@@ -47,7 +47,7 @@ const CreatePost = () => {
         notification.success({
           message: "Ad Posted Successfully",
         });
-        navigate("/dashboard-client");
+        navigate("/all-posts");
       } else {
         notification.error({
           message: "Error Posting Ad",

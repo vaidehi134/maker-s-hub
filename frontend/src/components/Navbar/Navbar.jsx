@@ -23,7 +23,7 @@ const Navbar = () => {
             {StorageService.getUserRole() === "CLIENT" ? (
               <>
                 <li>
-                  <Link to="/dashboard-client">Dashboard</Link>
+                  <Link to="/all-posts">Dashboard</Link>
                 </li>
                 <li>
                   <Link to="/create-post">Post</Link>

@@ -33,5 +33,11 @@ public class ClientController {
             }
     }
 
+    @GetMapping("/posts/{userId}")
+    public ResponseEntity<?> getAllPostByUserId(@PathVariable Long userId)
+    {
+        return  ResponseEntity.ok(clientService.getAllPosts(userId));
+    }
+
 
 }

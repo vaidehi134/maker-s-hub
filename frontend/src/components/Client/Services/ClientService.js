@@ -16,8 +16,7 @@ const createAuthorizationHeader = () => {
 export const ClientService = {
   // Post an post
   postAd(PostDTO) {
-    console.log("postDto");
-    console.log(PostDTO); //debugging
+    console.log("postDto : \n" + PostDTO);
 
     console.log("fetching endpoint");
     const userId = StorageService.getUserId();
@@ -30,13 +29,17 @@ export const ClientService = {
     }
   },
 
-  // Get all Ads for a user
-  //   getAllAdsByUserId() {
-  //     const userId = StorageService.getUserId();
-  //     return axios.get(`${BASIC_URL}api/company/ads/${userId}`, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   },
+  // Get all Posts for a user
+  getAllPostsByUserId() {
+    const userId = StorageService.getUserId();
+    try {
+      return axios.get(`${BASIC_URL}api/client/posts/${userId}`, {
+        headers: createAuthorizationHeader(),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
   //   // Get an Ad by ID
   //   getAdById(adId) {

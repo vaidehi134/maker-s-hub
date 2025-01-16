@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -41,5 +43,13 @@ public class ClientServiceImpl implements ClientService {
          }
                return false;
      }
+
+     @Override
+     public List<PostDTO>getAllPosts(Long userId)
+     {
+         return postRepository.findAllByUserId(userId).stream().map(Post::getPostDto).collect(Collectors.toList());
+     }
+
+
 
 }

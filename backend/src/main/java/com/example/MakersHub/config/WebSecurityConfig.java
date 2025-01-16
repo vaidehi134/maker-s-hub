@@ -30,7 +30,7 @@ public class WebSecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable()) // Explicitly disable CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/authenticate", "/crafter/sign-up", "/client/sign-up", "/ads", "/search/{service}")
+                        .requestMatchers("/authenticate", "/crafter/sign-up", "/client/sign-up", "/post", "/search/{item}")
                         .permitAll()
                         .requestMatchers("/api/**")
                         .authenticated()

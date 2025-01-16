@@ -13,6 +13,7 @@ import RegisterCrafter from "./components/RegisterCrafter/RegisterCrafter";
 import { AuthProvider } from "./context/AuthContext";
 import RegisterClientCrafter from "./components/RegisterClientCrafter/RegisterClientCrafter";
 import CreatePost from "./components/Client/ClientComponents/CreatePost/CreatePost";
+import AllPosts from "./components/Client/ClientComponents/AllPosts/AllPosts";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/dashboard-client" element={<DashboardClient />} />
+          <Route path="/all-posts" element={<AllPosts />} />
           <Route path="/dashboard-crafter" element={<DashboardCrafter />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/requests" element={<Requests />} />

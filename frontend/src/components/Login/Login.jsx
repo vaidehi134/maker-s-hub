@@ -57,7 +57,7 @@ const Login = () => {
 
       // Redirect based on user role
       if (StorageService.getUserRole() === "CLIENT") {
-        navigate("/dashboard-client");
+        navigate("/all-posts");
       } else if (StorageService.getUserRole() === "CRAFTER") {
         navigate("/dashboard-crafter");
       }

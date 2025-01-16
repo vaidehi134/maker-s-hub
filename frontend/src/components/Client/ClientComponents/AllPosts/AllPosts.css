@@ -1,0 +1,106 @@
+/* Container styles */
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Post list styles */
+.posts-list {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Individual post styles */
+.post-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px; /* Adds spacing between image and details */
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.post-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Image styles */
+.profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover; /* Ensures the image fits without distorting */
+  border: 2px solid #108ee9;
+}
+
+/* Post details */
+.post-details {
+  flex-grow: 1;
+}
+
+.post-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.post-title:hover {
+  color: #108ee9;
+}
+
+.post-description {
+  font-size: 14px;
+  color: #666;
+  margin: 5px 0;
+}
+
+/* Button styles */
+.post-actions {
+  margin-top: 10px;
+  text-align: right;
+}
+
+button {
+  font-size: 14px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button.update {
+  background-color: #108ee9;
+  color: white;
+}
+
+button.update:hover {
+  background-color: #0a6fb5;
+}
+
+button.delete {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+button.delete:hover {
+  background-color: #d9363e;
+}
