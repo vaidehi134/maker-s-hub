@@ -6,6 +6,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -18,15 +21,22 @@ public class Post {
     private String itemName;
     private String  description;
 
-    @Lob
-    @Column(columnDefinition = "LONGBLOB") // Use LONGBLOB for large binary data
-    private byte[] img;
+//    @ElementCollection
+//    @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
+//    @Column(name = "img", columnDefinition = "LONGBLOB")
+//    private List<byte[]> images; // Store multiple images as binary data
 
+
+
+    @ElementCollection
+    @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "image_url")
+    private List<String> imageUrls; // Store image URLs instead of binary data
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)  //so one user can create many post
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "client_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User user;
+    private Client client;
 
     // Getter and Setter for id
     public Long getId() {
@@ -51,26 +61,35 @@ public class Post {
         return description;
     }
 
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }
 
-    // Getter and Setter for img
-    public byte[] getImg() {
-        return img;
+
+//    // Getter and Setter for images
+//    public List<byte[]> getImages() {
+//        return images;
+//    }
+//
+//    public void setImages(List<byte[]> images) {
+//        this.images = images;
+//    }
+
+    // Getter and Setter for client
+    public Client getClient() {
+        return client;
     }
 
-    public void setImg(byte[] img) {
-        this.img = img;
-    }
-
-    // Getter and Setter for user
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public PostDTO getPostDto(){
@@ -79,8 +98,8 @@ public class Post {
         postDTO.setId(id);
         postDTO.setItemName(itemName);
         postDTO.setDescription(description);
-        postDTO.setClientName(user.getName());
-        postDTO.setReturnedImg(img);
+        postDTO.setClientName(client.getName());
+        postDTO.setImageUrls(imageUrls);
 
         return postDTO;
     }

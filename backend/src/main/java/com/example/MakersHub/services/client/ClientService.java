@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface ClientService {
     boolean postPost(long userId, PostDTO postDTO) throws IOException;
-    List<PostDTO> getAllPosts(Long userId);
+      List<PostDTO> getAllPosts(Long userId);
+      PostDTO getPostById(Long postId);
+    boolean updatePost(Long postId, PostDTO postDTO) throws IOException;
+    boolean deletePost(Long postId);
 }

@@ -15,13 +15,13 @@ const createAuthorizationHeader = () => {
 
 export const ClientService = {
   // Post an post
-  postAd(PostDTO) {
+  postPost(PostDTO) {
     console.log("postDto : \n" + PostDTO);
 
     console.log("fetching endpoint");
-    const userId = StorageService.getUserId();
+    const clientId = StorageService.getUserId();
     try {
-      return axios.post(`${BASIC_URL}api/client/post/${userId}`, PostDTO, {
+      return axios.post(`${BASIC_URL}api/client/post/${clientId}`, PostDTO, {
         headers: createAuthorizationHeader(),
       });
     } catch (error) {
@@ -41,39 +41,51 @@ export const ClientService = {
     }
   },
 
-  //   // Get an Ad by ID
-  //   getAdById(adId) {
-  //     return axios.get(`${BASIC_URL}api/company/ad/${adId}`, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   },
+  getPostById(postId) {
+    console.log("clientService getPostById postId: ", postId);
 
-  //   // Update an Ad
-  //   updateAd(adId, adDTO) {
-  //     return axios.put(`${BASIC_URL}api/company/ad/${adId}`, adDTO, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   },
+    // Ensure postId is valid
+    const longPostId = Number(postId);
+    if (isNaN(longPostId)) {
+      console.error("Invalid postId:", postId);
+      throw new Error("postId must be a valid number");
+    }
 
-  //   // Delete an Ad
-  //   deleteAd(adId) {
-  //     return axios.delete(`${BASIC_URL}api/company/ad/${adId}`, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   },
+    // Send a POST request instead of GET
+    return axios.post(
+      `${BASIC_URL}api/client/postById`,
+      { postId: longPostId }, // Pass postId in the request body
+      {
+        headers: createAuthorizationHeader(),
+      }
+    );
+  },
 
-  //   // Get all Ad bookings
-  //   getAllAdBookings() {
-  //     const companyId = getUserId();
-  //     return axios.get(`${BASIC_URL}api/company/bookings/${companyId}`, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   },
+  // Update an Post
+  updatePost(postId, postDTO) {
+    console.log("------------postDto" + postDTO); //for debugging
 
-  //   // Change booking status
-  //   changeBookingStatus(bookingId, status) {
-  //     return axios.get(`${BASIC_URL}api/company/booking/${bookingId}/${status}`, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   },
+    // Ensure postId is converted to a valid number (if needed)
+    const longPostId = Number(postId);
+
+    // Check if the conversion is successful
+    if (isNaN(longPostId)) {
+      console.error("Invalid postId:", postId);
+      throw new Error("postId must be a valid number");
+    }
+
+    // Make the API call with the valid postId
+    return axios.put(`${BASIC_URL}api/client/post/${longPostId}`, postDTO, {
+      headers: createAuthorizationHeader(),
+    });
+  },
+
+  // Delete an post
+  deletePostById(postId) {
+    return axios.delete(`${BASIC_URL}api/client/post/${postId}`, {
+      headers: createAuthorizationHeader(),
+    });
+  },
+
+  
 };

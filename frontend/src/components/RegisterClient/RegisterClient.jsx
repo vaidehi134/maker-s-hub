@@ -16,6 +16,7 @@ const Register = () => {
     name: "",
     lastname: "",
     address: "",
+    city: "",
     phone: "",
   });
 
@@ -29,6 +30,7 @@ const Register = () => {
 
   // Function to register the client using axios
   const registerClient = async (signupRequestDTO) => {
+    console.log(signupRequestDTO);
     try {
       const response = await axios.post(
         `${BASIC_URL}client/sign-up`, // API endpoint for registering a client
@@ -70,6 +72,7 @@ const Register = () => {
         name: formData.name,
         lastname: formData.lastname,
         address: formData.address,
+        city: formData.city,
         phone: formData.phone,
       };
 
@@ -148,6 +151,16 @@ const Register = () => {
           />
         </div>
         <div>
+          <label>City</label>
+          <input
+            type="text"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
           <label>Phone no</label>
           <input
             type="text"
@@ -166,4 +179,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Register; //here this module can be accessed with any name so here Register won't create any problem....

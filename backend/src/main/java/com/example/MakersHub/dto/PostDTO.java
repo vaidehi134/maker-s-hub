@@ -1,25 +1,29 @@
 package com.example.MakersHub.dto;
 
-
-import com.example.MakersHub.entity.User;
-import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Data
 public class PostDTO {
 
-
     private Long id;
     private String itemName;
-    private String  description;
-    private MultipartFile img;//Used to handle the incoming image upload.
-    private byte[] returnedImg; //Used to store or retrieve the image as raw binary data for processing or storage purposes.
-    private User user;
-    private Long userId;
+    private String description;
+    private List<MultipartFile> images; // Handle multiple file uploads
+    // private List<byte[]> returnedImages; // Retrieve multiple images for display
+    private List<String> imageUrls;  // Store image URLs instead of byte arrays
+    private Long clientId;
     private String clientName;
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
 
     // Getter and Setter for id
     public Long getId() {
@@ -48,40 +52,31 @@ public class PostDTO {
         this.description = description;
     }
 
-    // Getter and Setter for img
-    public MultipartFile getImg() {
-        return img;
+    // Getter and Setter for images
+    public List<MultipartFile> getImages() {
+        return images;
     }
 
-    public void setImg(MultipartFile img) {
-        this.img = img;
+    public void setImages(List<MultipartFile> images) {
+        this.images = images;
     }
 
-    // Getter and Setter for returnedImg
-    public byte[] getReturnedImg() {
-        return returnedImg;
+//    // Getter and Setter for returnedImages
+//    public List<byte[]> getReturnedImages() {
+//        return returnedImages;
+//    }
+//
+//    public void setReturnedImages(List<byte[]> returnedImages) {
+//        this.returnedImages = returnedImages;
+//    }
+
+    // Getter and Setter for clientId
+    public Long getClientId() {
+        return clientId;
     }
 
-    public void setReturnedImg(byte[] returnedImg) {
-        this.returnedImg = returnedImg;
-    }
-
-    // Getter and Setter for user
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    // Getter and Setter for userId
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 
     // Getter and Setter for clientName
@@ -91,5 +86,19 @@ public class PostDTO {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    // toString Method
+    @Override
+    public String toString() {
+        return "PostDTO{" +
+                "id=" + id +
+                ", itemName='" + itemName + '\'' +
+                ", description='" + description + '\'' +
+                ", images=" + (images != null ? images.size() + " files" : "null") +
+                ", ImageUrls=" + (imageUrls != null ? imageUrls.size() + " images" : "null") +
+                ", clientId=" + clientId +
+                ", clientName='" + clientName + '\'' +
+                '}';
     }
 }

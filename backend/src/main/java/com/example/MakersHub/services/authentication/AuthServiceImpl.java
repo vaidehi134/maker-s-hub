@@ -3,99 +3,101 @@
 package com.example.MakersHub.services.authentication;
 
 
-import com.example.MakersHub.repository.UserRepository;
-import com.example.MakersHub.dto.SignupRequestDTO;
-import com.example.MakersHub.dto.UserDto;
-import com.example.MakersHub.entity.User;
-import com.example.MakersHub.enums.UserRole;
-
+import com.example.MakersHub.dto.ClientDTO;
+import com.example.MakersHub.dto.CrafterDTO;
+import com.example.MakersHub.entity.Client;
+import com.example.MakersHub.entity.Crafter;
+import com.example.MakersHub.repository.ClientRepository;
+import com.example.MakersHub.repository.CrafterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-
 @Service
 public class AuthServiceImpl implements AuthService {
     private static final Logger logger = LoggerFactory.getLogger(AuthServiceImpl.class);
 
+
     @Autowired
-    private UserRepository userRepository;
+    private ClientRepository clientRepository;
 
-    public UserDto signUpClient(SignupRequestDTO signupRequestDTO) {
+    @Autowired
+    private CrafterRepository crafterRepository;
 
-            logger.info("Received signup request from client: {}", signupRequestDTO);
+    public ClientDTO signUpClient(ClientDTO clientSignupDTO) {
+
+            logger.info("Received signup request from client: {}",clientSignupDTO );
 
         // Validate input
-        if (signupRequestDTO == null) {
+        if (clientSignupDTO == null) {
             throw new IllegalArgumentException("SignupRequestDTO cannot be null.");
         }
-        if (signupRequestDTO.getEmail() == null || signupRequestDTO.getPassword() == null) {
+        if (clientSignupDTO.getEmail() == null || clientSignupDTO.getPassword() == null) {
             throw new IllegalArgumentException("Email and password are mandatory.");
         }
 
         // Check for existing email
-        if (presentByEmail(signupRequestDTO.getEmail())) {
+        if (presentByEmailClient(clientSignupDTO.getEmail())) {
             throw new IllegalArgumentException("Email already exists.");
         }
 
          //Map DTO to entity
-        User user = new User();
-        user.setName(signupRequestDTO.getName());
-        user.setLastname(signupRequestDTO.getLastname());
-        user.setAddress(signupRequestDTO.getAddress());
-        user.setEmail(signupRequestDTO.getEmail());
-        user.setPhone(signupRequestDTO.getPhone());
-        user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
-        user.setRole(UserRole.CLIENT);
+       Client client = new Client();
+        client.setName(clientSignupDTO.getName());
+        client.setLastname(clientSignupDTO.getLastname());
+        client.setAddress(clientSignupDTO.getAddress());
+        client.setEmail(clientSignupDTO.getEmail());
+        client.setPhone(clientSignupDTO.getPhone());
+        client.setPassword(new BCryptPasswordEncoder().encode(clientSignupDTO.getPassword()));
+
 
         // Save and return DTO
-        User savedUser = userRepository.save(user);
-        return savedUser.getDto();
-
+        Client savedClient =  clientRepository.save(client);
+        return savedClient.getDto();
 
     }
 
 
 
-    public UserDto signUpCrafter(SignupRequestDTO signupRequestDTO)
+    public CrafterDTO signUpCrafter(CrafterDTO crafterDTO)
     {
 
-       logger.info("Received signup request from crafter: {}", signupRequestDTO);
+       logger.info("Received signup request from crafter: {}", crafterDTO);
         // Validate input
-        if (signupRequestDTO == null) {
+        if (crafterDTO == null) {
             throw new IllegalArgumentException("SignupRequestDTO cannot be null.");
         }
-        if (signupRequestDTO.getEmail() == null || signupRequestDTO.getPassword() == null) {
+        if (crafterDTO.getEmail() == null || crafterDTO.getPassword() == null) {
             throw new IllegalArgumentException("Email and password are mandatory.");
         }
 
         // Check for existing email
-        if (presentByEmail(signupRequestDTO.getEmail())) {
+        if (presentByEmailCrafter(crafterDTO.getEmail())) {
             throw new IllegalArgumentException("Email already exists.");
         }
 
-        User user = new User();
-        user.setName(signupRequestDTO.getName());
-        user.setLastname(signupRequestDTO.getLastname());
-        user.setAddress(signupRequestDTO.getAddress());
-        user.setEmail(signupRequestDTO.getEmail());
-        user.setPhone(signupRequestDTO.getPhone());
-        user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
+        Crafter crafter = new Crafter();
+        crafter.setName(crafterDTO.getName());
+        crafter.setLastname(crafterDTO.getLastname());
+        crafter.setAddress(crafterDTO.getAddress());
+        crafter.setEmail(crafterDTO.getEmail());
+        crafter.setPhone(crafterDTO.getPhone());
+        crafter.setPassword(new BCryptPasswordEncoder().encode(crafterDTO.getPassword()));
+        crafter.setSkills(crafterDTO.getSkills());
 
-        user.setRole(UserRole.CRAFTER);
-
-        return userRepository.save(user).getDto(); //getDo()->to convert user entity to userDto
-   //After saving, it returns the saved object (the user in this case) with any field
-        // that were any fields that were automatically updated,
-        // like the id if it was generated by the database.
+        Crafter savedCrafter =  crafterRepository.save(crafter);
+        return savedCrafter.getDto();
 
     }
 
-    public Boolean presentByEmail(String email){
-        return userRepository.findFirstByEmail(email)!=null;
+    public Boolean presentByEmailClient(String email){
+        return clientRepository.findFirstByEmail(email)!=null;
+    }
+
+    public Boolean presentByEmailCrafter(String email){
+        return crafterRepository.findFirstByEmail(email)!=null;
     }
 
 }

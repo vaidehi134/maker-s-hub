@@ -1,20 +1,28 @@
 package com.example.MakersHub.dto;
 
-import com.example.MakersHub.enums.UserRole;
 import lombok.Data;
 
 @Data
-public class UserDto {
+public class CrafterDTO {
+
+
     private Long id;
     private String email;
-    private String password;        //why do we need to send password in Dto class ???
+    private String password;
     private String name;
     private String lastname;
     private String address;
     private String phone;
-    private UserRole role;
-    //here we have not written UserRole from User because DTO classes id (data transfer object)
-    //which helps to transfer data between different layers like frontend to backend....
+    private String skills;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 
     // Getter and Setter for id
     public Long getId() {
@@ -78,13 +86,13 @@ public class UserDto {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    // Getter and Setter for role
 
-    public UserRole getRole() {
-        return role;
+    //getter and setter for skills
+    public String getSkills() {
+        return skills;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setSkills(String skills) {
+        this.skills=skills;
     }
 }

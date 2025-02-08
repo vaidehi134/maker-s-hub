@@ -1,106 +1,127 @@
-/* Container styles */
+/* Container for all posts */
 .posts-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px auto;
-  max-width: 800px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-direction: column; /* Stack heading and posts list */
+  align-items: center; /* Center-align content */
+  padding: 30px;
+  background-color: #353535;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
-/* Post list styles */
+
+/* Center the heading */
+.posts-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px; /* Space between heading and posts list */
+}
+
+/* Grid layout for posts */
 .posts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
   width: 100%;
-  margin-top: 10px;
+  max-width: 1400px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Individual post styles */
+/* Individual post card styling */
 .post-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px; /* Adds spacing between image and details */
-  margin-bottom: 15px;
-  padding: 10px;
   background-color: #ffffff;
-  border: 1px solid #ddd;
-  color: #333;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.post-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+/* Content area of the post */
+.post-content {
+  padding: 20px;
 }
 
-/* Image styles */
-.profile {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
-  object-fit: cover; /* Ensures the image fits without distorting */
-  border: 2px solid #108ee9;
+/* Styling for images */
+.post-images {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-/* Post details */
+.post-image {
+  width: 48%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for post details */
 .post-details {
-  flex-grow: 1;
+  margin-top: 15px;
 }
 
 .post-title {
-  font-size: 18px;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin: 0;
   color: #333;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.post-title:hover {
-  color: #108ee9;
+  margin-bottom: 12px;
 }
 
 .post-description {
-  font-size: 14px;
-  color: #666;
-  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
 }
 
-/* Button styles */
+/* Message when no posts are available */
+.no-posts-message {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #888;
+  padding: 80px 20px;
+  font-weight: 600;
+}
+
+/* Buttons container for each post */
 .post-actions {
-  margin-top: 10px;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  gap: 10px;
 }
 
-button {
-  font-size: 14px;
-  padding: 5px 10px;
-  margin-left: 5px;
+/* Update Button */
+.update-btn {
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  padding: 10px 15px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-button.update {
-  background-color: #108ee9;
-  color: white;
+.update-btn:hover {
+  background-color: #0056b3;
 }
 
-button.update:hover {
-  background-color: #0a6fb5;
+/* Delete Button */
+.del-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-button.delete {
-  background-color: #ff4d4f;
-  color: white;
-}
-
-button.delete:hover {
-  background-color: #d9363e;
+.delete-btn:hover {
+  background-color: #a71d2a;
 }

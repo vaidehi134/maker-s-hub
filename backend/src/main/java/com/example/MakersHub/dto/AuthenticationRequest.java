@@ -7,6 +7,7 @@ public class AuthenticationRequest {
 
     private String username;  //email
     private String password;
+    private String role;
 
     public String getUsername() {
         return username;
@@ -24,6 +25,23 @@ public class AuthenticationRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    @Override
+    public String toString() {
+        return "AuthenticationRequest{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 
 

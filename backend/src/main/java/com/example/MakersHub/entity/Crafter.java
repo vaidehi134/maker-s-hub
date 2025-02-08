@@ -1,22 +1,46 @@
-package com.example.MakersHub.dto;
+package com.example.MakersHub.entity;
 
-import com.example.MakersHub.enums.UserRole;
+import com.example.MakersHub.dto.ClientDTO;
+import com.example.MakersHub.dto.CrafterDTO;
+import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
-public class UserDto {
-    private Long id;
-    private String email;
-    private String password;        //why do we need to send password in Dto class ???
-    private String name;
-    private String lastname;
-    private String address;
-    private String phone;
-    private UserRole role;
-    //here we have not written UserRole from User because DTO classes id (data transfer object)
-    //which helps to transfer data between different layers like frontend to backend....
+@Entity
+@Table(name="Crafter")
+@Data    //for getting getters and setters from lombok
+public class Crafter {
 
-    // Getter and Setter for id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String email;
+
+    private String password;
+
+    private String name;
+
+    private String lastname;
+
+
+    private String address;
+
+    private String phone;
+
+    private String skills;
+    private String city;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+
+    //getter and setter for id
     public Long getId() {
         return id;
     }
@@ -78,13 +102,30 @@ public class UserDto {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    // Getter and Setter for role
 
-    public UserRole getRole() {
-        return role;
+    // Getter and Setter for phone
+    public String getSkills() {
+        return skills;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setSkills(String skills) {
+        this.skills=skills;
     }
+
+
+    public CrafterDTO getDto() {
+        CrafterDTO crafterDTO = new CrafterDTO();
+        crafterDTO.setId(this.id);
+        crafterDTO.setEmail(this.email);
+        crafterDTO.setName(this.name);
+        crafterDTO.setLastname(this.lastname);
+        crafterDTO.setPhone(this.phone);
+        crafterDTO.setAddress(this.address);
+        crafterDTO.setSkills(this.skills);
+        return crafterDTO;
+    }
+
 }
+
+
+

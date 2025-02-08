@@ -63,6 +63,14 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.34.0</version>
+		</dependency>
+
+
+
 		<!-- android json dependency -->
 <!--		In a Spring Boot application, you typically use JSON to exchange data between the client and server. When building a Spring Boot application that -->
 <!--		communicates with a client, you often use Android JSON as the data format for exchanging information.....by code elevate-->

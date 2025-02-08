@@ -27,6 +27,7 @@
 .form-group {
   margin-bottom: 15px;
   text-align: left;
+  width: 100%;
 }
 
 /* Labels and inputs */
@@ -39,41 +40,29 @@ label {
 
 input[type="email"],
 input[type="password"] {
-  width: 95%;
+  width: 100%; /* Make input width 100% to ensure alignment */
   padding: 10px;
-
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
-/* Checkbox alignment
-.form-group.checkbox-group {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  font-size: 14px;
-  color: #666;
-}
-
-
-/* Checkbox alignment */
-.form-group.checkbox-group input[type="checkbox"] {
-  margin-right: 5px; /* Add a small margin to the right of the checkbox */
-}
 /* Button styling .login-btn */
-
 button.loginbtn {
-  width: 100%;
+  width: 100%; /* Make the button width 100% to align with inputs */
   padding: 10px;
-  background-color: #3c6e71; /*doubt*/
+  background-color: #3c6e71; /* Original color */
   color: #ffffff;
+  margin-left: -1px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s;
 }
-.loginbtn:hover {
-  background-color: #284b63;
+
+button.loginbtn:hover {
+  background-color: #284b63; /* Original hover color */
 }
 
 /* Register link */

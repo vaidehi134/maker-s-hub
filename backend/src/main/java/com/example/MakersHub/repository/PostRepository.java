@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post,Long> {
-    List<Post> findAllByUserId(Long userId);
+    List<Post> findAllByClientId(Long clientId);
 
 }
