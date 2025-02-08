@@ -1,52 +1,79 @@
+/* ========= NAVBAR STYLING ========= */
 .navbar {
-  background-color: transparent;
-  padding: 10px 20px;
-  /* border-bottom: 2px solid #8d99ae; */
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  background-color: #fff8f1; /* Light warm-beige */
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #e6d5c3; 
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
+/* ========= LOGO ========= */
 .navbar .logo {
-  font-size: 26px;
-  color: #FFFFFF;
+  font-size: 24px;
+  color: #333;
   font-weight: 700;
+  font-family: 'Georgia', serif;
+  letter-spacing: 0.5px;
 }
 
+/* ========= NAV LINKS (FIXED SPACING) ========= */
 .navbar .nav-links {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 12px; /* Ensure no extra space */
+  margin: 0;
+  padding: 0;
 }
 
 .navbar .nav-links li {
-  display: inline;
+  margin: 0;
+  padding: 0;
+  display: block; /* Prevent inline spacing issues */
 }
 
+/* ========= NAVBAR BUTTONS (Fixed Extra Gaps) ========= */
 .navbar .nav-links a {
-  color: #FFFFFF;
+  color: #333;
   text-decoration: none;
-  font-size: 18px;
-  padding: 8px 15px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 12px; /* Adjust padding but no margin */
+  margin: 0; /* Prevent unwanted spacing */
+  border-radius: 6px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+/* Hover effect */
 .navbar .nav-links a:hover {
-  background-color: #3c6e71;
-  color: #ffffff;
-  transform: scale(1.1);
+  background-color: #ff6700; 
+  color: white;
+  transform: scale(1.05);
 }
 
-/* @media (max-width: 768px) {
+/* ========= MOBILE RESPONSIVENESS ========= */
+@media (max-width: 768px) {
   .navbar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    padding: 12px;
   }
 
   .navbar .nav-links {
     flex-direction: column;
-    gap: 10px;
+    gap: 5px; /* Slight spacing for touch usability */
+    align-items: center;
+    margin-top: 10px;
   }
-} */
+
+  .navbar .nav-links a {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+  }
+}

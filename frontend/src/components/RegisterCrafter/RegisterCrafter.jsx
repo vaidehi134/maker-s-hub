@@ -87,6 +87,7 @@ const Register = () => {
   };
 
   return (
+    <div className="registerCrafter">
     <div className="form-container">
       <form onSubmit={handleSubmit}>
         <div>
@@ -174,6 +175,7 @@ const Register = () => {
           <Link to="/login">Login now</Link>
         </div>
       </form>
+    </div>
     </div>
   );
 };

@@ -1,10 +1,96 @@
-body {
-  margin: 0;
-  padding: 0;
-  /* background-color: #353535; */
-  background-color: #353535;
-  background-size: cover; /* Cover the entire background */
-  background-repeat: no-repeat; /* Prevent repetition */
-  height: 100vh;
-  font-family: "Merriweather", serif;
+/* ========= APP CONTAINER ========= */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: white;
+}
+
+/* ========= NAVBAR ========= */
+.navbar {
+  background-color: #ff8c00; /* Orange */
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 15px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* ========= MAIN CONTENT ========= */
+.main-content {
+  flex: 1;
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  min-height: 500px; /* Ensures visible content */
+}
+
+/* ========= BUTTONS ========= */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #ff8c00; /* Orange */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #e67e22;
+}
+
+.btn-secondary {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #388e3c;
+}
+
+/* ========= FOOTER ========= */
+.footer {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* ========= RESPONSIVE DESIGN ========= */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar a {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .main-content {
+    width: 95%;
+  }
 }

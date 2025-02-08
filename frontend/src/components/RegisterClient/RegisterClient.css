@@ -1,76 +1,134 @@
-/* Center the form and add background styling */
+/* General body and background styling */
+.registerClient {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  background-image: url('/assets/furniture-bg.jpg'); /* Replace with your actual image path */
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar adjustment to avoid overlap */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Adjust according to your navbar height */
+  background-color: #3a8dff; /* Match with your login/register page colors */
+  z-index: 10; /* Ensure the navbar stays on top */
+}
+
+/* Container for the form */
 .form-container {
-  width: 400px; /* Adjust the width of the form */
-  margin: 50px auto; /* Center the form horizontally and add top spacing */
-  padding: 20px;
-  background-color: #f9f9f9; /* Light background color */
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-  font-family: Arial, sans-serif; /* Clean, modern font */
+  margin-top: 80px; /* Space between navbar and form */
+  margin-bottom: 40px; /* Space at the bottom */
+  width: 100%;
+  max-width: 700px; /* Increased form width */
+  margin: 0 auto;
+  padding: 30px;
+  background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque background */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  height: calc(100vh - 120px); /* Adjusted for extra padding */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Prevent outer scrolling */
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Other animations kept */
 }
 
-/* Styling for each form element container */
-.form-container div {
-  margin-bottom: 15px;
+/* Allow the form to grow but prevent inner scrolling */
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1; /* Allow the form to take up remaining space */
+  margin-bottom: 20px; /* Space for the submit button */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-/* Styling for labels */
-.form-container label {
+/* Style for each form input element */
+form div {
+  margin-bottom: 20px; /* Increased space between form elements */
+}
+
+form label {
   display: block;
   font-size: 14px;
+  color: #333;
+  margin-bottom: 8px; /* More spacing before labels */
   font-weight: bold;
-  color: #333; /* Dark gray text for readability */
-  margin-bottom: 5px;
 }
 
-/* Styling for input fields */
-.form-container input {
+form input[type="email"],
+form input[type="password"],
+form input[type="text"] {
+  width: 100%; /* Ensure inputs fill the container */
+  padding: 12px; /* Larger padding for better clickability */
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px; /* Slightly larger text */
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box; /* Ensures padding doesn't affect width calculation */
+}
+
+/* Input focus effect */
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form input[type="text"]:focus {
+  border-color: #3a8dff;
+  outline: none;
+  box-shadow: 0 0 10px rgba(58, 141, 255, 0.5); /* Light glow effect on focus */
+}
+
+/* Style for the submit button */
+button {
   width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc; /* Light gray border */
-  border-radius: 5px; /* Rounded corners */
-  box-sizing: border-box; /* Include padding in width calculation */
-}
-
-/* Styling for input fields on focus */
-.form-container input:focus {
-  border-color: rgba(0, 123, 255, 0.5); /* Blue border on focus */
-  outline: none; /* Remove default outline */
-  /* box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); Add subtle glow effect */
-}
-
-/* Styling for the submit button */
-.form-container button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  color: #fff; /* White text */
-  background-color: #3c6e71; /* Primary blue background */
+  padding: 14px;
+  background-color: #3a8dff; /* Same blue as the navbar */
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px; /* Rounded corners for the button */
+  font-size: 18px;
   cursor: pointer;
-  font-weight: bold;
 }
 
-/* Button hover effect */
-.form-container button:hover {
-  background-color: #284b63; /* Darker blue on hover */
-}
-
-/* Styling for the login link */
+/* Style for the login link */
 .login-link {
   text-align: center;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .login-link a {
+  color: #3a8dff;
   text-decoration: none;
   font-size: 14px;
-  color: #3c6e71; /* Blue link */
+  font-weight: bold;
 }
 
 .login-link a:hover {
   text-decoration: underline;
-  color: #284b63; /* Darker blue on hover */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+  .form-container {
+    padding: 15px;
+  }
+
+  form div {
+    margin-bottom: 15px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 16px;
+  }
 }

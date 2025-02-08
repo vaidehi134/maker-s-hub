@@ -16,20 +16,14 @@ const RegisterClientCrafter = () => {
         <div className="register-options">
           <Link to="/register-client">
             <button
-              className="register-btn"
-              onClick={() => {
-                navigate("/register-client");
-              }}
+              className="register-btn client-btn"
             >
               Register as Client
             </button>
           </Link>
           <Link to="/register-crafter">
             <button
-              className="register-btn"
-              onClick={() => {
-                  navigate("register-crafter");
-              }}
+              className="register-btn crafter-btn"
             >
               Register as Crafter
             </button>
