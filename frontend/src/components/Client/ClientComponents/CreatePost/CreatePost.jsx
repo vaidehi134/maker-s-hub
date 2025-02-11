@@ -332,7 +332,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import { ClientService } from "../../Services/ClientService";
-import "./CreatePost.css";
+import styles from "./CreatePost.module.css";
 import StorageService from "../../../../util/StorageService";
 
 const CreatePost = () => {
@@ -403,11 +403,11 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="post-upload-container">
-      <h1 className="upload-heading">Create Your Post</h1>
-      <form onSubmit={handleSubmit} className="form-container">
-        <div className="input-group">
-          <label htmlFor="images" className="label">
+    <div className={styles.postUploadContainer}>
+      <h1 className={styles.uploadHeading}>Create Your Post</h1>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="images" className={styles.label}>
             Images
           </label>
           <input
@@ -416,27 +416,27 @@ const CreatePost = () => {
             name="images"
             multiple
             onChange={handleFileChange}
-            className="file-input"
+            className={styles.fileInput}
             style={{ display: "none" }}
             ref={fileInputRef}
           />
-          <div className="image-upload-btn">
+          <div className={styles.imageUploadBtn}>
             {imageUrls.length > 0 ? (
-              <div className="image-preview-container">
+              <div className={styles.imagePreviewContainer}>
                 {imageUrls.map((url, index) => (
                   <div
                     key={index}
-                    className="image-preview-wrapper"
+                    className={styles.imagePreviewWrapper}
                     onClick={(e) => e.stopPropagation()}
                   >
                     <img
                       src={url}
                       alt={`Preview ${index + 1}`}
-                      className="image-preview"
+                      className={styles.imagePreview}
                     />
                     <button
                       type="button"
-                      className="delete-btn"
+                      className={styles.deleteBtn}
                       onClick={(e) => handleDelete(index, e)}
                     >
                       X
@@ -444,7 +444,7 @@ const CreatePost = () => {
                   </div>
                 ))}
                 <div
-                  className="add-image-btn"
+                  className={styles.addImageBtn}
                   onClick={() => fileInputRef.current.click()}
                 >
                   <span>+</span>
@@ -453,7 +453,7 @@ const CreatePost = () => {
             ) : (
               <button
                 type="button"
-                className="upload-btn"
+                className={styles.uploadBtn}
                 onClick={() => fileInputRef.current.click()}
               >
                 Upload Images
@@ -462,8 +462,8 @@ const CreatePost = () => {
           </div>
         </div>
 
-        <div className="input-group">
-          <label htmlFor="itemName" className="label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="itemName" className={styles.label}>
             Furniture Request
           </label>
           <input
@@ -473,13 +473,13 @@ const CreatePost = () => {
             placeholder="Enter furniture request"
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
-            className="input-field"
+            className={styles.inputField}
             required
           />
         </div>
 
-        <div className="input-group">
-          <label htmlFor="description" className="label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="description" className={styles.label}>
             Description
           </label>
           <textarea
@@ -489,13 +489,13 @@ const CreatePost = () => {
             rows="4"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="input-field-des"
+            className={styles.inputFieldDes}
             required
           />
         </div>
 
-        <div className="input-group">
-          <button type="submit" className="sub-btn">
+        <div className={styles.inputGroup}>
+          <button type="submit" className={styles.subBtn}>
             Add Post
           </button>
         </div>

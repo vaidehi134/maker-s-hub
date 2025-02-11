@@ -1,79 +1,130 @@
 /* ========= NAVBAR STYLING ========= */
 .navbar {
-  background-color: #fff8f1; /* Light warm-beige */
-  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 1rem 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #e6d5c3; 
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 15px rgba(124, 130, 242, 0.08);
   position: sticky;
   top: 0;
-  width: 100%;
   z-index: 1000;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(124, 130, 242, 0.12);
 }
 
-/* ========= LOGO ========= */
-.navbar .logo {
-  font-size: 24px;
-  color: #333;
+/* ========= LOGO STYLING ========= */
+.logo {
+  font-size: 1.5rem;
   font-weight: 700;
-  font-family: 'Georgia', serif;
-  letter-spacing: 0.5px;
+  color: #2d3958;
+  letter-spacing: -0.5px;
+  position: relative;
+  padding: 0.5rem 0;
 }
 
-/* ========= NAV LINKS (FIXED SPACING) ========= */
-.navbar .nav-links {
-  list-style: none;
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30%;
+  height: 3px;
+  background: linear-gradient(90deg, #7c82f2, transparent);
+  border-radius: 2px;
+}
+
+/* ========= NAVIGATION LINKS ========= */
+.nav-links {
   display: flex;
-  gap: 12px; /* Ensure no extra space */
+  gap: 2.5rem;
+  align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.navbar .nav-links li {
-  margin: 0;
-  padding: 0;
-  display: block; /* Prevent inline spacing issues */
+.nav-links li {
+  position: relative;
 }
 
-/* ========= NAVBAR BUTTONS (Fixed Extra Gaps) ========= */
-.navbar .nav-links a {
-  color: #333;
+.nav-links a {
+  color: #4f5b76;
   text-decoration: none;
-  font-size: 16px;
   font-weight: 500;
-  padding: 8px 12px; /* Adjust padding but no margin */
-  margin: 0; /* Prevent unwanted spacing */
-  border-radius: 6px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-/* Hover effect */
-.navbar .nav-links a:hover {
-  background-color: #ff6700; 
+/* Hover effect for nav links */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #7c82f2;
+  transition: width 0.2s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover {
+  color: #7c82f2;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Special styling for active links */
+.nav-links a.active {
+  color: #7c82f2;
+  font-weight: 600;
+}
+
+.nav-links a.active::after {
+  width: 100%;
+  background: #7c82f2;
+}
+
+/* Logout link special styling */
+.nav-links a[href="/"][onclick] {
+  color: #2d3958;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  background: rgba(124, 130, 242, 0.1);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.nav-links a[href="/"][onclick]:hover {
+  background: rgba(124, 130, 242, 0.15);
+  transform: translateY(-1px);
+}
+
+.nav-links a[href="/"][onclick]::after {
+  display: none;
+}
+
+/* Login link special styling */
+.nav-links a[href="/login"] {
   color: white;
-  transform: scale(1.05);
+  background: #7c82f2;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-/* ========= MOBILE RESPONSIVENESS ========= */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-    padding: 12px;
-  }
+.nav-links a[href="/login"]:hover {
+  background: #6268f1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 130, 242, 0.2);
+}
 
-  .navbar .nav-links {
-    flex-direction: column;
-    gap: 5px; /* Slight spacing for touch usability */
-    align-items: center;
-    margin-top: 10px;
-  }
-
-  .navbar .nav-links a {
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-  }
+.nav-links a[href="/login"]::after {
+  display: none;
 }

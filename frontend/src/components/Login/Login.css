@@ -1,124 +1,164 @@
-/* ========= LOGIN PAGE STYLING WITH BACKGROUND IMAGE ========= */
+/* ========= LOGIN PAGE STYLING ========= */
 .login-container {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: url('/assets/furniture-bg.jpg?reload') no-repeat center center; /* ✅ Correct Path */
-  background-size: cover;
+  justify-content: center;
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
   position: relative;
+  overflow: hidden;
 }
 
-/* ========= DARK OVERLAY TO IMPROVE VISIBILITY ========= */
 .login-container::before {
-  content: "";
+  content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
+  top: -400px;
+  right: -300px;
+  z-index: 0;
+}
+
+.login-container::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
+  bottom: -300px;
+  left: -200px;
+  z-index: 0;
 }
 
 /* ========= LOGIN FORM BOX ========= */
 .login-form {
-  background: rgba(255, 255, 255, 0.85); /* White with 70% transparency */
-  backdrop-filter: blur(8px); /* Slight blur effect */
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 350px;
-  position: relative; /* Ensures it is above the overlay */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem 4rem;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 25px rgba(124, 130, 242, 0.07),
+    0 2px 4px rgba(124, 130, 242, 0.05);
+  width: 460px;
+  position: relative;
   z-index: 1;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
+
 /* ========= FORM HEADING ========= */
 .login-form h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  color: #2d3958;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.5px;
 }
 
 /* ========= FORM FIELDS ========= */
 .form-group {
-  text-align: left;
-  margin-bottom: 15px;
+  margin-bottom: 1.75rem;
 }
 
 .form-group label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-  color: #555;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4f5b76;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.2px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e9f2;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #2d3958;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.form-group input:hover {
+  border-color: #d1d6e6;
 }
 
 .form-group input:focus {
-  border-color: #ff6700;
+  outline: none;
+  border-color: #7c82f2;
+  box-shadow: 0 0 0 4px rgba(124, 130, 242, 0.1);
 }
 
 /* ========= BUTTON GROUP ========= */
 .button-group {
   display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
+  gap: 1.25rem;
+  margin: 2.5rem 0 2rem;
 }
 
 .role-btn {
   flex: 1;
-  padding: 10px;
-  margin: 0 5px;
-  border: none;
-  border-radius: 5px;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  letter-spacing: -0.2px;
 }
 
-.role-btn:nth-child(1) {
-  background-color: #3c6e71; /* Crafter Button */
+.role-btn:first-child {
+  background: #7c82f2;
   color: white;
 }
 
-.role-btn:nth-child(2) {
-  background-color: #ff6700; /* Client Button */
+.role-btn:last-child {
+  background: #2d3958;
   color: white;
 }
 
 .role-btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(124, 130, 242, 0.2);
 }
 
-.role-btn:nth-child(1):hover {
-  background-color: #2a4f54;
+.role-btn:first-child:hover {
+  background: #6268f1;
 }
 
-.role-btn:nth-child(2):hover {
-  background-color: #e65c00;
+.role-btn:last-child:hover {
+  background: #1f2942;
+}
+
+.role-btn:active {
+  transform: translateY(0);
 }
 
 /* ========= REGISTER LINK ========= */
 .register-link {
-  margin-top: 15px;
-  font-size: 14px;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #4f5b76;
 }
 
 .register-link a {
-  color: #ff6700;
-  font-weight: bold;
+  color: #7c82f2;
   text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
 }
 
 .register-link a:hover {
-  text-decoration: underline;
+  color: #6268f1;
+  text-decoration: none;
+  background: rgba(124, 130, 242, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  margin-left: 0.25rem;
 }

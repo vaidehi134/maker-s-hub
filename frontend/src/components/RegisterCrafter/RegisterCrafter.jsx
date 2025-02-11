@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./RegisterCrafter.css";
+import styles from "./RegisterCrafter.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext"; // Import the useAuth hook
@@ -87,9 +87,9 @@ const Register = () => {
   };
 
   return (
-    <div className="registerCrafter">
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
+    <div className={styles.register}>
+    <div className={styles.formContainer}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div>
           <label>Email</label>
           <input
@@ -171,7 +171,7 @@ const Register = () => {
           />
         </div>
         <button type="submit">Register as Crafter</button>
-        <div className="login-link">
+        <div className={styles.loginLink}>
           <Link to="/login">Login now</Link>
         </div>
       </form>

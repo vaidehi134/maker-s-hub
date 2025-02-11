@@ -454,7 +454,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { notification } from "antd";
 import { ClientService } from "../../Services/ClientService";
 import StorageService from "../../../../util/StorageService";
-import "./UpdatePost.css";
+import styles from "./UpdatePost.module.css";
 
 const UpdatePost = () => {
   const { postId } = useParams();
@@ -567,18 +567,18 @@ const UpdatePost = () => {
   };
 
   return (
-    <div className="post-update-container">
-      <h1 className="update-heading">Update Your Post</h1>
-      <form onSubmit={handleUpdatePost} className="form-container">
-        <div className="input-group">
-          <label htmlFor="images" className="label">
+    <div className={styles.postUpdateContainer}>
+      <h1 className={styles.updateHeading}>Update Your Post</h1>
+      <form onSubmit={handleUpdatePost} className={styles.formContainer}>
+        <div className={styles.inputGroup}>
+          <label htmlFor="images" className={styles.label}>
             Images
           </label>
-          <div className="image-upload-container">
+          <div className={styles.imageUploadContainer}>
             {existingImages.length > 0 && (
-              <div className="existing-images">
+              <div className={styles.existingImages}>
                 {existingImages.map((image, index) => (
-                  <div key={index} className="image-preview-wrapper">
+                  <div key={index} className={styles.imagePreviewWrapper}>
                     <img
                       src={image}
                       alt={`Existing ${index + 1}`}
@@ -586,7 +586,7 @@ const UpdatePost = () => {
                     />
                     <button
                       type="button"
-                      className="delete-btn"
+                      className={styles.deleteBtn}
                       onClick={() => handleDeleteExistingImage(index)}
                     >
                       X
@@ -596,15 +596,15 @@ const UpdatePost = () => {
               </div>
             )}
             {imagePreviews.map((preview, index) => (
-              <div key={index} className="image-preview-wrapper">
+              <div key={index} className={styles.imagePreviewWrapper}>
                 <img
                   src={preview}
                   alt={`New Preview ${index + 1}`}
-                  className="image-preview"
+                  className={styles.imagePreview}
                 />
                 <button
                   type="button"
-                  className="delete-btn"
+                  className={styles.deleteBtn}
                   onClick={() => handleDeleteNewImage(index)}
                 >
                   X
@@ -613,7 +613,7 @@ const UpdatePost = () => {
             ))}
             <button
               type="button"
-              className="upload-btn"
+              className={styles.uploadBtn}
               onClick={() => fileInputRef.current.click()}
             >
               Add More Images
@@ -629,8 +629,8 @@ const UpdatePost = () => {
             />
           </div>
         </div>
-        <div className="input-group">
-          <label htmlFor="itemName" className="label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="itemName" className={styles.label}>
             Item Name
           </label>
           <input
@@ -638,12 +638,12 @@ const UpdatePost = () => {
             id="itemName"
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
-            className="input-field"
+            className={styles.inputField}
             required
           />
         </div>
-        <div className="input-group">
-          <label htmlFor="description" className="label">
+        <div className={styles.inputGroup}>
+          <label htmlFor="description" className={styles.label}>
             Description
           </label>
           <textarea
@@ -651,12 +651,12 @@ const UpdatePost = () => {
             rows="4"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="input-field-des"
+            className={styles.inputFieldDes}
             required
           />
         </div>
-        <div className="input-group">
-          <button type="submit" className="sub-btn">
+        <div className={styles.inputGroup}>
+          <button type="submit" className={styles.subBtn}>
             Update Post
           </button>
         </div>

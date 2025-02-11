@@ -1,0 +1,231 @@
+/* CreatePost.css */
+.postUploadContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background decorative elements */
+.postUploadContainer::before {
+  content: '';
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
+  top: -400px;
+  left: -300px;
+  z-index: 0;
+}
+
+.postUploadContainer::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
+  bottom: -300px;
+  right: -200px;
+  z-index: 0;
+}
+
+.uploadHeading {
+  color: #2d3958;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+.formContainer {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem 3.5rem;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 25px rgba(124, 130, 242, 0.07),
+    0 2px 4px rgba(124, 130, 242, 0.05);
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  color: #2d3958;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.inputField,
+.inputFieldDes {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(124, 130, 242, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.inputField:focus,
+.inputFieldDes:focus {
+  outline: none;
+  border-color: #7c82f2;
+  box-shadow: 0 0 0 3px rgba(124, 130, 242, 0.15);
+}
+
+.inputFieldDes {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.subBtn {
+  background: #7c82f2;
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.subBtn:hover {
+  background: #6268f1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 130, 242, 0.25);
+}
+
+.subBtn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Image upload styling */
+.imageUploadBtn {
+  border: 2px dashed #7c82f2;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.imageUploadBtn:hover {
+  background: rgba(124, 130, 242, 0.05);
+}
+
+.uploadBtn {
+  background: #7c82f2;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.uploadBtn:hover {
+  background: #6268f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(124, 130, 242, 0.25);
+}
+
+.imagePreviewContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.imagePreviewWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.deleteBtn:hover {
+  background: #ff7875;
+  transform: scale(1.1);
+}
+
+.addImageBtn {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #7c82f2;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 2rem;
+  color: #7c82f2;
+  transition: all 0.3s ease;
+}
+
+.addImageBtn:hover {
+  background: rgba(124, 130, 242, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .postUploadContainer {
+    padding: 1rem;
+  }
+
+  .formContainer {
+    padding: 2rem;
+  }
+
+  .uploadHeading {
+    font-size: 1.75rem;
+  }
+
+  .imagePreviewContainer {
+    justify-content: center;
+  }
+}
