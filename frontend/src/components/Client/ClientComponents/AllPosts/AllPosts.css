@@ -9,7 +9,6 @@
   box-sizing: border-box;
 }
 
-
 /* Center the heading */
 .posts-container h1 {
   font-size: 2rem;
@@ -96,7 +95,7 @@
 
 /* Update Button */
 .update-btn {
-  background-color: #007bff;
+  background-color: #3c6e71;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -107,12 +106,12 @@
 }
 
 .update-btn:hover {
-  background-color: #0056b3;
+  background-color: #284b63;
 }
 
 /* Delete Button */
 .del-btn {
-  background-color: #dc3545;
+  background-color: #3c6e71;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -123,5 +122,5 @@
 }
 
 .delete-btn:hover {
-  background-color: #a71d2a;
+  background-color: #284b63;
 }

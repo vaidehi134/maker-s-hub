@@ -14,6 +14,7 @@ import RegisterClientCrafter from "./components/RegisterClientCrafter/RegisterCl
 import CreatePost from "./components/Client/ClientComponents/CreatePost/CreatePost";
 import AllPosts from "./components/Client/ClientComponents/AllPosts/AllPosts";
 import UpdatePost from "./components/Client/ClientComponents/UpdatePost/UpdatePost";
+import CategorySelector from "./components/CategorySelector/CategorySelector";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/requests" element={<Requests />} />
           <Route path="/register-client" element={<RegisterClient />} />
+        {/* <Route path="/categorySelector" element={<CategorySelector />} /> */}
           <Route path="/register-crafter" element={<RegisterCrafter />} />
           <Route
             path="/register-client-crafter"

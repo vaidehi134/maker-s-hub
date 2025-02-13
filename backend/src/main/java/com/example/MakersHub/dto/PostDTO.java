@@ -1,8 +1,13 @@
 package com.example.MakersHub.dto;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.MakersHub.entity.Category;
+import com.example.MakersHub.entity.Material;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -16,6 +21,77 @@ public class PostDTO {
     private List<String> imageUrls;  // Store image URLs instead of byte arrays
     private Long clientId;
     private String clientName;
+    private LocalDate initiationDate; // Start date of the project
+    private LocalDate completionDate;  // Deadline for completion
+
+//    @JsonProperty("categories")
+//    private List<CategoryDTO> categories;  // Use CategoryDTO instead of Category
+//
+//    @JsonProperty("materials")
+//    private List<MaterialDTO> materials;  // Use MaterialDTO instead of Material
+//
+//    // Getter and Setter for materials
+//    public List<MaterialDTO> getMaterials()
+//    {
+//        return materials;
+//    }
+//
+//    public void setMaterials(List<MaterialDTO> materials) {
+//        this.materials = materials;
+//    }
+//
+//
+//    public List<CategoryDTO> getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(List<CategoryDTO> categories) {
+//        this.categories = categories;
+//    }
+
+//
+    @JsonProperty("categories")
+    private List<Category> categories;  // Use CategoryDTO instead of Category
+
+    @JsonProperty("materials")
+    private List<Material>materials;  // Use MaterialDTO instead of Material
+
+  // Getter and Setter for materials
+   public List<Material> getMaterials()
+   {
+        return materials;
+    }
+
+   public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
+
+    public List<Category> getCategories() {
+       return categories;
+  }
+
+   public void setCategories(List<Category> categories) {
+       this.categories = categories;
+   }
+
+
+
+    public LocalDate getInitiationDate() {
+        return initiationDate;
+    }
+
+    public void setInitiationDate(LocalDate initiationDate) {
+        this.initiationDate = initiationDate;
+    }
+
+    public LocalDate getCompletionDate() {
+        return completionDate;
+    }
+
+    public void setCompletionDate(LocalDate completionDate) {
+        this.completionDate = completionDate;
+    }
+
 
     public List<String> getImageUrls() {
         return imageUrls;
@@ -60,15 +136,6 @@ public class PostDTO {
     public void setImages(List<MultipartFile> images) {
         this.images = images;
     }
-
-//    // Getter and Setter for returnedImages
-//    public List<byte[]> getReturnedImages() {
-//        return returnedImages;
-//    }
-//
-//    public void setReturnedImages(List<byte[]> returnedImages) {
-//        this.returnedImages = returnedImages;
-//    }
 
     // Getter and Setter for clientId
     public Long getClientId() {

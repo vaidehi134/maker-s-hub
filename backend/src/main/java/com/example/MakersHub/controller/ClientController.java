@@ -83,23 +83,28 @@ public class ClientController {
 //    }
 
 
-        @PostMapping("/post/{clientId}")
-        public ResponseEntity<?> postPost(@PathVariable Long clientId, @ModelAttribute PostDTO postDTO) throws IOException {
-            boolean success = clientService.postPost(clientId, postDTO);
-            if (success) {
-                return ResponseEntity.ok("Post created successfully!");
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client not found.");
-            }
+    @PostMapping("/post/{clientId}")
+    public ResponseEntity<?> postPost(@PathVariable Long clientId, @ModelAttribute PostDTO postDTO) throws IOException {
+        boolean success = clientService.postPost(clientId, postDTO);
+        if (success) {
+            return ResponseEntity.ok("Post created successfully!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Client not found.");
         }
+    }
 
         @GetMapping("/posts/{clientId}")
         public ResponseEntity<?> getAllPosts(@PathVariable Long clientId) {
+            System.out.println("---------------------------------------getAllPost() called");
+            if(clientId==null){System.out.println("error in clientid");}
             return ResponseEntity.ok(clientService.getAllPosts(clientId));
         }
 
         @PostMapping("/postById")
         public ResponseEntity<?> getPostById(@RequestBody Map<String, Long> requestBody) {
+
+        System.out.println("getPostById called-----------------");
+
             Long postId = requestBody.get("postId");
             if (postId == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Post ID is required");
@@ -111,8 +116,22 @@ public class ClientController {
 
 
 
+//    @PutMapping("/post/{postId}")
+//    public ResponseEntity<?> updatePost(@PathVariable Long postId, @ModelAttribute PostDTO postDTO) throws IOException {
+//         System.out.println("updatePost method of controller got called--------------------------->");
+//
+//        boolean success = clientService.updatePost(postId, postDTO);
+//        if (success) {
+//            return ResponseEntity.status(HttpStatus.OK).build();
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//    }
+
     @PutMapping("/post/{postId}")
     public ResponseEntity<?> updatePost(@PathVariable Long postId, @ModelAttribute PostDTO postDTO) throws IOException {
+        System.out.println("updatePost method of controller got called--------------------------->");
+
         boolean success = clientService.updatePost(postId, postDTO);
         if (success) {
             return ResponseEntity.status(HttpStatus.OK).build();
@@ -120,6 +139,7 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
 
     @DeleteMapping("/post/{postId}")
     public ResponseEntity<?> deletePost(@PathVariable Long postId)
