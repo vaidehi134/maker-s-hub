@@ -1,114 +1,161 @@
+/* CreatePost.css */
 .postUploadContainer {
-  max-width: 650px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 8px;
-  color: #333;
-  background-color: #ccc;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background decorative elements */
+.postUploadContainer::before {
+  content: '';
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
+  top: -400px;
+  left: -300px;
+  z-index: 0;
+}
+
+.postUploadContainer::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
+  bottom: -300px;
+  right: -200px;
+  z-index: 0;
 }
 
 .uploadHeading {
+  color: #2d3958;
+  font-size: 2.25rem;
+  font-weight: 700;
   text-align: center;
-  font-size: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
 }
 
 .formContainer {
-  display: flex;
-  margin-top: 50px;
-  flex-direction: column;
-  gap: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem 3.5rem;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 25px rgba(124, 130, 242, 0.07),
+    0 2px 4px rgba(124, 130, 242, 0.05);
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  z-index: 1;
 }
 
-/* Input group for each field */
 .inputGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  margin-bottom: 1.5rem;
 }
 
 .label {
-  font-weight: bold;
-  font-size: 20px;
-  color: #333;
+  display: block;
+  color: #2d3958;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .inputField,
 .inputFieldDes {
-  padding: 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.inputFieldDate {
-  width: 45%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.dateInputContainer {
-  display: flex;
-  align-items: center;
-}
-
-.dateSeparator {
-  margin: 0 10px;
-  font-weight: bold;
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid rgba(124, 130, 242, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .inputField:focus,
 .inputFieldDes:focus {
-  border-color: #284b63;
   outline: none;
+  border-color: #7c82f2;
+  box-shadow: 0 0 0 3px rgba(124, 130, 242, 0.15);
 }
 
 .inputFieldDes {
   resize: vertical;
+  min-height: 100px;
 }
 
 .subBtn {
-  padding: 12px;
-  font-size: 16px;
-  background-color: #3c6e71;
+  background: #7c82f2;
   color: white;
+  padding: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .subBtn:hover {
-  background-color: #284b63;
+  background: #6268f1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 130, 242, 0.25);
 }
 
+.subBtn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Image upload styling */
 .imageUploadBtn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: 2px dashed #7c82f2;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.imageUploadBtn:hover {
+  background: rgba(124, 130, 242, 0.05);
 }
 
 .uploadBtn {
-  padding: 10px 20px;
-  background-color: #3c6e71;
+  background: #7c82f2;
   color: white;
+  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
+  font-weight: 600;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 .uploadBtn:hover {
-  background-color: #284b63;
+  background: #6268f1;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(124, 130, 242, 0.25);
 }
 
 .imagePreviewContainer {
   display: flex;
-  gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 10px;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .imagePreviewWrapper {
@@ -121,41 +168,81 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .deleteBtnCreatePost {
   position: absolute;
-  margin-top: 3px;
-  right: 2px;
-  background-color: rgba(217, 217, 217, 0.7); /* 80% opacity */
+  top: -8px;
+  right: -8px;
+  background: #ff4d4f;
   color: white;
   border: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 100%;
-  padding: 5px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
 .deleteBtnCreatePost:hover {
-  background-color: rgba(217, 217, 217, 0.9);
+  background: #ff7875;
+  transform: scale(1.1);
 }
 
 .addImageBtn {
   width: 100px;
   height: 100px;
-  background-color: #3c6e71;
-  color: white;
-  border-radius: 5px;
+  border: 2px dashed #7c82f2;
+  border-radius: 8px;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 2rem;
+  color: #7c82f2;
+  transition: all 0.3s ease;
 }
 
 .addImageBtn:hover {
-  background-color: #284b63;
+  background: rgba(124, 130, 242, 0.05);
+}
+
+.inputFieldDate {
+  width: 45%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.dateInputContainer {
+  display: flex;
+  align-items: center;
+}
+
+.dateSeparator {
+  margin: 0 10px;
+  font-weight: bold;
+}
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .postUploadContainer {
+    padding: 1rem;
+  }
+
+  .formContainer {
+    padding: 2rem;
+  }
+
+  .uploadHeading {
+    font-size: 1.75rem;
+  }
+
+  .imagePreviewContainer {
+    justify-content: center;
+  }
 }

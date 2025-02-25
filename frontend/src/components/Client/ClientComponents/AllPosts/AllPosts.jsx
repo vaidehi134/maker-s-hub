@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ClientService } from "../../Services/ClientService";
 import { notification } from "antd";
-import "./AllPosts.css";
+import styles from "./AllPosts.module.css";
 import { useNavigate } from "react-router-dom";
 
 const AllPosts = () => {
@@ -59,22 +59,22 @@ const AllPosts = () => {
   const getImageSrc = (imgUrl) => imgUrl; // Directly return the image URL
 
   return (
-    <div className="posts-container">
+    <div className={styles.postsContainer}>
       <h1>DashBoard</h1>
 
       {posts.length === 0 ? (
-        <h1 className="no-posts-message">No Posts Available</h1>
+        <h1 className={styles.noPostsMessage}>No Posts Available</h1>
       ) : (
-        <div className="posts-list">
+        <div className={styles.postsList}>
           {posts.map((post) => (
-            <div key={post.id} className="post-item">
-              <div className="post-content">
-                <div className="post-images">
+            <div key={post.id} className={styles.postItem}>
+              <div className={styles.postContent}>
+                <div className={styles.postImages}>
                   {post.imageUrls &&
                     post.imageUrls.map((img, index) => (
                       <img
                         key={index}
-                        className="post-image"
+                        className={styles.postImage}
                         src={getImageSrc(img)}
                         alt={`Post ${post.id} Image ${index + 1}`}
                         onError={(e) => {
@@ -83,22 +83,22 @@ const AllPosts = () => {
                       />
                     ))}
                 </div>
-                <div className="post-details">
-                  <h2 className="post-title">{post.itemName}</h2>
-                  {/* <p className="post-description">
+                <div className={styles.postDetails}>
+                  <h2 className={styles.postTitle}>{post.itemName}</h2>
+                  {/* <p className={styles.postDescription}>
                     <strong>Description: </strong>
                     {post.description}
                   </p> */}
                 </div>
-                <div className="post-actions">
+                <div className={styles.postActions}>
                   <button
-                    className="update-btn"
+                    className={styles.updateBtn}
                     onClick={() => handlePostClick(post.id)}
                   >
                     Update
                   </button>
                   <button
-                    className="del-btn"
+                    className={styles.delBtn}
                     onClick={() => handleDeletePost(post.id)}
                   >
                     Delete
