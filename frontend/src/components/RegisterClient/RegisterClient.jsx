@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./RegisterClient.css";
+import styles from "./RegisterClient.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context/AuthContext"; //import useAuth hook
@@ -88,8 +88,9 @@ const Register = () => {
   };
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit}>
+    <div className={styles.register}>
+    <div className={styles.formContainer}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div>
           <label>Email</label>
           <input
@@ -171,10 +172,11 @@ const Register = () => {
           />
         </div>
         <button type="submit">Register</button>
-        <div className="login-link">
+        <div className={styles.loginLink}>
           <Link to="/login">login now</Link>
         </div>
       </form>
+    </div>
     </div>
   );
 };

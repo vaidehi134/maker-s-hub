@@ -1,70 +1,164 @@
+/* ========= LOGIN PAGE STYLING ========= */
 .login-container {
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: calc(100vh - 80px); /* Full page height minus Navbar height */
+  justify-content: center;
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
+  position: relative;
+  overflow: hidden;
 }
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  width: 1000px;
+  height: 1000px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
+  top: -400px;
+  right: -300px;
+  z-index: 0;
+}
+
+.login-container::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
+  bottom: -300px;
+  left: -200px;
+  z-index: 0;
+}
+
+/* ========= LOGIN FORM BOX ========= */
 .login-form {
-  background: #d9d9d9;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 350px;
-  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem 4rem;
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 25px rgba(124, 130, 242, 0.07),
+    0 2px 4px rgba(124, 130, 242, 0.05);
+  width: 460px;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
+
+/* ========= FORM HEADING ========= */
 .login-form h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  color: #2d3958;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.5px;
 }
+
+/* ========= FORM FIELDS ========= */
 .form-group {
-  margin-bottom: 15px;
-  text-align: left;
-  width: 100%;
+  margin-bottom: 1.75rem;
 }
-label {
+
+.form-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4f5b76;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.2px;
 }
-input[type="email"],
-input[type="password"] {
-  width: 100%; /* Make input width 100% to ensure alignment */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
+
+.form-group input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e5e9f2;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #2d3958;
+  transition: all 0.2s ease;
+  background: #ffffff;
 }
+
+.form-group input:hover {
+  border-color: #d1d6e6;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #7c82f2;
+  box-shadow: 0 0 0 4px rgba(124, 130, 242, 0.1);
+}
+
+/* ========= BUTTON GROUP ========= */
 .button-group {
   display: flex;
-  justify-content: space-between;
-  gap: 10px; /* Add gap between buttons */
-  margin-bottom: 1.5rem;
+  gap: 1.25rem;
+  margin: 2.5rem 0 2rem;
 }
-button.loginbtn {
-  width: 100%; /* Make the button width 100% to align with inputs */
-  padding: 10px;
-  background-color: #3c6e71; /* Original color */
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
+
+.role-btn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  border: none;
+  letter-spacing: -0.2px;
 }
-button.loginbtn:hover {
-  background-color: #284b63; /* Original hover color */
+
+.role-btn:first-child {
+  background: #7c82f2;
+  color: white;
 }
+
+.role-btn:last-child {
+  background: #2d3958;
+  color: white;
+}
+
+.role-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(124, 130, 242, 0.2);
+}
+
+.role-btn:first-child:hover {
+  background: #6268f1;
+}
+
+.role-btn:last-child:hover {
+  background: #1f2942;
+}
+
+.role-btn:active {
+  transform: translateY(0);
+}
+
+/* ========= REGISTER LINK ========= */
 .register-link {
-  margin-top: 15px;
-  color: #333;
+  text-align: center;
+  font-size: 0.95rem;
+  color: #4f5b76;
 }
+
 .register-link a {
-  color: #3c6e71;
+  color: #7c82f2;
   text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  transition: all 0.2s ease;
 }
+
 .register-link a:hover {
-  color: #284b63;
-  text-decoration: underline;
+  color: #6268f1;
+  text-decoration: none;
+  background: rgba(124, 130, 242, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  margin-left: 0.25rem;
 }
