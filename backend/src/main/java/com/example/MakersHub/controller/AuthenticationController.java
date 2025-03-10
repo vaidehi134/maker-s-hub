@@ -76,6 +76,7 @@ public class AuthenticationController {
         System.out.println(crafterDTO.getLastname());
         System.out.println(crafterDTO.getPhone());
         System.out.println(crafterDTO.getSkills());
+        System.out.println(crafterDTO.getCity());
 
         if (authService.presentByEmailCrafter(crafterDTO.getEmail())) {
             return new ResponseEntity<>("Crafter already exsist with this email", HttpStatus.NOT_ACCEPTABLE);

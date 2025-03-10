@@ -27,9 +27,11 @@ const StorageService = {
     return user.userId;
   },
 
-  signOut: () => {
+  logOut: () => {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user");
+    console.log("token : ", StorageService.getToken());
+    console.log("user : ", StorageService.getUser());
   },
 };
 

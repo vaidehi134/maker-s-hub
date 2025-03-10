@@ -18,8 +18,17 @@ const CreatePost = () => {
   const [description, setDescription] = useState("");
   const fileInputRef = useRef(null); // Use ref to directly access the file input
   const [isSubmitting, setIsSubmitting] = useState(false); // Track submission state
-  const [initiationDate, setInitiationDate] = useState("");
+  // const [initiationDate, setInitiationDate] = useState("");
   const [completionDate, setCompletionDate] = useState("");
+  const [showCategoryDialog, setShowCategoryDialog] = useState(false);
+  const [showMaterialDialog, setShowMaterialDialog] = useState(false);
+
+  // New state variables for location search
+  const [locationQuery, setLocationQuery] = useState("");
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [location, setLocation] = useState(null); //string location
+
   const navigate = useNavigate();
 
   const handleFileChange = (e) => {
@@ -47,7 +56,6 @@ const CreatePost = () => {
     setImageUrls((prevUrls) => prevUrls.filter((_, i) => i !== index));
   };
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
@@ -61,8 +69,14 @@ const CreatePost = () => {
     formData.append("itemName", itemName);
     formData.append("description", description);
     formData.append("clientId", StorageService.getUserId());
-    formData.append("initiationDate", initiationDate);
+    // formData.append("initiationDate", initiationDate);
     formData.append("completionDate", completionDate);
+    formData.append("location", location);
+
+    if (selectedLocation) {
+      formData.append("latitude", selectedLocation.lat);
+      formData.append("longitude", selectedLocation.lon);
+    }
 
     selectedCategories.forEach((category, index) => {
       formData.append(`categories[${index}].id`, category.id);
@@ -102,6 +116,40 @@ const CreatePost = () => {
     }
   };
 
+  // New function to fetch location suggestions
+  const fetchLocationSuggestions = async (query) => {
+    try {
+      const response = await ClientService.getLocationSuggestions(query);
+      setLocation(query);
+      setLocationSuggestions(response.data);
+    } catch (error) {
+      console.error("Error fetching location suggestions:", error);
+      setLocationSuggestions([]);
+    }
+  };
+
+  // Add debouncing for location search
+  useEffect(() => {
+    if (locationQuery.trim() === "") {
+      setLocationSuggestions([]);
+      return;
+    }
+
+    // const debounceTimer = setTimeout(() => {
+    //   fetchLocationSuggestions(locationQuery);
+    // }, 10);
+
+    // return () => clearTimeout(debounceTimer);
+     fetchLocationSuggestions(locationQuery);
+  }, [locationQuery]);
+
+  // Handle location selection
+  const handleLocationSelect = (location) => {
+    setLocationQuery(location.display_name);
+    setSelectedLocation(location);
+    setLocationSuggestions([]);
+  };
+
   // Function to handle closing the category selector
   const handleCloseCategorySelector = () => {
     setShowCategorySelector(false);
@@ -115,6 +163,9 @@ const CreatePost = () => {
     console.log("selected materials.......from create Post");
     console.log(selectedMaterials);
   };
+
+  // Set the minimum date to today's date
+  const today = new Date().toISOString().split("T")[0];
 
   return (
     <div className={styles.postUploadContainer}>
@@ -206,28 +257,86 @@ const CreatePost = () => {
           />
         </div>
 
+        {/* Location search section */}
         <div className={styles.inputGroup}>
-          <CategorySelector
-            selectedCategories={selectedCategories} // Pass selected categories
-            setSelectedCategories={setSelectedCategories} // Set selected categories
-            onClose={handleCloseCategorySelector}
-          />
+          <label htmlFor="location" className={styles.label}>
+            Location
+          </label>
+          <div style={{ position: "relative" }}>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Enter location"
+              value={locationQuery}
+              onChange={(e) => setLocationQuery(e.target.value)}
+              className={styles.inputField}
+            />
+
+            {locationSuggestions.length > 0 && (
+              <div
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  backgroundColor: "white",
+                  border: "1px solid #ddd",
+                  zIndex: 10,
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                }}
+              >
+                {locationSuggestions.map((suggestion, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      padding: "8px 12px",
+                      cursor: "pointer",
+                      borderBottom: "1px solid #ddd",
+                    }}
+                    onClick={() => handleLocationSelect(suggestion)}
+                  >
+                    {suggestion.display_name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className={styles.inputGroup}>
-          <MaterialSelector
-            selectedMaterials={selectedMaterials} // Pass selected categories
-            setSelectedMaterials={setSelectedMaterials} // Set selected categories
-            onClose={handleCloseMaterialSelector} //------------------------>change needed
-          />
-        </div>
+        <button
+          className={styles.buttonGroup}
+          onClick={() => setShowCategoryDialog(true)}
+        >
+          Choose Categories
+        </button>
+
+        {/* CategorySelector with controlled dialog */}
+        <CategorySelector
+          open={showCategoryDialog}
+          onClose={() => setShowCategoryDialog(false)}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+        />
+
+        {/* Material Selector */}
+        <button
+          className={styles.buttonGroup}
+          onClick={() => setShowMaterialDialog(true)}
+        >
+          Choose Materials
+        </button>
+        <MaterialSelector
+          open={showMaterialDialog}
+          onClose={() => setShowMaterialDialog(false)}
+          selectedMaterials={selectedMaterials}
+          setSelectedMaterials={setSelectedMaterials}
+        />
 
         <div className={styles.inputGroup}>
           <label htmlFor="initiationDate" className={styles.label}>
-            Set Timeline
+            Set completionDate
           </label>
           <div className={styles.dateInputContainer}>
-            <input
+            {/* <input
               type="date"
               id="initiationDate"
               name="initiationDate"
@@ -235,8 +344,9 @@ const CreatePost = () => {
               onChange={(e) => setInitiationDate(e.target.value)}
               className={styles.inputFieldDate}
               required
-            />
-            <span className={styles.dateSeparator}>to</span>
+              min={today} // Set the minimum date to today
+            /> */}
+            {/* <span className={styles.dateSeparator}>to</span> */}
             <input
               type="date"
               id="completionDate"
@@ -245,6 +355,7 @@ const CreatePost = () => {
               onChange={(e) => setCompletionDate(e.target.value)}
               className={styles.inputFieldDate}
               required
+              min={today} // Set the minimum date to today
             />
           </div>
         </div>

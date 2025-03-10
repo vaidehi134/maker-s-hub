@@ -18,8 +18,6 @@ public class  MaterialController{
     // Endpoint to get all categories
     @GetMapping("/material")
     public List<MaterialDTO> getAllMaterials() {
-
-        System.out.println("....................................................entered in getAAllCategories()");
         return materialService.getAllMaterials();
     }
 }

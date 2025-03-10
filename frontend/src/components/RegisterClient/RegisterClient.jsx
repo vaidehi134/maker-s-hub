@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthContext"; //import useAuth hook
 const BASIC_URL = "http://localhost:8080/";
 
 const Register = () => {
-  const { register } = useAuth(); // Access register function from AuthContext
+  //const { register } = useAuth(); // Access register function from AuthContext
 
   const [formData, setFormData] = useState({
     email: "",
@@ -79,7 +79,7 @@ const Register = () => {
       const response = await registerClient(signupRequestDTO);
 
       // Set the role to 'client' after successful registration
-      register("client"); // Set the role to 'client'
+     // register("client"); // Set the role to 'client'
 
       alert("Registration successful: " + response.message); // Display success message
     } catch (error) {

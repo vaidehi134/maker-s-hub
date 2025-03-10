@@ -23,11 +23,6 @@ public class CategoryServiceImpl implements CategoryService{
                 .map(Category::getName) // Map each Category to its name
                 .collect(Collectors.toList()); // Collect the names into a list
 
-// Now print the category names
-        for (String name : categoryNames) {
-            System.out.println(name);
-        }
-
         return categories.stream()
                 .map(Category::getDto)
                 .collect(Collectors.toList());

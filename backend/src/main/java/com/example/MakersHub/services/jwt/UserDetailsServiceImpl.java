@@ -2,10 +2,8 @@ package com.example.MakersHub.services.jwt;
 
 import com.example.MakersHub.entity.Client;
 import com.example.MakersHub.entity.Crafter;
-import com.example.MakersHub.entity.User;
 import com.example.MakersHub.repository.ClientRepository;
 import com.example.MakersHub.repository.CrafterRepository;
-import com.example.MakersHub.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

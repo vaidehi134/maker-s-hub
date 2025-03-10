@@ -20,7 +20,6 @@ public class CategoryController {
     @GetMapping("/category")
     public List<CategoryDTO> getAllCategories() {
 
-        System.out.println("....................................................entered in getAAllCategories()");
         return categoryService.getAllCategories();
     }
 }

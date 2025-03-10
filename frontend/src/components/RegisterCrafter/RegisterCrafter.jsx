@@ -7,7 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 const BASIC_URL = "http://localhost:8080/";
 
 const Register = () => {
-  const { register } = useAuth();
+  //const { register } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -76,7 +76,7 @@ const Register = () => {
 
       const response = await registerCrafter(signupRequestDTO);
 
-      register("crafter");
+      // register("crafter");
       alert("Registration successful: " + response.message);
     } catch (error) {
       alert("Failed to register: " + error.message);
@@ -85,104 +85,104 @@ const Register = () => {
 
   return (
     <div className={styles.register}>
-    <div className={styles.formContainer}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>First Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Last Name</label>
-          <input
-            type="text"
-            name="lastname"
-            value={formData.lastname}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Address</label>
-          <input
-            type="text"
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>City</label>
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Phone no</label>
-          <input
-            type="text"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Skills (comma-separated)</label>
-          <input
-            type="text"
-            name="skills"
-            value={formData.skills}
-            onChange={handleChange}
-            placeholder="e.g., Woodworking, Carving, Metalwork"
-          />
-        </div>
-        <button type="submit">Register as Crafter</button>
-        <div className={styles.loginLink}>
-          <Link to="/login">Login now</Link>
-        </div>
-      </form>
-    </div>
+      <div className={styles.formContainer}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>First Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Last Name</label>
+            <input
+              type="text"
+              name="lastname"
+              value={formData.lastname}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Address</label>
+            <input
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>City</label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Phone no</label>
+            <input
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Skills (comma-separated)</label>
+            <input
+              type="text"
+              name="skills"
+              value={formData.skills}
+              onChange={handleChange}
+              placeholder="e.g., Woodworking, Carving, Metalwork"
+            />
+          </div>
+          <button type="submit">Register as Crafter</button>
+          <div className={styles.loginLink}>
+            <Link to="/login">Login now</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,166 @@
+.allPosts {
+  background-color: white;
+  color: #333;
+ height: 100vh;
+}
+.searchContainer {
+  width: 100%;
+  margin: 0 auto;
+  margin-left: 20px;
+  display: flex; /* Enable Flexbox */
+  align-items: center; /* Vertically center the items */
+  justify-content: flex-start; /* Align items to the start of the container */
+  gap: 15px; /* Add some space between the button and the search wrapper */
+}
+
+.addLocation {
+  margin-top: 20px;
+  width: 100%;
+  display: flex; /* Enable Flexbox */
+  align-items: center; /* Vertically center the items */
+  justify-content: flex-start; /* Align items to the start of the container */
+  gap: 15px; /* Add some space between the button and the search wrapper */
+  margin-left: 20px;
+}
+
+.addLocation input {
+  border: 2px solid #333;
+}
+
+.findLocationButton {
+  width: 240px;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 680px;
+}
+
+.searchInput {
+  border: 2px solid #333;
+  margin-top: 30px;
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.searchInput:focus {
+  border-color: #284b63;
+}
+
+.searchIcon {
+  margin-top: 30px;
+  position: absolute;
+  left: 10px;
+  color: #333;
+}
+
+.buttonGroup {
+  background-color: #3c6e71;
+  width: 195px;
+  height: 45px;
+  margin-top: 30px;
+}
+
+.searchButton {
+  background-color: #3c6e71;
+  position: absolute;
+  right: 3px;
+  border: none;
+  border-radius: 10px;
+  width: 70px;
+  margin-top: 30px;
+  margin-left: 20px;
+  height: 45%;
+  color: white;
+  cursor: pointer;
+}
+
+.postList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  /* justify-content: center; */
+}
+
+/* Post Item Container */
+.postItem {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.postItem:hover {
+  transform: scale(1.02);
+}
+
+/* Post Content */
+.postContent {
+  padding: 15px;
+}
+
+/* Post Image */
+.postImage {
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+
+.postImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Post Details */
+.post-details {
+  padding: 15px;
+}
+
+.post-title {
+  font-size: 1.5em;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+/* Post Action */
+.postAction {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.updateButton {
+  background-color: #3c6e71;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.updateButton:hover {
+  background-color: #284b63;
+}
+
+/* No Posts Available */
+.noPostAvailable {
+  text-align: center;
+  font-size: 2em;
+  color: #666;
+  margin: 50px 0;
+}

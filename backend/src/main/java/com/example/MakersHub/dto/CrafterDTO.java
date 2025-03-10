@@ -1,6 +1,9 @@
 package com.example.MakersHub.dto;
 
+import com.example.MakersHub.entity.Post;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class CrafterDTO {
@@ -15,6 +18,15 @@ public class CrafterDTO {
     private String phone;
     private String skills;
     private String city;
+    private List<PostDTO> assignedPosts;
+
+    public List<PostDTO> getAssignedPosts() {
+        return assignedPosts;
+    }
+    public void setAssignedPosts(List<PostDTO> assignedPosts) {
+        this.assignedPosts = assignedPosts;
+    }
+
 
     public String getCity() {
         return city;

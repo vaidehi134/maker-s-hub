@@ -2,8 +2,6 @@ package com.example.MakersHub.services.authentication;
 
 import com.example.MakersHub.dto.ClientDTO;
 import com.example.MakersHub.dto.CrafterDTO;
-import com.example.MakersHub.dto.SignupRequestDTO;
-import com.example.MakersHub.dto.UserDto;
 
 public interface AuthService {
 

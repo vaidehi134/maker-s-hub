@@ -50,6 +50,7 @@ public class AuthServiceImpl implements AuthService {
         client.setAddress(clientSignupDTO.getAddress());
         client.setEmail(clientSignupDTO.getEmail());
         client.setPhone(clientSignupDTO.getPhone());
+        client.setCity(clientSignupDTO.getCity());
         client.setPassword(new BCryptPasswordEncoder().encode(clientSignupDTO.getPassword()));
 
 
@@ -84,6 +85,7 @@ public class AuthServiceImpl implements AuthService {
         crafter.setAddress(crafterDTO.getAddress());
         crafter.setEmail(crafterDTO.getEmail());
         crafter.setPhone(crafterDTO.getPhone());
+        crafter.setCity(crafterDTO.getCity());
         crafter.setPassword(new BCryptPasswordEncoder().encode(crafterDTO.getPassword()));
         crafter.setSkills(crafterDTO.getSkills());
 

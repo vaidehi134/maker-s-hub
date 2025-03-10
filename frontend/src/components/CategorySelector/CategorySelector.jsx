@@ -148,13 +148,18 @@ import StorageService from "../../util/StorageService";
 import axios from "axios";
 import styles from "./CategorySelector.module.css"; // Import the CSS Module
 
-const CategorySelector = ({
-  selectedCategories,
-  setSelectedCategories,
-  onClose,
-}) => {
-  const [categories, setCategories] = useState([]); // Store categories
-  const [showDialog, setShowDialog] = useState(false);
+// const CategorySelector = ({
+//   selectedCategories,
+//   setSelectedCategories,
+//   onClose,
+// }) => {
+//   const [categories, setCategories] = useState([]); // Store categories
+//   const [showDialog, setShowDialog] = useState(false);
+
+const CategorySelector = (props) => {
+  const { selectedCategories, setSelectedCategories, onClose, open } = props;
+
+  const [categories, setCategories] = useState([]);
 
   // Function to create Authorization header
   const createAuthorizationHeader = () => {
@@ -167,33 +172,54 @@ const CategorySelector = ({
     console.log("Updated selected categories:", selectedCategories);
   }, [selectedCategories]);
 
-  // Fetch categories when the button is clicked
-  const handleOpenDialog = async () => {
-    console.log(
-      "---------------------------------------------------handleOpenDialog button got clicked"
-    );
+  // // Fetch categories when the button is clicked
+  // const handleOpenDialog = async () => {
+  //   console.log(
+  //     "---------------------------------------------------handleOpenDialog button got clicked"
+  //   );
 
+  //   try {
+  //     console.log(
+  //       "-----------------------------------------------------Fetching categories..."
+  //     );
+  //     const response = await axios.get(
+  //       "http://localhost:8080/api/categories/category",
+  //       {
+  //         headers: createAuthorizationHeader(),
+  //       }
+  //     );
+  //     console.log("Fetched Categories:", response.data);
+  //     setCategories(response.data); // Update state with fetched categories
+  //     setShowDialog(true); // Show the dialog after fetching data
+  //   } catch (error) {
+  //     notification.error({
+  //       message: "Error fetching categories",
+  //       description:
+  //         error.message || "Something went wrong while fetching categories",
+  //     });
+  //   }
+  // };
+
+  const fetchCategories = async () => {
     try {
-      console.log(
-        "-----------------------------------------------------Fetching categories..."
-      );
       const response = await axios.get(
         "http://localhost:8080/api/categories/category",
-        {
-          headers: createAuthorizationHeader(),
-        }
+        { headers: createAuthorizationHeader() }
       );
-      console.log("Fetched Categories:", response.data);
-      setCategories(response.data); // Update state with fetched categories
-      setShowDialog(true); // Show the dialog after fetching data
+      setCategories(response.data);
     } catch (error) {
       notification.error({
         message: "Error fetching categories",
-        description:
-          error.message || "Something went wrong while fetching categories",
+        description: error.message || "Something went wrong",
       });
     }
   };
+
+  useEffect(() => {
+    if (open) {
+      fetchCategories();
+    }
+  }, [open]);
 
   // Handle category selection (Add/remove entire category object)
   const handleSelectCategory = (category) => {
@@ -207,11 +233,11 @@ const CategorySelector = ({
     console.log("Selected Categories:", selectedCategories);
   };
 
-  // Close the dialog
-  const handleCloseDialog = () => {
-    setShowDialog(false);
-    onClose(); // Call the onClose function from CreatePost or UpdatePost
-  };
+  // // Close the dialog
+  // const handleCloseDialog = () => {
+  //   setShowDialog(false);
+  //   onClose(); // Call the onClose function from CreatePost or UpdatePost
+  // };
 
   // Delete selected category
   const handleDeleteCategory = (categoryId) => {
@@ -220,17 +246,60 @@ const CategorySelector = ({
     );
   };
 
-  return (
-    <div className={styles.categorySelector}>
-      <button
-        className={styles.button}
-        onClick={handleOpenDialog}
-        type="button"
-      >
-        Choose Categories
-      </button>
+  const renderDialog = () => (
+    <div className={styles.dialog}>
+      <div className={styles.dialogContent}>
+        <h3>Select Categories</h3>
+        <button className={styles.button} onClick={onClose} type="button">
+          Close
+        </button>
+        
+        {categories.map((category) => (
+          <div key={category.id}>
+            <span>
+              <label className={styles.categoryName}>{category.name}</label>
+              <input
+                className={styles.categoryCheckBox}
+                type="checkbox"
+                checked={selectedCategories.some(
+                  (cat) => cat.id === category.id
+                )}
+                onChange={() => handleSelectCategory(category)} // Pass the whole category to handleSelectCategory
+              />
+            </span>
+            <p>{category.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
-      {/* Selected Categories as Tags */}
+  return (
+    // <div className={styles.categorySelector}>
+    //   <button
+    //     className={styles.button}
+    //     onClick={handleOpenDialog}
+    //     type="button"
+    //   >
+    //     Choose Categories
+    //   </button>
+
+    //   {/* Selected Categories as Tags */}
+    //   <div className={styles.selectedCategories}>
+    //     {selectedCategories.map((category) => (
+    //       <span key={category.id} className={styles.categoryTag}>
+    //         {category.name}
+    //         <button
+    //           className={styles.deleteButton}
+    //           onClick={() => handleDeleteCategory(category.id)}
+    //         >
+    //           ✖
+    //         </button>
+    //       </span>
+    //     ))}
+    //   </div>
+
+    <div className={styles.categorySelector}>
       <div className={styles.selectedCategories}>
         {selectedCategories.map((category) => (
           <span key={category.id} className={styles.categoryTag}>
@@ -245,7 +314,10 @@ const CategorySelector = ({
         ))}
       </div>
 
-      {/* Category selection dialog */}
+      {open && renderDialog()}
+    </div>
+
+    /* Category selection dialog
       {showDialog && (
         <div className={styles.dialog}>
           <div className={styles.dialogContent}>
@@ -280,8 +352,8 @@ const CategorySelector = ({
             </div>
           </div>
         </div>
-      )}
-    </div>
+      )} */
+    // </div>
   );
 };
 

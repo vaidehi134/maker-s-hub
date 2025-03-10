@@ -15,11 +15,9 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-
         {/* If user is logged in, show role-specific Navbar */}
         {user ? (
           <>
-            {/* Render links based on user role */}
             {StorageService.getUserRole() === "CLIENT" ? (
               <>
                 <li>
@@ -32,10 +30,10 @@ const Navbar = () => {
             ) : (
               <>
                 <li>
-                  <Link to="/dashboard-crafter">Dashboard</Link>
+                  <Link to="/crafter-all-posts">Dashboard</Link>
                 </li>
                 <li>
-                  <Link to="/requests">Requests</Link>
+                  <Link to="/crafter-work">Work</Link>
                 </li>
               </>
             )}

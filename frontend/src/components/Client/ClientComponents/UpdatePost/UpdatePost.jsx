@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { notification } from "antd";
 import { ClientService } from "../../Services/ClientService";
@@ -8,22 +8,31 @@ import MaterialSelector from "../../../MaterialSelector/MaterialSelector";
 import styles from "./UpdatePost.module.css";
 
 const UpdatePost = () => {
-  const { postId } = useParams(); // Get postId from URL
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedMaterials, setSelectedMaterials] = useState([]);
+  const { postId } = useParams();
+  const [existingImages, setExistingImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
+  const [imageUrlsForNewFiles, setImageUrlsForNewFiles] = useState([]);
+  const [deletedPublicIds, setDeletedPublicIds] = useState([]);
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
-  const [initiationDate, setInitiationDate] = useState("");
+  // const [initiationDate, setInitiationDate] = useState("");
   const [completionDate, setCompletionDate] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const fileInputRef = useRef(null);
-  const [showCategorySelector, setShowCategorySelector] = useState(false); // Manage category dialog visibility
-  const [showMaterialSelector, setShowMaterialSelector] = useState(false); // Manage material dialog visibility
+  const [showCategorySelector, setShowCategorySelector] = useState(false);
+  const [showMaterialSelector, setShowMaterialSelector] = useState(false);
+  const [showCategoryDialog, setShowCategoryDialog] = useState(false);
+  const [showMaterialDialog, setShowMaterialDialog] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedMaterials, setSelectedMaterials] = useState([]);
+
+  // New state variables for location search
+  const [locationQuery, setLocationQuery] = useState("");
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [location,setLocation] = useState();
   const navigate = useNavigate();
 
-  // Fetch post data when the component mounts
   useEffect(() => {
     console.log("updatepost component called ........................");
     const fetchPost = async () => {
@@ -33,15 +42,14 @@ const UpdatePost = () => {
           const post = response.data;
           setItemName(post.itemName);
           setDescription(post.description);
-          setImageUrls(post.imageUrls || []);
-          setInitiationDate(post.initiationDate?.split("T")[0] || ""); // Format date
-          setCompletionDate(post.completionDate?.split("T")[0] || ""); // Format date
+          // setInitiationDate(post.initiationDate?.split("T")[0] || "");
+          setCompletionDate(post.completionDate?.split("T")[0] || "");
+          setExistingImages(post.imageDetails || []);
           setSelectedCategories(post.categories || []);
           setSelectedMaterials(post.materials || []);
+          setLocationQuery(post.location || "");
 
-          console.log("timeline.........");
-          console.log("initiation date", post.initiationDate);
-          console.log("completion date", post.completionDate);
+          console.log("location : ", locationQuery);
         }
       } catch (error) {
         notification.error({
@@ -58,15 +66,25 @@ const UpdatePost = () => {
     const files = Array.from(e.target.files);
     setSelectedFiles((prevFiles) => [...prevFiles, ...files]);
     const urls = files.map((file) => URL.createObjectURL(file));
-    setImageUrls((prevUrls) => [...prevUrls, ...urls]);
+    setImageUrlsForNewFiles((prevUrls) => [...prevUrls, ...urls]);
     e.target.value = null;
   };
 
   // Handle file deletion
-  const handleDelete = (index, e) => {
-    e.stopPropagation();
-    setSelectedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
-    setImageUrls((prevUrls) => prevUrls.filter((_, i) => i !== index));
+  const handleDelete = (item) => {
+    if (item.type === "existing") {
+      setDeletedPublicIds((prev) => [...prev, item.publicId]);
+      setExistingImages((prev) =>
+        prev.filter((img) => img.imgPublicId !== item.publicId)
+      );
+    } else if (item.type === "new") {
+      setSelectedFiles((prevFiles) =>
+        prevFiles.filter((file, index) => index !== item.index)
+      );
+      setImageUrlsForNewFiles((prevUrls) =>
+        prevUrls.filter((url, index) => index !== item.index)
+      );
+    }
   };
 
   // Handle form submission
@@ -76,15 +94,25 @@ const UpdatePost = () => {
     setIsSubmitting(true);
 
     const formData = new FormData();
-    selectedFiles.forEach((file) => {
-      formData.append("images", file);
-    });
 
+    // Append new files
+    selectedFiles.forEach((file) => formData.append("images", file));
+
+    // Append other fields
     formData.append("itemName", itemName);
     formData.append("description", description);
     formData.append("clientId", StorageService.getUserId());
-    formData.append("initiationDate", initiationDate);
+    // formData.append("initiationDate", initiationDate);
     formData.append("completionDate", completionDate);
+    formData.append("location", location);
+
+    if (selectedLocation) {
+      formData.append("latitude", selectedLocation.lat);
+      formData.append("longitude", selectedLocation.lon);
+    }
+
+    // Append deleted public IDs as a JSON string
+    formData.append("deletedPublicIds", JSON.stringify(deletedPublicIds));
 
     selectedCategories.forEach((category, index) => {
       formData.append(`categories[${index}].id`, category.id);
@@ -119,15 +147,72 @@ const UpdatePost = () => {
     }
   };
 
+  // New function to fetch location suggestions
+  const fetchLocationSuggestions = async (query) => {
+    try {
+      const response = await ClientService.getLocationSuggestions(query);
+      setLocationSuggestions(response.data);
+    } catch (error) {
+      console.error("Error fetching location suggestions:", error);
+      setLocationSuggestions([]);
+    }
+  };
+
+  // Add debouncing for location search
+  useEffect(() => {
+    if (locationQuery.trim() === "") {
+      setLocationSuggestions([]);
+      return;
+    }
+
+    const debounceTimer = setTimeout(() => {
+      fetchLocationSuggestions(locationQuery);
+    }, 300);
+
+    return () => clearTimeout(debounceTimer);
+  }, [locationQuery]);
+
+  // Handle location selection
+  const handleLocationSelect = (location) => {
+    setLocationQuery(location.display_name);
+    setLocation(location.display_name);
+    setSelectedLocation(location);
+    setLocationSuggestions([]);
+  };
+
+  // Display images
+  const displayImages = useMemo(() => {
+    return [
+      ...existingImages.map((img) => ({
+        type: "existing",
+        url: img.imgUrl,
+        publicId: img.imgPublicId,
+        key: img.imgPublicId,
+      })),
+      ...selectedFiles.map((file, index) => ({
+        type: "new",
+        file,
+        url: imageUrlsForNewFiles[index],
+        key: `new-${index}`,
+        index: index,
+      })),
+    ];
+  }, [existingImages, selectedFiles, imageUrlsForNewFiles]);
+
+  // Set the minimum date to today's date
+  const today = useMemo(() => {
+    return new Date().toISOString().split("T")[0];
+  }, []);
+
   // Handle closing the category selector
   const handleCloseCategorySelector = () => {
-    setShowCategorySelector(false); // Hide the category dialog
+    setShowCategorySelector(false);
     console.log("Selected Categories:", selectedCategories);
   };
 
   // Handle closing the material selector
   const handleCloseMaterialSelector = () => {
-    setShowMaterialSelector(false); // Hide the material dialog
+    setShowMaterialSelector(false);
     console.log("Selected Materials:", selectedMaterials);
   };
 
@@ -159,19 +244,23 @@ const UpdatePost = () => {
             ref={fileInputRef}
           />
           <div className={styles.imageUploadBtn}>
-            {imageUrls.length > 0 ? (
+            {imageUrlsForNewFiles.length > 0 || existingImages.length > 0 ? (
               <div className={styles.imagePreviewContainer}>
-                {imageUrls.map((url, index) => (
-                  <div key={index} className={styles.imagePreviewWrapper}>
+                {displayImages.map((item) => (
+                  <div
+                    key={item.key}
+                    className={styles.imagePreviewWrapper}
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <img
-                      src={url}
-                      alt={`Preview ${index + 1}`}
+                      src={item.url}
+                      alt={`Preview ${item.key}`}
                       className={styles.imagePreview}
                     />
                     <button
                       type="button"
                       className={styles.deleteBtn}
-                      onClick={(e) => handleDelete(index, e)}
+                      onClick={() => handleDelete(item)}
                     >
                       X
                     </button>
@@ -230,31 +319,94 @@ const UpdatePost = () => {
           />
         </div>
 
-        {/* Category Selector */}
+        {/* Location search section */}
         <div className={styles.inputGroup}>
-          <CategorySelector
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-            onClose={handleCloseCategorySelector}
-          />
+          <label htmlFor="location" className={styles.label}>
+            Location
+          </label>
+          <div style={{ position: "relative" }}>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Enter location"
+              value={locationQuery}
+              onChange={(e) => setLocationQuery(e.target.value)}
+              className={styles.inputField}
+            />
+
+            {locationSuggestions.length > 0 && (
+              <div
+                style={{
+                  position: "absolute",
+                  width: "100%",
+                  backgroundColor: "white",
+                  border: "1px solid #ddd",
+                  zIndex: 10,
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                }}
+              >
+                {locationSuggestions.map((suggestion, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      padding: "8px 12px",
+                      cursor: "pointer",
+                      borderBottom: "1px solid #ddd",
+                    }}
+                    onClick={() => handleLocationSelect(suggestion)}
+                  >
+                    {suggestion.display_name}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Material Selector */}
         <div className={styles.inputGroup}>
-          <MaterialSelector
-            selectedMaterials={selectedMaterials}
-            setSelectedMaterials={setSelectedMaterials}
-            onClose={handleCloseMaterialSelector}
-          />
+          <button
+            className={styles.buttonGroup}
+            onClick={() => setShowCategoryDialog(true)}
+            type="button"
+          >
+            Choose Categories
+          </button>
         </div>
+
+        {/* CategorySelector with controlled dialog */}
+        <CategorySelector
+          open={showCategoryDialog}
+          onClose={() => setShowCategoryDialog(false)}
+          selectedCategories={selectedCategories}
+          setSelectedCategories={setSelectedCategories}
+        />
+
+        <div className={styles.inputGroup}>
+          <button
+            className={styles.buttonGroup}
+            onClick={() => setShowMaterialDialog(true)}
+            type="button"
+          >
+            Choose Materials
+          </button>
+        </div>
+
+        {/* MaterialSelector with controlled dialog */}
+        <MaterialSelector
+          open={showMaterialDialog}
+          onClose={() => setShowMaterialDialog(false)}
+          selectedMaterials={selectedMaterials}
+          setSelectedMaterials={setSelectedMaterials}
+        />
 
         {/* Timeline Fields */}
         <div className={styles.inputGroup}>
           <label htmlFor="initiationDate" className={styles.label}>
-            Set Timeline
+            Set Completion Time
           </label>
           <div className={styles.dateInputContainer}>
-            <input
+            {/* <input
               type="date"
               id="initiationDate"
               name="initiationDate"
@@ -262,7 +414,8 @@ const UpdatePost = () => {
               onChange={(e) => setInitiationDate(e.target.value)}
               className={styles.inputFieldDate}
               required
-            />
+              min={today}
+            /> */}
             <span className={styles.dateSeparator}>to</span>
             <input
               type="date"
@@ -272,6 +425,7 @@ const UpdatePost = () => {
               onChange={(e) => setCompletionDate(e.target.value)}
               className={styles.inputFieldDate}
               required
+              min={today}
             />
           </div>
         </div>

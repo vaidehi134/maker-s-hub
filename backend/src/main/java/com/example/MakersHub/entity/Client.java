@@ -1,7 +1,6 @@
 package com.example.MakersHub.entity;
 
 import com.example.MakersHub.dto.ClientDTO;
-import com.example.MakersHub.dto.UserDto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,18 +12,11 @@ public class Client {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-
         private String email;
-
         private String password;
-
         private String name;
-
         private String lastname;
-
-
         private String address;
-
         private String phone;
     private String city;
 
