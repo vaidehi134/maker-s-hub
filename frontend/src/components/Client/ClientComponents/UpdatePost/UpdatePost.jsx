@@ -329,7 +329,7 @@ const UpdatePost = () => {
               type="text"
               id="location"
               name="location"
-              placeholder="Enter location"
+              placeholder="Enter city"
               value={locationQuery}
               onChange={(e) => setLocationQuery(e.target.value)}
               className={styles.inputField}
@@ -416,7 +416,7 @@ const UpdatePost = () => {
               required
               min={today}
             /> */}
-            <span className={styles.dateSeparator}>to</span>
+            {/* <span className={styles.dateSeparator}>to</span> */}
             <input
               type="date"
               id="completionDate"

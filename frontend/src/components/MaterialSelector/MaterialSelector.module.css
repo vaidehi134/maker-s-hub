@@ -80,6 +80,18 @@
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(4px);
+  overflow: hidden;
+}
+
+/* Prevent body scrolling when dialog is open */
+.dialog::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 
 .dialogContent {
@@ -89,9 +101,11 @@
   width: 90%;
   max-width: 500px;
   max-height: 80vh;
-  overflow-y: auto;
   position: relative;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Prevent overall scrolling */
 }
 
 .dialogContent h3 {
@@ -101,7 +115,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Search Input Styling */
+/* Search Input Styling - Fixed at the top */
 .searchInput {
   width: 100%;
   padding: 0.875rem 1rem;
@@ -111,6 +125,9 @@
   margin-bottom: 1.5rem;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.9);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .searchInput:focus {
@@ -123,10 +140,13 @@
   color: #6c757d;
 }
 
-/* Material List Styling */
+/* Material List Styling - Scrollable */
 .dialogContent > div {
   display: grid;
   gap: 0.75rem;
+  overflow-y: auto; /* Make only this section scrollable */
+  max-height: calc(80vh - 150px); /* Adjust based on header and search height */
+  padding-right: 5px; /* Space for scrollbar */
 }
 
 .dialogContent > div > div {
@@ -176,24 +196,25 @@
   right: 1rem;
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
+  z-index: 11; /* Ensure it's above the search input */
 }
 
 /* Scrollbar styling */
-.dialogContent::-webkit-scrollbar {
+.dialogContent > div::-webkit-scrollbar {
   width: 8px;
 }
 
-.dialogContent::-webkit-scrollbar-track {
+.dialogContent > div::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 4px;
 }
 
-.dialogContent::-webkit-scrollbar-thumb {
+.dialogContent > div::-webkit-scrollbar-thumb {
   background: #7c82f2;
   border-radius: 4px;
 }
 
-.dialogContent::-webkit-scrollbar-thumb:hover {
+.dialogContent > div::-webkit-scrollbar-thumb:hover {
   background: #6268f1;
 }
 
@@ -220,3 +241,4 @@
     font-size: 0.95rem;
   }
 }
+

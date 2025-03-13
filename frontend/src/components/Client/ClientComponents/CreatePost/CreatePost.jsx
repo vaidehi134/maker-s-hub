@@ -260,14 +260,14 @@ const CreatePost = () => {
         {/* Location search section */}
         <div className={styles.inputGroup}>
           <label htmlFor="location" className={styles.label}>
-            Location
+            City
           </label>
           <div style={{ position: "relative" }}>
             <input
               type="text"
               id="location"
               name="location"
-              placeholder="Enter location"
+              placeholder="Enter city"
               value={locationQuery}
               onChange={(e) => setLocationQuery(e.target.value)}
               className={styles.inputField}

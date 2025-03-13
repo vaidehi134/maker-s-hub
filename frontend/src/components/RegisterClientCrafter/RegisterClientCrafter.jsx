@@ -17,6 +17,7 @@ const RegisterClientCrafter = () => {
           <Link to="/register-client">
             <button
               className="register-btn"
+              id="client-btn"
               onClick={() => {
                 navigate("/register-client");
               }}
@@ -27,6 +28,7 @@ const RegisterClientCrafter = () => {
           <Link to="/register-crafter">
             <button
               className="register-btn"
+              id="crafter-btn"
               onClick={() => {
                   navigate("register-crafter");
               }}

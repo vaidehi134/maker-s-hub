@@ -1,5 +1,5 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   background-color: #f7f7f7;
   margin: 0;
   padding: 0;
@@ -8,55 +8,98 @@ body {
 .PostDetails {
   max-width: 1200px;
   margin: 20px auto;
-  padding: 20px;
+  padding: 30px;
   background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  position: relative;
+  border: 1px solid #e0e0e0;
+}
+
+.PostDetails::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #3c6e71, #284b63);
+  border-radius: 12px 12px 0 0;
 }
 
 .postTitle {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #333;
+  line-height: 1.2;
 }
 
 .postDescription {
   font-size: 1.2rem;
   color: #555555;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  line-height: 1.6;
 }
 
 .postDetails {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
 }
 
 .postDetails p {
   flex: 1 1 45%;
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #333333;
+  margin: 0;
+}
+
+.postDetails strong {
+  color: #3c6e71;
+  font-weight: 600;
 }
 
 .postImages {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .postImage {
-  width: calc(33.333% - 20px);
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 3px solid #fff;
+}
+
+.postImage:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  border-color: #f0f0f0;
 }
 
 .proposalForm {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
 }
 
 .proposalForm div {
@@ -65,33 +108,104 @@ body {
 }
 
 .proposalForm label {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #333333;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .proposalForm input,
 .proposalForm textarea {
-  padding: 10px;
+  padding: 12px 15px;
   font-size: 1rem;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  background-color: #fff;
+}
+
+.proposalForm input:focus,
+.proposalForm textarea:focus {
+  border-color: #3c6e71;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(60, 110, 113, 0.2);
 }
 
 .proposalForm button {
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 12px 24px;
+  font-size: 1.1rem;
   color: #ffffff;
-  background-color: #007bff;
+  background-color: #3c6e71;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.proposalForm button:hover {
+  background-color: #284b63;
 }
 
 .proposalForm button[type="button"] {
   background-color: #6c757d;
 }
 
-.proposalForm button:hover {
-  opacity: 0.9;
+.proposalForm button[type="button"]:hover {
+  background-color: #5a6268;
 }
+
+/* Modal styles enhancement */
+:global(.ant-modal-content) {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+:global(.ant-modal-close) {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .PostDetails {
+    padding: 20px;
+  }
+
+  .postTitle {
+    font-size: 2rem;
+  }
+
+  .postDescription {
+    font-size: 1.1rem;
+  }
+
+  .postImages {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .postImage {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .postTitle {
+    font-size: 1.8rem;
+  }
+
+  .postImages {
+    grid-template-columns: 1fr;
+  }
+
+  .postDetails {
+    flex-direction: column;
+  }
+
+  .postDetails p {
+    flex: 1 1 100%;
+  }
+}
+

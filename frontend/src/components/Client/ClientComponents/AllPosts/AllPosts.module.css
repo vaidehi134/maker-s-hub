@@ -1,11 +1,10 @@
-/* AllPosts.module.css */
 .postsContainer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
-  padding: 2rem;
+  padding-top: 100px;
   overflow: hidden;
   position: relative;
 }
@@ -19,7 +18,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
   top: -400px;
-  left: -300px;
+  right: -300px;
   z-index: 0;
 }
 
@@ -31,26 +30,9 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
   bottom: -300px;
-  right: -200px;
+  left: -200px;
   z-index: 0;
 }
-
-.postsContainer h1 {
-  color: #2d3958;
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  z-index: 1;
-}
-
-.noPostsMessage {
-  color: #6c757d;
-  font-size: 1.5rem;
-  text-align: center;
-  margin-top: 2rem;
-  z-index: 1;
-}
-
 .postsList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -66,52 +48,50 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.postItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* Fixed height for all cards */
 }
 
 .postContent {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.postImages {
-  display: flex;
-  overflow-x: auto;
+.postImageContainer {
+  width: 100%;
+  height: 200px;
   margin-bottom: 1rem;
-  gap: 0.5rem;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .postImage {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
+  transition: transform 0.3s ease;
 }
 
-.postTitle {
-  color: #2d3958;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.postDescription {
-  color: #6c757d;
-  font-size: 0.9rem;
+.postDetails {
+  flex-grow: 1;
   margin-bottom: 1rem;
 }
 
-.postActions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
+.postStatus {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-top: 0.5rem;
 }
 
 .updateBtn,
-.delBtn {
+.delBtn,
+.findCraftersBtn,
+.paymentBtn,
+.cancelBtn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
@@ -119,38 +99,39 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
 .updateBtn {
-  background-color: #7c82f2;
-  color: white;
+  color: green;
 }
-
-.updateBtn:hover {
-  background-color: #6268f1;
-  transform: translateY(-2px);
-}
-
 .delBtn {
-  background-color: #ff4d4f;
+  color: red;
+}
+.findCraftersBtn {
+  background-color: #4caf50;
   color: white;
 }
 
-.delBtn:hover {
-  background-color: #ff7875;
+.findCraftersBtn:hover {
+  background-color: #45a049;
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .postsList {
-    grid-template-columns: 1fr;
-  }
+.paymentBtn {
+  background-color: #2196f3;
+  color: white;
+}
 
-  .postsContainer {
-    padding: 1rem;
-  }
+.paymentBtn:hover {
+  background-color: #0b7dda;
+  transform: translateY(-2px);
+}
 
-  .postsContainer h1 {
-    font-size: 2rem;
-  }
+.cancelBtn {
+  background-color: #ff9800;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.cancelBtn:hover {
+  background-color: #e68a00;
+  transform: translateY(-2px);
 }

@@ -1,0 +1,88 @@
+/* Improved styling for Ant Design notifications */
+.custom-notification {
+  border-radius: 10px !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+  margin-bottom: 16px !important;
+  padding: 16px !important;
+}
+
+.custom-notification .ant-notification-notice-message {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  margin-bottom: 8px !important;
+}
+
+.custom-notification .ant-notification-notice-description {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+.custom-notification .ant-notification-notice-close {
+  top: 16px !important;
+  right: 16px !important;
+}
+
+/* Success notification styling */
+.success-notification {
+  background-color: #f6ffed !important;
+  border-left: 4px solid #52c41a !important;
+}
+
+.success-notification .ant-notification-notice-message {
+  color: #52c41a !important;
+}
+
+/* Error notification styling */
+.error-notification {
+  background-color: #fff1f0 !important;
+  border-left: 4px solid #f5222d !important;
+}
+
+.error-notification .ant-notification-notice-message {
+  color: #f5222d !important;
+}
+
+/* Warning notification styling */
+.warning-notification {
+  background-color: #fffbe6 !important;
+  border-left: 4px solid #faad14 !important;
+}
+
+.warning-notification .ant-notification-notice-message {
+  color: #faad14 !important;
+}
+
+/* Info notification styling */
+.info-notification {
+  background-color: #e6f7ff !important;
+  border-left: 4px solid #1890ff !important;
+}
+
+.info-notification .ant-notification-notice-message {
+  color: #1890ff !important;
+}
+
+/* Animation for notifications */
+.custom-notification {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-notification {
+    width: 90% !important;
+    margin-right: 5% !important;
+  }
+}

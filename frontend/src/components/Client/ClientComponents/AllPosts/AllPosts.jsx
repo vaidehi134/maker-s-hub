@@ -1,95 +1,97 @@
-import React, { useEffect, useState } from "react";
-import { ClientService } from "../../Services/ClientService";
-import { notification } from "antd";
-import { useNavigate } from "react-router-dom";
-import styles from "./AllPosts.module.css";
-import CrafterContactDialog from "../CrafterContentDialog/CrafterContactDialog";
+"use client"
+
+import { useEffect, useState } from "react"
+import { ClientService } from "../../Services/ClientService"
+import { notification } from "antd"
+import { useNavigate } from "react-router-dom"
+import styles from "./AllPosts.module.css"
+import CrafterContactDialog from "../CrafterContentDialog/CrafterContactDialog"
 
 const AllPosts = () => {
-  const [posts, setPosts] = useState([]);
-  const [isOpen, setIsOpen] = useState(false); // Dialog state
-  const [assignedCrafterId, setAssignedCrafterId] = useState(null); // Selected crafter details
-  const navigate = useNavigate();
+  const [posts, setPosts] = useState([])
+  const [isOpen, setIsOpen] = useState(false) // Dialog state
+  const [assignedCrafterId, setAssignedCrafterId] = useState(null) // Selected crafter details
+  const navigate = useNavigate()
 
   useEffect(() => {
-    console.log("AllPost got called");
-    fetchPosts();
-  }, []);
+    console.log("AllPost got called")
+    fetchPosts()
+  }, [])
 
   const handleFindCrafters = async (postId) => {
-    console.log("handleFindCrafter() called");
-    navigate(`/client/find-crafters/${postId}`);
-  };
+    console.log("handleFindCrafter() called")
+    navigate(`/client/find-crafters/${postId}`)
+  }
 
   const fetchPosts = async () => {
     try {
-      const response = await ClientService.getAllPostsByUserId();
-      setPosts(response.data);
+      const response = await ClientService.getAllPostsByUserId()
+      setPosts(response.data)
 
-      console.log("fetchPost got called...........");
-      console.log(response.data);
+      console.log("fetchPost got called...........")
+      console.log(response.data)
     } catch (error) {
       notification.error({
         message: "Error",
         description: "There was an error fetching the posts",
-      });
-      console.error("Error fetching posts: ", error);
+      })
+      console.error("Error fetching posts: ", error)
     }
-  };
+  }
 
   const handlePostClick = (postId) => {
-    navigate(`/client/update-post/${postId}`);
-  };
+    navigate(`/client/update-post/${postId}`)
+  }
 
   const handleDeletePost = async (postId) => {
     try {
-      await ClientService.deletePostById(postId);
+      await ClientService.deletePostById(postId)
       notification.success({
         message: "Success",
         description: "Post deleted successfully",
-      });
-      setPosts(posts.filter((post) => post.id !== postId));
+      })
+      setPosts(posts.filter((post) => post.id !== postId))
     } catch (error) {
       notification.error({
         message: "Error",
         description: "Failed to delete the post",
-      });
-      console.error("Error deleting post: ", error);
+      })
+      console.error("Error deleting post: ", error)
     }
-  };
+  }
 
   const handleCancelRequest = async (postId, assignedCrafterId) => {
     try {
-      await ClientService.cancelCrafterRequest(postId, assignedCrafterId);
+      await ClientService.cancelCrafterRequest(postId, assignedCrafterId)
       notification.success({
         message: "Success",
         description: "Crafter request canceled successfully",
-      });
-      fetchPosts();
+      })
+      fetchPosts()
     } catch (error) {
       notification.error({
         message: "Error",
         description: "Failed to cancel the crafter request",
-      });
-      console.error("Error canceling crafter request: ", error);
+      })
+      console.error("Error canceling crafter request: ", error)
     }
-  };
+  }
 
   const handleShowContactDetails = (assignedCrafterId) => {
-    setAssignedCrafterId(assignedCrafterId);
-    setIsOpen(true);
-  };
+    setAssignedCrafterId(assignedCrafterId)
+    setIsOpen(true)
+  }
 
   const handleCloseDialog = () => {
-    setIsOpen(false);
-    setAssignedCrafterId(null);
-  };
+    setIsOpen(false)
+    setAssignedCrafterId(null)
+  }
 
-  const getImageSrc = (imgUrl) => imgUrl;
+  const getImageSrc = (imgUrl) => imgUrl
 
   return (
     <div className={styles.postsContainer}>
-      <h1 className={styles.dashboardHeading}>DashBoard</h1>
+      {/* <h1 className={styles.dashboardHeading}>DashBoard</h1> */}
 
       {posts.length === 0 ? (
         <h1 className={styles.noPostsMessage}>No Posts Available</h1>
@@ -98,37 +100,40 @@ const AllPosts = () => {
           {posts.map((post) => (
             <div key={post.id} className={styles.postItem}>
               <div className={styles.postContent}>
-                <div className={styles.postImages}>
-                  {post.imageDetails &&
-                    post.imageDetails.map((imgDetail, index) => (
-                      <img
-                        key={index}
-                        className={styles.postImage}
-                        src={getImageSrc(imgDetail.imgUrl)}
-                        alt={`Post ${post.id} Image ${index + 1}`}
-                        onError={(e) => {
-                          e.target.src = "/path/to/placeholder-image.jpg";
-                        }}
-                      />
-                    ))}
-                </div>
+                {/* Show only the first image */}
+                {post.imageDetails && post.imageDetails.length > 0 && (
+                  <div className={styles.postImageContainer}>
+                    <img
+                      className={styles.postImage}
+                      src={getImageSrc(post.imageDetails[0].imgUrl) || "/placeholder.svg"}
+                      alt={`${post.itemName}`}
+                      onError={(e) => {
+                        e.target.src = "/path/to/placeholder-image.jpg"
+                      }}
+                    />
+                  </div>
+                )}
                 <div className={styles.postDetails}>
                   <h2 className={styles.postTitle}>{post.itemName}</h2>
+                  {post.postStatus === "PENDING" && (
+                    <p className={styles.postStatus}>No crafter has accepted your request yet</p>
+                  )}
+                  {post.postStatus === "IN_PROGRESS" && (
+                    <p className={styles.postStatus}>
+                      <strong>Status: </strong>
+                      Your order is being processed
+                    </p>
+                  )}
+                  {post.postStatus === "COMPLETED" && <p className={styles.postStatus}>Your order is completed</p>}
                 </div>
                 <div className={styles.postActions}>
                   {/* Conditional rendering based on post status */}
                   {post.postStatus === "PENDING" ? (
                     <>
-                      <button
-                        className={styles.updateBtn}
-                        onClick={() => handlePostClick(post.id)}
-                      >
+                      <button className={styles.updateBtn} onClick={() => handlePostClick(post.id)}>
                         Update
                       </button>
-                      <button
-                        className={styles.delBtn}
-                        onClick={() => handleDeletePost(post.id)}
-                      >
+                      <button className={styles.delBtn} onClick={() => handleDeletePost(post.id)}>
                         Delete
                       </button>
                     </>
@@ -150,16 +155,10 @@ const AllPosts = () => {
                         >
                           Find Crafters
                         </button>
-                        <button
-                          className={styles.updateBtn}
-                          onClick={() => handlePostClick(post.id)}
-                        >
+                        <button className={styles.updateBtn} onClick={() => handlePostClick(post.id)}>
                           Update
                         </button>
-                        <button
-                          className={styles.delBtn}
-                          onClick={() => handleDeletePost(post.id)}
-                        >
+                        <button className={styles.delBtn} onClick={() => handleDeletePost(post.id)}>
                           Delete
                         </button>
                       </>
@@ -169,52 +168,31 @@ const AllPosts = () => {
                     post.postStatus === "COMPLETED" ? (
                     <button
                       className={styles.paymentBtn}
-                      onClick={() =>
-                        handleShowContactDetails(post.assignedCrafterId)
-                      }
+                      onClick={() => handleShowContactDetails(post.assignedCrafterId)}
                     >
-                      crafter contact details
+                      Crafter Contact Details
                     </button>
                   ) : null}
+
+                  {post.postStatus === "ASSIGNED" && (
+                    <button
+                      className={styles.cancelBtn}
+                      onClick={() => handleCancelRequest(post.id, post.assignedCrafterId)}
+                    >
+                      Cancel Request
+                    </button>
+                  )}
                 </div>
-                {post.postStatus === "PENDING" && (
-                  <p className={styles.postStatus}>
-                    No crafter has accepted your request yet
-                  </p>
-                )}
-                {post.postStatus === "ASSIGNED" && (
-                  <button
-                    className={styles.cancelBtn}
-                    onClick={() =>
-                      handleCancelRequest(post.id, post.assignedCrafterId)
-                    }
-                  >
-                    Cancel Crafter Request
-                  </button>
-                )}
-                {post.postStatus === "IN_PROGRESS" && (
-                  <p className={styles.postStatus}>
-                    <strong>Status: </strong>
-                    Your order is being processed
-                  </p>
-                )}
-                {post.postStatus === "COMPLETED" && (
-                  <p>Your order is completed </p>
-                )}
               </div>
             </div>
           ))}
         </div>
       )}
       {/* Render the dialog */}
-      <CrafterContactDialog
-        isOpen={isOpen}
-        onClose={handleCloseDialog}
-        crafterId={assignedCrafterId}
-      />
+      <CrafterContactDialog isOpen={isOpen} onClose={handleCloseDialog} crafterId={assignedCrafterId} />
     </div>
-  );
-};
+  )
+}
 
-export default AllPosts;
+export default AllPosts
 

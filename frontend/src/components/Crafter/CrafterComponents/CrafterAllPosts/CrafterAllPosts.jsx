@@ -177,7 +177,7 @@ const CrafterAllPosts = () => {
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Enter location"
+            placeholder="Enter city"
             value={locationQuery}
             onChange={(e) => setLocationQuery(e.target.value)}
             // Add clear button functionality
@@ -235,7 +235,7 @@ const CrafterAllPosts = () => {
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search..."
+            placeholder="Search posts..."
             value={query}
             onChange={handleInputChange}
           />

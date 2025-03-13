@@ -15,7 +15,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
   top: -400px;
-  left: -300px;
+  right: -300px;
   z-index: 0;
 }
 
@@ -27,7 +27,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
   bottom: -300px;
-  right: -200px;
+  left: -200px;
   z-index: 0;
 }
 
@@ -43,18 +43,22 @@
 
 /* Form Container */
 .formContainer {
-  max-width: 800px;
-  margin: 0 auto;
   background: rgba(255, 255, 255, 0.95);
-  padding: 3rem;
+  padding: 3rem 3.5rem;
   border-radius: 20px;
-  box-shadow: 
-    0 10px 25px rgba(124, 130, 242, 0.07),
-    0 2px 4px rgba(124, 130, 242, 0.05);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 800px;
   position: relative;
   z-index: 1;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+
+  /* Adjust vertical space */
+  max-height: 75vh;
+  margin: 5vh auto;
+
+  overflow-y: auto;
 }
 
 /* Input Groups */

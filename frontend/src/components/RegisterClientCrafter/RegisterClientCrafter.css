@@ -1,36 +1,40 @@
 /* ========= REGISTER PAGE STYLING ========= */
 .register-container {
-  min-height: 100vh;
+  overflow: hidden;
+  padding-top: 100px;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 /* Background decorative elements */
 .register-container::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 1000px;
   height: 1000px;
   border-radius: 50%;
   background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
   top: -400px;
-  left: -300px;
+  right: -300px;
   z-index: 0;
 }
 
 .register-container::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 800px;
   height: 800px;
   border-radius: 50%;
   background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
   bottom: -300px;
-  right: -200px;
+  left: -200px;
   z-index: 0;
 }
 
@@ -40,13 +44,13 @@
   padding: 3.5rem 4rem;
   border-radius: 20px;
   box-shadow: 
-    0 10px 25px rgba(124, 130, 242, 0.07),
-    0 2px 4px rgba(124, 130, 242, 0.05);
+    0 15px 30px rgba(0, 0, 0, 0.1), 
+    0 5px 10px rgba(0, 0, 0, 0.05);
   width: 500px;
   position: relative;
   z-index: 1;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.9);
 }
 
 /* ========= HEADING ========= */
@@ -99,24 +103,24 @@
 }
 
 /* Client button styling */
-.client-btn {
+#client-btn {
   background: #7c82f2;
   color: white;
 }
 
-.client-btn:hover {
+#client-btn:hover {
   background: #6268f1;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(124, 130, 242, 0.25);
 }
 
 /* Crafter button styling */
-.crafter-btn {
+#crafter-btn {
   background: #2d3958;
   color: white;
 }
 
-.crafter-btn:hover {
+#crafter-btn:hover {
   background: #1f2942;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(45, 57, 88, 0.25);

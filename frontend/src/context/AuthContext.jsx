@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (role) => {
     // Here, set the user with a role
+    
     setUser({ role });
   };
 
