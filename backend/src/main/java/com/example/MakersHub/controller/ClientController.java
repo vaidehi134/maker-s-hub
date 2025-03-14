@@ -40,8 +40,6 @@ public class ClientController {
         @PostMapping("/postById")
         public ResponseEntity<?> getPostById(@RequestBody Map<String, Long> requestBody) {
 
-
-
             Long postId = requestBody.get("postId");
             if (postId == null) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Post ID is required");
@@ -53,7 +51,6 @@ public class ClientController {
 
     @PutMapping("/post/{postId}")
     public ResponseEntity<?> updatePost(@PathVariable Long postId, @ModelAttribute PostDTO postDTO) throws IOException {
-
 
         boolean success = clientService.updatePost(postId, postDTO);
         if (success) {
@@ -80,7 +77,6 @@ public class ClientController {
     @GetMapping("/find-crafter/{postId}")
     public ResponseEntity<?> findCrafter(@PathVariable Long postId)
     {
-
         if(postId==null){System.out.println("error in clientid");}
         return ResponseEntity.ok(clientService.findCrafter(postId));
     }

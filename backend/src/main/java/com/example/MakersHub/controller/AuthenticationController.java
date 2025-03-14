@@ -58,7 +58,6 @@ public class AuthenticationController {
     @PostMapping("/client/sign-up")
     public ResponseEntity<?> signupClient(@RequestBody ClientDTO clientSignupDTO) {
 
-
         System.out.println("---------------------------------------------------------------" + clientSignupDTO.getName());
         System.out.println(clientSignupDTO.getLastname());
 

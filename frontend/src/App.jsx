@@ -41,12 +41,10 @@ function App() {
             path="/register-client-crafter"
             element={<RegisterClientCrafter />}
           />
-
           <Route
             path="/crafter/see-details/:postId"
             element={<PostDetails />}
           />
-
           <Route
             path="/client/find-crafters/:postId"
             element={<FindCrafters />}

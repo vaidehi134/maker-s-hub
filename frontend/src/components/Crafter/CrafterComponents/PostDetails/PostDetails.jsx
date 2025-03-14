@@ -12,7 +12,7 @@ const PostDetails = ({ postId: propPostId }) => {
   const [description, setDescription] = useState("");
   const [completionDate, setCompletionDate] = useState("");
   const [existingImages, setExistingImages] = useState([]);
-
+  const [location, setLocation] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -26,6 +26,7 @@ const PostDetails = ({ postId: propPostId }) => {
           const post = response.data;
           setItemName(post.itemName);
           setDescription(post.description);
+          setLocation(post.location);
           setCompletionDate(post.completionDate?.split("T")[0] || "");
           setExistingImages(post.imageDetails || []);
         }
@@ -75,6 +76,9 @@ const PostDetails = ({ postId: propPostId }) => {
       <div className={styles.postDetails}>
         <p>
           <strong>Completion Date:</strong> {completionDate}
+        </p>
+        <p>
+          <strong>Location  :</strong> {location}
         </p>
       </div>
       <div className={styles.postImages}>

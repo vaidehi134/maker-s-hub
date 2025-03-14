@@ -39,6 +39,89 @@ public class CrafterServiceImpl implements CrafterService{
     @Autowired
     private CrafterProposalRepository crafterProposalRepository;
 
+//    @Override
+//    public List<PostDTO> getAllPosts(CrafterRequestDTO crafterRequestDto) {
+//        // Extract category and material IDs, passing null if lists are empty
+//        List<Long> categoryIds = crafterRequestDto.getCategories() == null || crafterRequestDto.getCategories().isEmpty()
+//                ? null
+//                : crafterRequestDto.getCategories().stream()
+//                .map(category -> category.getId())
+//                .collect(Collectors.toList());
+//
+//        List<Long> materialIds = crafterRequestDto.getMaterials() == null || crafterRequestDto.getMaterials().isEmpty()
+//                ? null
+//                : crafterRequestDto.getMaterials().stream()
+//                .map(material -> material.getId())
+//                .collect(Collectors.toList());
+//
+//        Double longitude = crafterRequestDto.getLongitude();
+//        Double latitude = crafterRequestDto.getLatitude();
+//        String itemName = crafterRequestDto.getItemName().isEmpty() ? null : crafterRequestDto.getItemName();
+//
+//        List<Post> filteredPosts;
+//
+//        if( longitude != null && latitude!=null) {
+//            Double latMin = latitude - 0.09;
+//            Double latMax = latitude + 0.09;
+//            Double lonMax = longitude + 0.097;
+//            Double lonMin = longitude - 0.097;
+//
+//
+//            System.out.println("longitude : " + longitude);
+//            System.out.println("latitude : " + latitude);
+//
+//
+//            // Fetch posts matching the crafter's request
+//        filteredPosts = postRepository.findPostsByCrafterPreferences(
+//                    categoryIds,
+//                    materialIds,
+//                    itemName,
+//                    latitude,
+//                    longitude,
+//                    latMin,
+//                    latMax,
+//                    lonMin,
+//                    lonMax
+//            );
+//        }
+//
+//        else {
+//           filteredPosts = postRepository.findPostsByCrafterPreferencesAndWithoutLatLon(
+//                    categoryIds,
+//                    materialIds,
+//                    itemName
+//            );
+//        }
+//
+//        // Collect all post IDs
+//        List<Long> postIds = filteredPosts.stream()
+//                .map(Post::getId)
+//                .collect(Collectors.toList());
+//
+//        // Fetch all CrafterProposals for these posts
+//        List<CrafterProposal> proposals = postIds.isEmpty()
+//                ? Collections.emptyList()
+//                : crafterProposalRepository.findAllByPostIdIn(postIds);
+//
+//        // Group proposals by post ID to get list of crafter IDs
+//        Map<Long, List<Long>> postToCraftersMap = proposals.stream()
+//                .collect(Collectors.groupingBy(
+//                        cp -> cp.getPost().getId(),
+//                        Collectors.mapping(cp -> cp.getCrafter().getId(), Collectors.toList())
+//                ));
+//
+//        // Convert Entity to DTO and map postAcceptingCrafterId
+//        return filteredPosts.stream()
+//                .map(post -> {
+//                    PostDTO postDTO = post.getPostDto();
+//                    List<Long> acceptingCrafters = postToCraftersMap.getOrDefault(post.getId(), Collections.emptyList());
+//                    postDTO.setPostAcceptingCrafterId(acceptingCrafters);
+//                    System.out.println("postDTO : " + postDTO);
+//                    return postDTO;
+//                })
+//                .collect(Collectors.toList());
+//    }
+
     @Override
     public List<PostDTO> getAllPosts(CrafterRequestDTO crafterRequestDto) {
         // Extract category and material IDs, passing null if lists are empty
@@ -60,63 +143,71 @@ public class CrafterServiceImpl implements CrafterService{
 
         List<Post> filteredPosts;
 
-        if( longitude != null && latitude!=null) {
-            Double latMin = latitude - 0.09;
-            Double latMax = latitude + 0.09;
-            Double lonMax = longitude + 0.097;
-            Double lonMin = longitude - 0.097;
+        // Determine which coordinates to use
+        Double useLatitude = latitude;
+        Double useLongitude = longitude;
+
+        // If latitude and longitude are not provided, use crafter's location
+        if (latitude == null && longitude == null) {
+            Long crafterId = crafterRequestDto.getCrafterId();
+              System.out.println("crafter id : "+ crafterId);
+            if (crafterId != null) {
+                Crafter crafter = crafterRepository.findById(crafterId)
+                        .orElseThrow(() -> new RuntimeException("Crafter not found with id: " + crafterId));
+                useLatitude = crafter.getLatitude();
+                useLongitude = crafter.getLongitude();
+            }
+        }
+
+        if (useLatitude != null && useLongitude != null) {
+            Double latMin = useLatitude - 0.09;
+            Double latMax = useLatitude + 0.09;
+            Double lonMin = useLongitude - 0.097;
+            Double lonMax = useLongitude + 0.097;
+
+            System.out.println("latmin : "+ latMin);
+            System.out.println("latMax : " + latMax);
 
 
-            System.out.println("longitude : " + longitude);
-            System.out.println("latitude : " + latitude);
-
-
-            // Fetch posts matching the crafter's request
-        filteredPosts = postRepository.findPostsByCrafterPreferences(
+            filteredPosts = postRepository.findPostsByCrafterPreferences(
                     categoryIds,
                     materialIds,
                     itemName,
-                    latitude,
-                    longitude,
+                    useLatitude,
+                    useLongitude,
                     latMin,
                     latMax,
                     lonMin,
                     lonMax
             );
-        }
-
-        else {
-           filteredPosts = postRepository.findPostsByCrafterPreferencesAndWithoutLatLon(
+        } else {
+            filteredPosts = postRepository.findPostsByCrafterPreferencesAndWithoutLatLon(
                     categoryIds,
                     materialIds,
                     itemName
             );
         }
 
-        // Collect all post IDs
+        // Rest of the code remains the same (processing proposals, etc.)
         List<Long> postIds = filteredPosts.stream()
                 .map(Post::getId)
                 .collect(Collectors.toList());
 
-        // Fetch all CrafterProposals for these posts
         List<CrafterProposal> proposals = postIds.isEmpty()
                 ? Collections.emptyList()
                 : crafterProposalRepository.findAllByPostIdIn(postIds);
 
-        // Group proposals by post ID to get list of crafter IDs
         Map<Long, List<Long>> postToCraftersMap = proposals.stream()
                 .collect(Collectors.groupingBy(
                         cp -> cp.getPost().getId(),
                         Collectors.mapping(cp -> cp.getCrafter().getId(), Collectors.toList())
                 ));
 
-        // Convert Entity to DTO and map postAcceptingCrafterId
         return filteredPosts.stream()
                 .map(post -> {
                     PostDTO postDTO = post.getPostDto();
                     List<Long> acceptingCrafters = postToCraftersMap.getOrDefault(post.getId(), Collections.emptyList());
                     postDTO.setPostAcceptingCrafterId(acceptingCrafters);
-                    System.out.println("postDTO : " + postDTO);
                     return postDTO;
                 })
                 .collect(Collectors.toList());
@@ -135,6 +226,7 @@ public class CrafterServiceImpl implements CrafterService{
             postDTO.setCategories(post.getCategories());
             postDTO.setMaterials(post.getMaterials());
             postDTO.setCompletionDate(post.getCompletionDate());
+            postDTO.setLocation(post.getLocation());
             return postDTO;
         }).orElse(null);
     }

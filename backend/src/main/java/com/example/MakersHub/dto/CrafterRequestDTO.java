@@ -105,16 +105,24 @@ import java.util.List;
 
 public class CrafterRequestDTO {
 
+    private Long crafterId;
     @JsonProperty("categories")
     private List<Category> categories;
-
     @JsonProperty("materials")
     private List<Material>materials;
-
     private Double longitude;
     private Double latitude;
     private String itemName;
     private String location;
+
+
+    public Long getCrafterId() {
+        return crafterId;
+    }
+    public void setCrafterId(Long crafterId) {
+        this.crafterId = crafterId;
+    }
+
 
     public String getLocation() {
         return location;

@@ -14,15 +14,12 @@ const CrafterAllPosts = () => {
   const [showCategoryDialog, setShowCategoryDialog] = useState(false);
   const [selectedMaterials, setSelectedMaterials] = useState([]);
   const [showMaterialDialog, setShowMaterialDialog] = useState(false);
-
   const [locationQuery, setLocationQuery] = useState("");
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState(null); //for double location
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [posts, setPosts] = useState([]);
   const [query, setQuery] = useState("");
-
   const currentUserId = StorageService.getUserId();
   const navigate = useNavigate();
 
@@ -68,17 +65,6 @@ const CrafterAllPosts = () => {
     return () => clearTimeout(debounceTimer);
   }, [locationQuery]);
 
-  // const handleLocationSelect = (location) => {
-  //   console.log("handleLocationSelect get called");
-  //   setLocationQuery(location.display_name);
-
-  //   console.log("location : ", locationQuery);
-  //   setSelectedLocation(location);
-
-  //   setLocationSuggestions([]);
-  //   handleFindPosts();
-  // };
-
   const handleLocationSelect = (location) => {
     if (!location) {
       setSelectedLocation(null);
@@ -94,9 +80,10 @@ const CrafterAllPosts = () => {
   };
 
   const handleFindPosts = async () => {
-    console.log("handle find post got called....");
+   
 
     const crafterRequestDto = {
+      crafterId: StorageService.getUserId(),
       categories: selectedCategories.map((category) => ({
         id: category.id,
         name: category.name,

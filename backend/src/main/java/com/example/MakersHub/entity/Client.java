@@ -18,15 +18,25 @@ public class Client {
         private String lastname;
         private String address;
         private String phone;
-    private String city;
+   // private String city;
+    private Double latitude;
+    private Double longitude;
+    private String location;
 
-    public String getCity() {
-        return city;
-    }
+    public Double getLatitude(){return latitude;}
+    public void setLatitude(Double latitude){this.latitude=latitude;}
+    public Double getLongitude(){return longitude;}
+    public void setLongitude(Double longitude){this.longitude=longitude;}
+    public String getLocation(){return location;}
+    public void setLocation(String location){this.location=location;}
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+//    public String getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
 
 
         //getter and setter for id
@@ -101,7 +111,10 @@ public class Client {
             clientDto.setLastname(this.lastname);
             clientDto.setPhone(this.phone);
             clientDto.setAddress(this.address);
-            clientDto.setCity(this.city);
+            clientDto.setLongitude(this.longitude);
+            clientDto.setLocation(this.location);
+            clientDto.setLatitude(this.latitude);
+           // clientDto.setCity(this.city);
             // Add any other fields here
             return clientDto;
         }

@@ -1,6 +1,4 @@
 package com.example.MakersHub.entity;
-
-import com.example.MakersHub.dto.ClientDTO;
 import com.example.MakersHub.dto.CrafterDTO;
 import com.example.MakersHub.dto.PostDTO;
 import jakarta.persistence.*;
@@ -25,7 +23,11 @@ public class Crafter {
     private String address;
     private String phone;
     private String skills;
-    private String city;
+  //  private String city;
+  private Double latitude;
+    private Double longitude;
+    private String location;
+
 
     @OneToMany(mappedBy = "assignedCrafter", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> assignedPosts=new ArrayList<>(); // Initialize to an empty list
@@ -39,12 +41,12 @@ public class Crafter {
     public void setAssignedPosts(List<Post> assignedPosts) {
         this.assignedPosts = assignedPosts;
     }
-    public String getCity() {
-        return city;
-    }
-    public void setCity(String city) {
-        this.city = city;
-    }
+//    public String getCity() {
+//        return city;
+//    }
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
     public Long getId() {
         return id;
     }
@@ -93,6 +95,12 @@ public class Crafter {
     public void setSkills(String skills) {
         this.skills=skills;
     }
+    public Double getLatitude(){return latitude;}
+    public void setLatitude(Double latitude){this.latitude=latitude;}
+    public Double getLongitude(){return longitude;}
+    public void setLongitude(Double longitude){this.longitude=longitude;}
+    public String getLocation(){return location;}
+    public void setLocation(String location){this.location=location;}
 
     public CrafterDTO getDto() {
         CrafterDTO crafterDTO = new CrafterDTO();
@@ -103,7 +111,10 @@ public class Crafter {
         crafterDTO.setPhone(this.phone);
         crafterDTO.setAddress(this.address);
         crafterDTO.setSkills(this.skills);
-        crafterDTO.setCity(this.city);
+        crafterDTO.setLocation(this.location);
+        crafterDTO.setLatitude(this.latitude);
+        crafterDTO.setLongitude(this.longitude);
+//        crafterDTO.setCity(this.city);
         // Convert assignedPosts to PostDTO list
         if (this.assignedPosts != null && !this.assignedPosts.isEmpty()) {
             List<PostDTO> postDTOs = this.assignedPosts.stream()

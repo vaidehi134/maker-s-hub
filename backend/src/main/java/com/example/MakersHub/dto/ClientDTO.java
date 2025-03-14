@@ -13,15 +13,25 @@ public class ClientDTO {
         private String lastname;
         private String address;
         private String phone;
-        private String city;
+        //private String city;
+    private Double latitude;
+    private Double longitude;
+    private String location;
 
-    public String getCity() {
-        return city;
-    }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
+    public Double getLatitude(){return latitude;}
+    public void setLatitude(Double latitude){this.latitude=latitude;}
+    public Double getLongitude(){return longitude;}
+    public void setLongitude(Double longitude){this.longitude=longitude;}
+    public String getLocation(){return location;}
+    public void setLocation(String location){this.location=location;}
+//    public String getCity() {
+//        return city;
+//    }
+//
+//    public void setCity(String city) {
+//        this.city = city;
+//    }
 
         // Getter and Setter for id
         public Long getId() {

@@ -19,6 +19,16 @@ public class CrafterDTO {
     private String skills;
     private String city;
     private List<PostDTO> assignedPosts;
+    private Double latitude;
+    private Double longitude;
+    private String location;
+
+    public Double getLatitude(){return latitude;}
+    public void setLatitude(Double latitude){this.latitude=latitude;}
+    public Double getLongitude(){return longitude;}
+    public void setLongitude(Double longitude){this.longitude=longitude;}
+    public String getLocation(){return location;}
+    public void setLocation(String location){this.location=location;}
 
     public List<PostDTO> getAssignedPosts() {
         return assignedPosts;
@@ -26,8 +36,6 @@ public class CrafterDTO {
     public void setAssignedPosts(List<PostDTO> assignedPosts) {
         this.assignedPosts = assignedPosts;
     }
-
-
     public String getCity() {
         return city;
     }

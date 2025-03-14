@@ -50,7 +50,10 @@ public class AuthServiceImpl implements AuthService {
         client.setAddress(clientSignupDTO.getAddress());
         client.setEmail(clientSignupDTO.getEmail());
         client.setPhone(clientSignupDTO.getPhone());
-        client.setCity(clientSignupDTO.getCity());
+//        client.setCity(clientSignupDTO.getCity());
+        client.setLocation(clientSignupDTO.getLocation());
+        client.setLatitude(clientSignupDTO.getLatitude());
+        client.setLongitude(clientSignupDTO.getLongitude());
         client.setPassword(new BCryptPasswordEncoder().encode(clientSignupDTO.getPassword()));
 
 
@@ -59,8 +62,6 @@ public class AuthServiceImpl implements AuthService {
         return savedClient.getDto();
 
     }
-
-
 
     public CrafterDTO signUpCrafter(CrafterDTO crafterDTO)
     {
@@ -85,7 +86,10 @@ public class AuthServiceImpl implements AuthService {
         crafter.setAddress(crafterDTO.getAddress());
         crafter.setEmail(crafterDTO.getEmail());
         crafter.setPhone(crafterDTO.getPhone());
-        crafter.setCity(crafterDTO.getCity());
+//        crafter.setCity(crafterDTO.getCity());
+        crafter.setLocation(crafterDTO.getLocation());
+        crafter.setLatitude(crafterDTO.getLatitude());
+        crafter.setLongitude(crafterDTO.getLongitude());
         crafter.setPassword(new BCryptPasswordEncoder().encode(crafterDTO.getPassword()));
         crafter.setSkills(crafterDTO.getSkills());
 
@@ -97,7 +101,6 @@ public class AuthServiceImpl implements AuthService {
     public Boolean presentByEmailClient(String email){
         return clientRepository.findFirstByEmail(email)!=null;
     }
-
     public Boolean presentByEmailCrafter(String email){
         return crafterRepository.findFirstByEmail(email)!=null;
     }
