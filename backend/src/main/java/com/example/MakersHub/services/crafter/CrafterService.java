@@ -2,6 +2,7 @@ package com.example.MakersHub.services.crafter;
 
 import com.example.MakersHub.dto.*;
 import com.example.MakersHub.dto.CrafterRequestDTO;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface CrafterService {
     boolean updatePostStatus(String status,Long postId);
 
     boolean cancelRequestForPost(Long postId,Long crafterId);
+
+     boolean uploadCrafterWork(CrafterWorkDTO crafterWorkDTO);
+
+    CrafterWorkDTO getWorkClientReviews(Long crafterId, Long postId);
 }

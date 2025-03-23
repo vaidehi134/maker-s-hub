@@ -125,7 +125,53 @@ public class ClientController {
 
        }
 
+    @GetMapping("get-completed-work/{postId}/{crafterId}")
+    public ResponseEntity<?>  getComplpetedWork(@PathVariable Long postId , @PathVariable Long crafterId)
+    {
+        if (crafterId == null || postId == null) {
+            System.out.println("error in crafterId or postId");
+            return ResponseEntity.badRequest().body("Invalid parameters");
+        }
+         return ResponseEntity.ok(clientService.getCompletedWork(postId , crafterId));
+    }
 
+    @PostMapping("post-client-reviews/{postId}")
+    public ResponseEntity<?>  postRatingsByPostId(@PathVariable Long  postId, @RequestBody ClientReviews clientReviews)
+    {
+        if (postId == null) {
+            System.out.println("error in crafterId or postId");
+            return ResponseEntity.badRequest().body("Invalid parameters");
+        }
+        return ResponseEntity.ok(clientService.postClientReviewByPostId(postId,clientReviews));
+
+    }
+
+    // crafter-portfolio
+    @GetMapping("get-crafter-work/{crafterId}")
+    public ResponseEntity<?> getCrafterWork(@PathVariable Long crafterId)
+    {
+        if (crafterId == null) {
+            return ResponseEntity.badRequest().body("Invalid parameters");
+        }
+        return ResponseEntity.ok(clientService.getCrafterWork(crafterId));
+    }
+
+    @PostMapping("payment")
+    public ResponseEntity<?> payment(@RequestBody PaymentDTO paymentDTO)
+    {
+        return ResponseEntity.ok(clientService.payment(paymentDTO));
+    }
+
+    @PostMapping("/post-status/{status}")
+    public ResponseEntity<?> updatePostStatus(@PathVariable String status, @RequestParam Long postId)
+    {
+        boolean success = clientService.updatePostStatus(status , postId);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
 
 
 }

@@ -80,8 +80,6 @@ const CrafterAllPosts = () => {
   };
 
   const handleFindPosts = async () => {
-   
-
     const crafterRequestDto = {
       crafterId: StorageService.getUserId(),
       categories: selectedCategories.map((category) => ({
@@ -127,9 +125,10 @@ const CrafterAllPosts = () => {
   // Show posts excluding those with status ASSIGNED or COMPLETED
   const filteredPosts = posts.filter(
     (post) =>
-      post.postStatus !== "ASSIGNED" &&
-      post.postStatus !== "COMPLETED" &&
-      post.postStatus !== "IN_PROGRESS"
+      // post.postStatus !== "ASSIGNED" &&
+      // post.postStatus !== "COMPLETED" &&
+      // post.postStatus !== "IN_PROGRESS"
+      post.postStatus === "PENDING" || post.postStatus === "ACCEPTED"
   );
 
   const getImageSrc = (imgUrl) => imgUrl;
@@ -153,14 +152,6 @@ const CrafterAllPosts = () => {
     <div className={styles.allPosts}>
       <div className={styles.searchContainer}>
         <div style={{ position: "relative" }}>
-          {/* <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Enter location"
-            value={locationQuery}
-            onChange={(e) => setLocationQuery(e.target.value)}
-          /> */}
-
           <input
             type="text"
             className={styles.searchInput}
@@ -287,7 +278,7 @@ const CrafterAllPosts = () => {
                           )
                         }
                       >
-                        see Details
+                        See Details
                       </button>
                       <p>No Client has accepted your request</p>
                     </>

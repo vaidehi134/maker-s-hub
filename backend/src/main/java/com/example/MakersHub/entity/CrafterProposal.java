@@ -14,6 +14,7 @@ public class CrafterProposal {
     private Double estimatedPrice;
     private String comment;
 
+    //many crafters may submit proposals for the same client request).
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false) // Foreign key to Post
     private Post post;

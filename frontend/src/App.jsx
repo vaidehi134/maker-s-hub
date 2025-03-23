@@ -17,6 +17,10 @@ import PostDetails from "./components/Crafter/CrafterComponents/PostDetails/Post
 import FindCrafters from "./components/Client/ClientComponents/FindCrafters/FindCrafters";
 import CrafterWork from "./components/Crafter/CrafterComponents/CrafterWork/CrafterWork";
 import CrafterProposal from "./components/Crafter/CrafterComponents/CrafterProposal/CrafterProposal";
+import UploadCrafterWork from "./components/Crafter/CrafterComponents/UploadCrafterWork/UploadCrafterWork";
+import CompletedWork from "./components/Client/ClientComponents/CompletedWork/CompletedWork";
+import CrafterPortfolio from "./components/Client/ClientComponents/CrafterPortfolio/CrafterPortfolio";
+import ClientPayment from "./components/Client/ClientComponents/ClientPayment/ClientPayment";
 
 function App() {
   return (
@@ -46,8 +50,23 @@ function App() {
             element={<PostDetails />}
           />
           <Route
+            path="/crafter/upload-crafter-work/:postId"
+            element={<UploadCrafterWork />}
+          />
+          <Route
             path="/client/find-crafters/:postId"
             element={<FindCrafters />}
+          />
+          <Route
+            path="/client/completed-work/:postId/:crafterId"
+            element={<CompletedWork />}
+          />
+          <Route
+            path="/client/crafter-portfolio/:crafterId/:postId"
+            element={<CrafterPortfolio />}
+          />
+          <Route 
+          path="/client/payment" element={<ClientPayment/>}
           />
         </Routes>
       </Router>

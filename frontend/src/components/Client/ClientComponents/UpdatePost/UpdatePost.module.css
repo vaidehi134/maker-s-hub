@@ -2,30 +2,30 @@
 .postUploadContainer {
   min-height: 100vh;
   padding: 2rem;
-  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
+  /* background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%); */
   position: relative;
   overflow: hidden;
 }
 
 .postUploadContainer::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 1000px;
   height: 1000px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
+  /* background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%); */
   top: -400px;
   right: -300px;
   z-index: 0;
 }
 
 .postUploadContainer::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 800px;
   height: 800px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
+  /* background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%); */
   bottom: -300px;
   left: -200px;
   z-index: 0;
@@ -41,25 +41,26 @@
   z-index: 1;
 }
 
-/* Form Container */
-.formContainer {
+/*Form Container */
+ .formContainer {
   background: rgba(255, 255, 255, 0.95);
   padding: 3rem 3.5rem;
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
   max-width: 800px;
-  position: relative;
+  /* position: relative;
   z-index: 1;
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px); */
   border: 2px solid rgba(255, 255, 255, 0.9);
 
-  /* Adjust vertical space */
-  max-height: 75vh;
+ 
+  /* max-height: 75vh; */
   margin: 5vh auto;
-
-  overflow-y: auto;
+/* 
+  overflow-y: auto; */
 }
+
 
 /* Input Groups */
 .inputGroup {
@@ -263,7 +264,7 @@
 
 /* Hover effect for submit button */
 .subBtn::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;

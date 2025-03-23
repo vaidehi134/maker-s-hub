@@ -1,0 +1,108 @@
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.noWorkMessage {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subHeading {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  display: inline-block;
+  margin-left: 380px;
+}
+
+.details p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.workSection {
+  margin-top: 20px;
+}
+
+.subHeading {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.workItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+  max-width: 100%;
+  max-height: 500px; /* Adjust this based on your image size */
+}
+
+.workImage {
+  max-width: 100%; /* Ensures image fits within the container */
+  max-height: 100%; /* Prevents overflow */
+  height: auto; /* Maintains aspect ratio */
+  object-fit: scale-down; /* Ensures the whole image is visible without cropping */
+  border-radius: 8px;
+}
+
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.starRating {
+  color: #f4c542;
+}
+
+.backButton {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background: #0056b3;
+}

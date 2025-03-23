@@ -1,0 +1,123 @@
+/* UploadCrafterWork.module.css */
+
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.imagePreviewContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.imagePreviewWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: red;
+  color: white;
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addImageBtn {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px dashed #ccc;
+  transition: 0.3s;
+}
+
+.addImageBtn:hover {
+  background: #e0e0e0;
+}
+
+.commentBox {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  font-size: 14px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submitButton, .closeButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.submitButton {
+  background: #4CAF50;
+  color: white;
+}
+
+.submitButton:hover {
+  background: #45a049;
+}
+
+.closeButton {
+  background: #ccc;
+  color: black;
+}
+
+.closeButton:hover {
+  background: #bbb;
+}

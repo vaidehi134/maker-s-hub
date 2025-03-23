@@ -216,13 +216,15 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String itemName;
-    private String  description;
+
+    @Column(length = 255) // Increase this if needed
+    private String description;
 
     @ElementCollection
     @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
     private List<PostImage> imageDetails;
 
-
+//one client can do many posts
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "client_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

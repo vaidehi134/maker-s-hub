@@ -1,8 +1,8 @@
 package com.example.MakersHub.services.client;
 
 import com.example.MakersHub.dto.*;
+import com.example.MakersHub.enums.PostStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,4 +23,14 @@ boolean acceptCrafterRequest(CrafterAssignmentDTO crafterAssignmentDTO);
     boolean cancelCrafterRequest(Long postId,Long assignedCrafterId);
 
     CrafterDTO getCrafterByCrafterId(Long crafterId);
+
+    CrafterWorkDTO getCompletedWork(Long postId, Long crafterId);
+
+    boolean postClientReviewByPostId(Long postId,  ClientReviews clientReviews);
+
+    List<CrafterWorkDTO> getCrafterWork(Long crafterId);
+
+    boolean payment(PaymentDTO paymentDTO);
+
+    boolean updatePostStatus(String status, Long postId);
 }

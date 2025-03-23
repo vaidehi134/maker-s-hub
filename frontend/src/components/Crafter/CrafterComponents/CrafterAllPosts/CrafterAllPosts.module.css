@@ -23,10 +23,15 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 100%; /* Ensures it does not shrink */
+  /* width: 100%; Ensures it does not shrink */
   max-width: 680px;
-  min-width: 280px;
+  min-width: 500px;
+
   gap: 8px; /* Provides spacing without margin issues */
+}
+
+button{
+  margin-left: 5px;
 }
 
 /* Input Field - Fixed width & prevents movement */
@@ -45,7 +50,7 @@
 
 /* Prevents input shifting on focus */
 .searchInput:focus {
-  border-color: #3c6e71;
+  border-color: #6268f1;
   box-shadow: 0 4px 8px rgba(60, 110, 113, 0.1);
   background-color: #fff;
 }
@@ -65,7 +70,7 @@
 
 /* Search Button - Fixed, No Shrinking */
 .searchButton {
-  background-color: #3c6e71;
+  background-color: #6268f1;
   border: none;
   border-radius: 8px;
   width: 40px;
@@ -80,12 +85,12 @@
 
 /* Button Hover Effect */
 .searchButton:hover {
-  background-color: #284b63;
+  background-color: #6268f1;
 }
 
 /* Button Styles */
 .buttonGroup {
-  background-color: #3c6e71;
+  background-color: #6268f1;
   color: white;
   border: none;
   border-radius: 10px;
@@ -101,7 +106,7 @@
 }
 
 .buttonGroup:hover {
-  background-color: #284b63;
+  background-color: #6268f1;
   transform: translateY(-2px);
 }
 
@@ -189,7 +194,7 @@
 }
 
 .updateButton {
-  background-color: #3c6e71;
+  background-color: #6268f1;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -203,7 +208,7 @@
 }
 
 .updateButton:hover {
-  background-color: #284b63;
+  background-color: #6268f1;
   transform: translateY(-2px);
 }
 

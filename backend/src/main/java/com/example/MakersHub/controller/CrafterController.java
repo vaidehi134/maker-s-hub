@@ -1,6 +1,7 @@
 package com.example.MakersHub.controller;
 import com.example.MakersHub.dto.CrafterProposalDTO;
 import com.example.MakersHub.dto.CrafterRequestDTO;
+import com.example.MakersHub.dto.CrafterWorkDTO;
 import com.example.MakersHub.services.crafter.CrafterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -100,6 +101,29 @@ public class CrafterController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @PostMapping("upload-crafter-work")
+    public ResponseEntity<?>  uploadCrafterWork(@ModelAttribute CrafterWorkDTO crafterWorkDTO)
+    {
+        boolean success=  crafterService.uploadCrafterWork(crafterWorkDTO);
+        if (success) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    //get ratings given by client
+    @GetMapping("get-client-reviews/{crafterId}/{postId}")
+    public ResponseEntity<?> getWorkClientReviews(@PathVariable Long crafterId,@PathVariable Long postId)
+    {
+        if(crafterId == null || postId == null)
+        {
+                  System.out.println("crafterId or postId is null");
+        }
+        return ResponseEntity.ok(crafterService.getWorkClientReviews(crafterId,postId));
+
     }
 
 }

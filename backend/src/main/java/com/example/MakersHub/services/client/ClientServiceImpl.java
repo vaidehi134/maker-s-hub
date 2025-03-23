@@ -17,6 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class ClientServiceImpl implements ClientService {
 
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+     @Autowired
+     private CrafterWorkRepository crafterWorkRepository;
 
     @Autowired
     private PostAssignmentRepository postAssignmentRepository;
@@ -65,14 +70,6 @@ public class ClientServiceImpl implements ClientService {
             post.setLatitude(postDTO.getLatitude());
             post.setLongitude(postDTO.getLongitude());
             post.setLocation(postDTO.getLocation());
-
-
-//            if (postDTO.getMaterials() != null) {
-//                System.out.println("Materials: " + postDTO.getMaterials());
-//            } else {
-//                System.out.println("Materials are null");
-//            }
-
             post.setMaterials(postDTO.getMaterials());
 
             if (postDTO.getImages() != null && !postDTO.getImages().isEmpty()) {
@@ -220,39 +217,6 @@ public boolean updatePost(Long postId, PostDTO postDTO) throws IOException {
         return false;
     }
 
-//    public List<CrafterDTO> findCrafter(Long postId) {
-//        Optional<Post> postOptional = postRepository.findById(postId);
-//        if (!postOptional.isPresent()) {
-//            return Collections.emptyList();
-//        }
-//
-//        Post post = postOptional.get();
-//
-//        // Use the correct repository method that returns a list
-//        List<CrafterProposal> proposals = crafterProposalRepository.findByPostId(postId);
-//
-//        Set<Crafter> crafters = proposals.stream()
-//                .map(CrafterProposal::getCrafter)
-//                .collect(Collectors.toSet());
-//
-//        List<CrafterDTO> crafterDTOs = crafters.stream()
-//                .map(Crafter::getDto)
-//                .collect(Collectors.toList());
-//
-////        crafterDTOs.forEach(crafterDTO -> {
-////            System.out.println("Crafter ID: " + crafterDTO.getId());
-////            System.out.println("Crafter Name: " + crafterDTO.getName());
-////            System.out.println("Crafter Email: " + crafterDTO.getEmail());
-////            System.out.println("Crafter Phone: " + crafterDTO.getPhone());
-////            System.out.println("Crafter Address: " + crafterDTO.getAddress());
-////            System.out.println("Crafter Skills: " + crafterDTO.getSkills());
-////            System.out.println("Crafter City: " + crafterDTO.getCity());
-////            System.out.println("-------------------------------");
-////        });
-//
-//        return crafterDTOs;
-//    }
-
 public List<CrafterDTO> findCrafter(Long postId) {
     Optional<Post> postOptional = postRepository.findById(postId);
     if (!postOptional.isPresent()) {
@@ -366,8 +330,103 @@ public List<CrafterDTO> findCrafter(Long postId) {
          crafterDTO.setAddress(crafter.getAddress());
          crafterDTO.setLastname(crafter.getLastname());
          crafterDTO.setPhone(crafter.getPhone());
+         crafterDTO.setSkills(crafter.getSkills());
+         crafterDTO.setLocation(crafter.getLocation());
          return crafterDTO;
     }
+
+    @Override
+    public CrafterWorkDTO getCompletedWork(Long postId, Long crafterId) {
+         Optional<CrafterWork> optionalCrafterWork = crafterWorkRepository.findByPostIdAndCrafterId(postId , crafterId);
+          if(!optionalCrafterWork.isPresent())
+          {
+              return null;
+          }
+
+          CrafterWork crafterWork = optionalCrafterWork.get();
+          CrafterWorkDTO crafterWorkDTO = new CrafterWorkDTO();
+           crafterWorkDTO.setImageDetails(crafterWork.getImageDetails());
+           crafterWorkDTO.setComment(crafterWork.getComment());
+          return crafterWorkDTO;
+    }
+
+    @Override
+    public boolean postClientReviewByPostId(Long postId, ClientReviews clientReviews) {
+
+         if(postId == null )
+             return false;
+
+        Double rating = clientReviews.getRating();
+        String review = clientReviews.getClientFeedback();
+
+         Optional<CrafterWork> optionalCrafterWork = crafterWorkRepository.findByPostId(postId);
+         if(!optionalCrafterWork.isPresent())
+             return false;
+
+         CrafterWork crafterWork = optionalCrafterWork.get();
+         crafterWork.setRating(rating);
+         crafterWork.setClientFeedback(review);
+         crafterWorkRepository.save(crafterWork);
+        return false;
+    }
+
+    @Override
+    public List<CrafterWorkDTO> getCrafterWork(Long crafterId) {
+        List<CrafterWorkDTO> crafterWorkDTOList = new ArrayList<>();
+
+        List<CrafterWork> crafterWorks = crafterWorkRepository.findByCrafterId(crafterId);
+
+        for (CrafterWork crafterWork : crafterWorks) {
+            CrafterWorkDTO dto = new CrafterWorkDTO();
+            dto.setId(crafterWork.getId());
+            dto.setCrafterId(crafterWork.getCrafter().getId());
+            dto.setPostId(crafterWork.getPost().getId());
+            dto.setImageDetails(crafterWork.getImageDetails()); // Preserving existing images
+            dto.setComment(crafterWork.getComment());
+            dto.setRating(crafterWork.getRating());
+            dto.setClientFeedback(crafterWork.getClientFeedback());
+
+            crafterWorkDTOList.add(dto);
+        }
+
+        return crafterWorkDTOList;
+    }
+
+    @Override
+    public boolean payment(PaymentDTO paymentDTO) {
+
+        Payment payment = new Payment();
+        payment.setPaymentMethod(paymentDTO.getPaymentMethod());
+        payment.setPaymentNote(paymentDTO.getPaymentNote());
+        payment.setAmount(paymentDTO.getAmount());
+
+          Optional<Crafter> optionalCrafter = crafterRepository.findById(paymentDTO.getCrafterId());
+          Optional<Client> optionalClient  = clientRepository.findById(paymentDTO.getClientId());
+          Optional<Post> optionalPost = postRepository.findById(paymentDTO.getPostId());
+
+          if(!optionalClient.isPresent() || !optionalCrafter.isPresent() || !optionalPost.isPresent())
+              return false;
+
+          payment.setPost(optionalPost.get());
+          payment.setCrafter(optionalCrafter.get());
+          payment.setClient(optionalClient.get());
+
+          paymentRepository.save(payment);
+             return true;
+    }
+
+    @Override
+    public boolean updatePostStatus(String status, Long postId) {
+            Optional<Post> optionalPost = postRepository.findById(postId);
+    if(!optionalPost.isPresent())
+        return false;
+
+    Post post = optionalPost.get();
+    post.setPostStatus(status);
+    postRepository.save(post);
+    return true;
+    }
+
 }
 
 

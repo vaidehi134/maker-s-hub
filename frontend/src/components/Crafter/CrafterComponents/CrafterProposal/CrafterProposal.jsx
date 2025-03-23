@@ -143,7 +143,7 @@ const CrafterProposal = () => {
         className={styles.proposalForm}
       >
         <div>
-          <label htmlFor="estimatedPrice">Estimated Price in Rs:</label>
+          <label htmlFor="estimatedPrice">Estimate Price in rs : </label>
           <input
             type="number"
             id="estimatedPrice"
@@ -154,7 +154,7 @@ const CrafterProposal = () => {
           />
         </div>
         <div>
-          <label htmlFor="comment">Proposal Comments:</label>
+          <label htmlFor="comment">Your Proposal : </label>
           <textarea
             id="comment"
             value={comment || ""} // Ensure value is never undefined
@@ -163,25 +163,25 @@ const CrafterProposal = () => {
           ></textarea>
         </div>
 
-        {postStatus === "ACCEPTED" && isPostAcceptingCrafter ? ( //if crafter has already requested / accepted post
-          <div>
-            <button type="submit" onClick={handleUpdate}>
-              Update Request
-            </button>
-            <button type="button" onClick={handleDelete}>
-              Delete Request
-            </button>
-          </div>
-        ) : (
-          <div>
+        <div className={styles.proposalFormButtons}>
+          {postStatus === "ACCEPTED" && isPostAcceptingCrafter ? ( //if crafter has already requested / accepted post
+            <>
+              <button type="submit" onClick={handleUpdate}>
+                Update Request
+              </button>
+              <button type="button" onClick={handleDelete}>
+                Delete Request
+              </button>
+            </>
+          ) : (
             <button type="submit" onClick={handleSendRequest}>
               Send Request
             </button>
-          </div>
-        )}
-        <button type="button" onClick={handleBackButton}>
-          Back
-        </button>
+          )}
+          <button type="button" onClick={handleBackButton}>
+            Back
+          </button>
+        </div>
       </form>
     </div>
   );

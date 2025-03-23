@@ -16,7 +16,6 @@ const CrafterContactDialog = ({ isOpen, onClose, crafterId }) => {
         setCrafterDetails(response.data);
       } catch (error) {
         console.error("Error fetching crafter details: ", error);
-        // You might want to add error notification here
       }
       setLoading(false);
     };
@@ -35,10 +34,10 @@ const CrafterContactDialog = ({ isOpen, onClose, crafterId }) => {
         ) : (
           <>
             <p>
-              <strong>Name:</strong> {crafterDetails?.name}
-            </p>
-            <p>
-              <strong>Last Name:</strong> {crafterDetails?.lastname}
+              <strong>Name:</strong>{" "}
+              {`${crafterDetails?.name || ""} ${
+                crafterDetails?.lastname || ""
+              }`}
             </p>
             <p>
               <strong>Email:</strong> {crafterDetails?.email}
@@ -50,7 +49,7 @@ const CrafterContactDialog = ({ isOpen, onClose, crafterId }) => {
               <strong>Address:</strong> {crafterDetails?.address}
             </p>
             <p>
-              <strong>City:</strong> {crafterDetails?.city}
+              <strong>City:</strong> {crafterDetails?.location}
             </p>
           </>
         )}

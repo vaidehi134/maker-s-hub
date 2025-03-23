@@ -1,31 +1,26 @@
 package com.example.MakersHub.services.crafter;
 
-import com.example.MakersHub.dto.CrafterProposalDTO;
-import com.example.MakersHub.dto.CrafterRequestDTO;
+import com.example.MakersHub.dto.*;
 
-import com.example.MakersHub.dto.PostAssignmentDTO;
-import com.example.MakersHub.dto.PostDTO;
-import com.example.MakersHub.dto.PostImage;
 import com.example.MakersHub.entity.*;
 import com.example.MakersHub.enums.PostStatus;
-import com.example.MakersHub.repository.CrafterProposalRepository;
-import com.example.MakersHub.repository.CrafterRepository;
-import com.example.MakersHub.repository.PostAssignmentRepository;
-import com.example.MakersHub.repository.PostRepository;
+import com.example.MakersHub.repository.*;
+import com.example.MakersHub.services.cloudinary.CloudinaryService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class CrafterServiceImpl implements CrafterService{
 
+    @Autowired
+    private CloudinaryService cloudinaryService;  // Inject CloudinaryService
 
     @Autowired
     private PostAssignmentRepository postAssignmentRepository;
@@ -39,88 +34,9 @@ public class CrafterServiceImpl implements CrafterService{
     @Autowired
     private CrafterProposalRepository crafterProposalRepository;
 
-//    @Override
-//    public List<PostDTO> getAllPosts(CrafterRequestDTO crafterRequestDto) {
-//        // Extract category and material IDs, passing null if lists are empty
-//        List<Long> categoryIds = crafterRequestDto.getCategories() == null || crafterRequestDto.getCategories().isEmpty()
-//                ? null
-//                : crafterRequestDto.getCategories().stream()
-//                .map(category -> category.getId())
-//                .collect(Collectors.toList());
-//
-//        List<Long> materialIds = crafterRequestDto.getMaterials() == null || crafterRequestDto.getMaterials().isEmpty()
-//                ? null
-//                : crafterRequestDto.getMaterials().stream()
-//                .map(material -> material.getId())
-//                .collect(Collectors.toList());
-//
-//        Double longitude = crafterRequestDto.getLongitude();
-//        Double latitude = crafterRequestDto.getLatitude();
-//        String itemName = crafterRequestDto.getItemName().isEmpty() ? null : crafterRequestDto.getItemName();
-//
-//        List<Post> filteredPosts;
-//
-//        if( longitude != null && latitude!=null) {
-//            Double latMin = latitude - 0.09;
-//            Double latMax = latitude + 0.09;
-//            Double lonMax = longitude + 0.097;
-//            Double lonMin = longitude - 0.097;
-//
-//
-//            System.out.println("longitude : " + longitude);
-//            System.out.println("latitude : " + latitude);
-//
-//
-//            // Fetch posts matching the crafter's request
-//        filteredPosts = postRepository.findPostsByCrafterPreferences(
-//                    categoryIds,
-//                    materialIds,
-//                    itemName,
-//                    latitude,
-//                    longitude,
-//                    latMin,
-//                    latMax,
-//                    lonMin,
-//                    lonMax
-//            );
-//        }
-//
-//        else {
-//           filteredPosts = postRepository.findPostsByCrafterPreferencesAndWithoutLatLon(
-//                    categoryIds,
-//                    materialIds,
-//                    itemName
-//            );
-//        }
-//
-//        // Collect all post IDs
-//        List<Long> postIds = filteredPosts.stream()
-//                .map(Post::getId)
-//                .collect(Collectors.toList());
-//
-//        // Fetch all CrafterProposals for these posts
-//        List<CrafterProposal> proposals = postIds.isEmpty()
-//                ? Collections.emptyList()
-//                : crafterProposalRepository.findAllByPostIdIn(postIds);
-//
-//        // Group proposals by post ID to get list of crafter IDs
-//        Map<Long, List<Long>> postToCraftersMap = proposals.stream()
-//                .collect(Collectors.groupingBy(
-//                        cp -> cp.getPost().getId(),
-//                        Collectors.mapping(cp -> cp.getCrafter().getId(), Collectors.toList())
-//                ));
-//
-//        // Convert Entity to DTO and map postAcceptingCrafterId
-//        return filteredPosts.stream()
-//                .map(post -> {
-//                    PostDTO postDTO = post.getPostDto();
-//                    List<Long> acceptingCrafters = postToCraftersMap.getOrDefault(post.getId(), Collections.emptyList());
-//                    postDTO.setPostAcceptingCrafterId(acceptingCrafters);
-//                    System.out.println("postDTO : " + postDTO);
-//                    return postDTO;
-//                })
-//                .collect(Collectors.toList());
-//    }
+    @Autowired
+    private CrafterWorkRepository crafterWorkRepository;
+
 
     @Override
     public List<PostDTO> getAllPosts(CrafterRequestDTO crafterRequestDto) {
@@ -373,4 +289,59 @@ public class CrafterServiceImpl implements CrafterService{
         postRepository.save(post);
         return true;
     }
+
+    @Override
+    public boolean uploadCrafterWork(CrafterWorkDTO crafterWorkDTO) {
+
+        Long crafterId = crafterWorkDTO.getCrafterId();
+        Optional<Crafter>  optionalCrafter = crafterRepository.findById(crafterId);
+
+        Long postId = crafterWorkDTO.getPostId();
+        Optional<Post> optionalPost = postRepository.findById(postId);
+
+        if(!optionalCrafter.isPresent() || !optionalPost.isPresent())
+            return false;
+
+        CrafterWork crafterWork = new CrafterWork();
+
+        Crafter crafter = optionalCrafter.get();
+        crafterWork.setCrafter(crafter);
+
+        Post post = optionalPost.get();
+        crafterWork.setPost(post);
+
+        if (crafterWorkDTO.getImages() != null && !crafterWorkDTO.getImages().isEmpty()) {
+        List<PostImage> imageDetails = new ArrayList<>();
+        for (MultipartFile image : crafterWorkDTO.getImages()) {
+            try {
+                AbstractMap.SimpleEntry<String, String> result = cloudinaryService.uploadImage(image);
+                imageDetails.add(new PostImage(result.getKey(), result.getValue()));
+            } catch (IOException e) {
+                throw new RuntimeException("Image upload failed: " + image.getOriginalFilename(), e);
+            }
+        }
+       crafterWork.setImageDetails(imageDetails);
+    }
+        crafterWork.setComment(crafterWorkDTO.getComment());
+        crafterWorkRepository.save(crafterWork);
+        return true;
+    }
+
+    @Override
+    public CrafterWorkDTO getWorkClientReviews(Long crafterId, Long postId) {
+
+        Optional<CrafterWork> optionalCrafterWork = crafterWorkRepository.findByPostIdAndCrafterId(postId , crafterId);
+
+        if(!optionalCrafterWork.isPresent())
+         return null;
+
+        CrafterWork crafterWork = optionalCrafterWork.get();
+        CrafterWorkDTO crafterWorkDTO = new CrafterWorkDTO();
+
+        crafterWorkDTO.setRating(crafterWork.getRating());
+        crafterWorkDTO.setClientFeedback(crafterWork.getClientFeedback());
+
+        return crafterWorkDTO;
+    }
 }
+

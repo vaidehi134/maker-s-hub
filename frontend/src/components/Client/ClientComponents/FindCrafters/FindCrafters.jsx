@@ -51,6 +51,11 @@ const FindCrafters = () => {
     }
   };
 
+  const handleViewCrafterPortfolio = (crafterId)=>{
+   
+   navigate(`/client/crafter-portfolio/${crafterId}/${postId}`);
+  };
+
   const handleAcceptRequest = async (crafterId) => {
     const crafterAssignmentDTO = {
       postId: postId,
@@ -63,7 +68,7 @@ const FindCrafters = () => {
       );
       if (response.status === 200) {
         notification.success({
-          message: "Proposal accepted successfully",
+          message: "You've Successfully Assigned This Project!",
         });
         setIsPostAccepted(true);
       } else {
@@ -84,35 +89,29 @@ const FindCrafters = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Find suitable crafter here for your product</h1>
+      <h1>Select the Perfect Crafter for Your Project</h1>
       {!isPostAccepted ? (
         crafters.length === 0 ? (
-          <p className={styles.noCraftersMessage}>No crafters available</p>
+          <p className={styles.noCraftersMessage}>
+            No Crafters Have Applied Yet
+          </p>
         ) : (
           <div>
             <ul className={styles.craftersList}>
               {crafters.map((crafter) => (
                 <li key={crafter.email} className={styles.crafterItem}>
                   <div className={styles.crafterDetails}>
-                    <strong>Full Name:</strong>{" "}
+                    <strong> Crafter Name :</strong>{" "}
                     {`${crafter.name} ${crafter.lastname}`}
                     <br />
-                    <strong>Email:</strong> {crafter.email}
-                    <br />
-                    <strong>Address:</strong> {crafter.address}
-                    <br />
-                    <strong>Phone:</strong> {crafter.phone}
-                    <br />
-                    <strong>Skills:</strong> {crafter.skills}
-                    <br />
-                    <strong>City:</strong> {crafter.city}
                     {crafter.proposal ? (
                       <>
                         <hr />
-                        <strong>Estimated Price:</strong> Rs.
+                        <strong>Proposed Budget:</strong> Rs.
                         {crafter.proposal.estimatedPrice}.00
                         <br />
-                        <strong>Comment:</strong> {crafter.proposal.comment}
+                        <strong>Crafter's Note:</strong>{" "}
+                        {crafter.proposal.comment}
                       </>
                     ) : (
                       <p>Proposal details unavailable</p>
@@ -122,7 +121,11 @@ const FindCrafters = () => {
                     className={styles.acceptRequestBtn}
                     onClick={() => handleAcceptRequest(crafter.id)}
                   >
-                    Accept Request
+                    Hire this crafter
+                  </button>
+                  <button className={styles.acceptRequestBtn}
+                   onClick={()=> handleViewCrafterPortfolio(crafter.id)}>
+                    View Crafter's Portfolio
                   </button>
                 </li>
               ))}

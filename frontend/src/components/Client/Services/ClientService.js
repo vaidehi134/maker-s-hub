@@ -124,29 +124,20 @@ export const ClientService = {
     }
   },
 
-  // getCrafterProposalById(crafterId) {
-  //   console.log("clientService: getCrafterProposalById()");
-  //   try {
-  //     return axios.get(`${BASIC_URL}api/client/crafter-proposal/${crafterId}`, {
-  //       headers: createAuthorizationHeader(),
-  //     });
-  //   } catch (error) {
-  //     console.error("error : ", error);
-  //     return Promise.reject(error);
-  //   }
-  // },
-
   getCrafterProposalById(crafterId, postId) {
-  console.log("clientService: getCrafterProposalById()");
-  try {
-    return axios.get(`${BASIC_URL}api/client/crafter-proposal/${crafterId}/${postId}`, {
-      headers: createAuthorizationHeader(),
-    });
-  } catch (error) {
-    console.error("error : ", error);
-    return Promise.reject(error);
-  }
-},
+    console.log("clientService: getCrafterProposalById()");
+    try {
+      return axios.get(
+        `${BASIC_URL}api/client/crafter-proposal/${crafterId}/${postId}`,
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error("error : ", error);
+      return Promise.reject(error);
+    }
+  },
 
   cancelCrafterRequest(postId, assignedCrafterId) {
     console.log("ClientService : cancelCrafterRequest()");
@@ -189,7 +180,7 @@ export const ClientService = {
     }
   },
 
-  // Add this to your service file
+  // Add this to your service file                    // ???
   getLocationSuggestions(query) {
     console.log("Fetching location suggestions for:", query);
     try {
@@ -203,4 +194,69 @@ export const ClientService = {
       return Promise.reject(error);
     }
   },
+
+  getCompletedWork(crafterId, postId) {
+    try {
+      return axios.get(
+        `${BASIC_URL}api/client/get-completed-work/${postId}/${crafterId}`,
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error("Error fetching completed work:", error);
+      return Promise.reject(error);
+    }
+  },
+
+  postRatingsByPostId(postId, ClientReviews) {
+    try {
+      return axios.post(
+        `${BASIC_URL}api/client/post-client-reviews/${postId}`, // Add "cancel-"
+        ClientReviews,
+        {
+          headers: {
+            ...createAuthorizationHeader(),
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    } catch (error) {
+      console.log("error : ", error);
+      return Promise.reject(error);
+    }
+  },
+
+  getCrafterWork(crafterId) {
+    console.log("ClientService: getCrafterWork()");
+    try {
+      return axios.get(`${BASIC_URL}api/client/get-crafter-work/${crafterId}`, {
+        headers: createAuthorizationHeader(),
+      });
+    } catch (error) {
+      console.error("Error fetching crafter work:", error);
+      return Promise.reject(error);
+    }
+  },
+
+   updatePostStatus(status, postId) {
+      console.log("clientService: updatePostStatus() called....");
+      const longPostId = Number(postId);
+      if (isNaN(longPostId)) {
+        console.log("invalid postID", postId);
+      }
+      try {
+        return axios.post(
+          `${BASIC_URL}api/client/post-status/${status}?postId=${longPostId}`, // Include postId as a query parameter
+          null, // No data in the request body
+          {
+            headers: createAuthorizationHeader(),
+          }
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    },
+
+ 
 };

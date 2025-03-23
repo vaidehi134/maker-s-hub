@@ -154,4 +154,31 @@ export const CrafterService = {
         throw error; // Re-throw the error to be caught in the component
       });
   },
+
+  uploadCrafterWork(crafterWorkDto) {
+    try {
+      return axios.post(
+        `${BASIC_URL}api/crafter/upload-crafter-work`,
+        crafterWorkDto,
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  getClientReviews(crafterId, postId) {
+    try {
+      return axios.get(
+        `${BASIC_URL}api/crafter/get-client-reviews/${crafterId}/${postId}`,
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };

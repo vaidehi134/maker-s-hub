@@ -1,0 +1,110 @@
+.completedWorkContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.completedWorkHeading {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.completedWorkCommentTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.completedWorkComment {
+  background: #f9f9f9;
+  border-left: 5px solid #6268f1; /* Stylish left border */
+  padding: 15px;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 10px auto;
+  text-align: left;
+  font-style: italic;
+}
+
+
+.completedWorkImageGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.completedWorkImageCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 10px;
+}
+
+.completedWorkImage {
+  width: 200px;  /* Fixed width */
+  height: 200px; /* Fixed height */
+  object-fit: contain; /* Ensures the whole image fits without cropping */
+  border-radius: 5px;
+}
+
+.completedWorkNoImages {
+  font-size: 16px;
+  color: #777;
+}
+
+.completedWorkRatingSection {
+  margin-top: 20px;
+  padding: 15px;
+  border-top: 2px solid #ddd;
+}
+
+.completedWorkRatingTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.completedWorkStarRating {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.completedWorkFeedbackInput {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.completedWorkSubmitButton {
+  background-color: #6268f1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.completedWorkSubmitButton:hover {
+  background-color: #6268f1;
+}
