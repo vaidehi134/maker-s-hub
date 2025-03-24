@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 public class CrafterServiceImpl implements CrafterService{
 
     @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
     private CloudinaryService cloudinaryService;  // Inject CloudinaryService
 
     @Autowired
@@ -342,6 +345,24 @@ public class CrafterServiceImpl implements CrafterService{
         crafterWorkDTO.setClientFeedback(crafterWork.getClientFeedback());
 
         return crafterWorkDTO;
+    }
+
+    @Override
+    public PaymentDTO getPaymentConfirmation(Long crafterId, Long postId) {
+
+        Optional<Payment> optionalPayment =  paymentRepository.findByPostIdAndCrafterId(postId , crafterId);
+
+        if(!optionalPayment.isPresent())
+             return null;
+
+             Payment payment = optionalPayment.get();
+            PaymentDTO paymentDTO = new PaymentDTO();
+
+             paymentDTO.setAmount(payment.getAmount());
+             paymentDTO.setPaymentNote(payment.getPaymentNote());
+             paymentDTO.setPaymentMethod(payment.getPaymentMethod());
+
+        return paymentDTO;
     }
 }
 

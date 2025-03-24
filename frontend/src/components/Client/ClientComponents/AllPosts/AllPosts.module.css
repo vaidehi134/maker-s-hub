@@ -3,54 +3,62 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%); */
-  padding-top: 100px;
+  background: #f4f7fc;
+  padding: 80px 20px;
   overflow: hidden;
   position: relative;
 }
 
-/* Background decorative elements */
-.postsContainer::before {
-  content: "";
-  position: absolute;
-  width: 1000px;
-  height: 1000px;
-  border-radius: 50%;
-  /* background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%); */
-  top: -400px;
-  right: -300px;
-  z-index: 0;
-}
-
+/* Soft background gradient */
+.postsContainer::before,
 .postsContainer::after {
   content: "";
   position: absolute;
-  width: 800px;
-  height: 800px;
   border-radius: 50%;
-  /* background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%); */
-  bottom: -300px;
-  left: -200px;
+  filter: blur(100px);
+  opacity: 0.3;
   z-index: 0;
 }
+
+.postsContainer::before {
+  width: 600px;
+  height: 600px;
+  background: #d1d8ff;
+  top: -150px;
+  right: -100px;
+}
+
+.postsContainer::after {
+  width: 500px;
+  height: 500px;
+  background: #d1d8ff;
+  bottom: -150px;
+  left: -100px;
+}
+
 .postsList {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.5rem;
   width: 100%;
   max-width: 1200px;
   z-index: 1;
 }
 
 .postItem {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
+  background: white;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  height: 400px; /* Fixed height for all cards */
+  height: 420px;
+}
+
+.postItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .postContent {
@@ -62,18 +70,20 @@
 
 .postImageContainer {
   width: 100%;
-  height: 200px;
-  margin-bottom: 1rem;
-  border-radius: 8px;
+  height: 220px;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 .postImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
   transition: transform 0.3s ease;
+}
+
+.postImage:hover {
+  transform: scale(1.05);
 }
 
 .postDetails {
@@ -81,67 +91,83 @@
   margin-bottom: 1rem;
 }
 
+.postTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
 .postStatus {
-  font-size: 0.85rem;
-  color: #6c757d;
+  font-size: 0.9rem;
+  color: #626262;
   margin-top: 0.5rem;
 }
 
-.updateBtn,
-.delBtn,
-.findCraftersBtn,
-.paymentBtn,
-.cancelBtn {
-  padding: 0.5rem 1rem;
+.postActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+button {
+  padding: 8px 14px;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
 }
+
 .updateBtn {
-  color: #6268f1;
+  background-color: #4c7ef3;
+  color: white;
 }
+
+.updateBtn:hover {
+  background-color: #3b6cd4;
+}
+
 .delBtn {
-  color: #6268f1;
+  background-color: #e63946;
+  color: white;
 }
+
+.delBtn:hover {
+  background-color: #c5303b;
+}
+
 .findCraftersBtn {
-  background-color: #6268f1;
+  background-color: #fcbf49;
   color: white;
 }
 
 .findCraftersBtn:hover {
-  background-color: #6268f1;
-  transform: translateY(-2px);
+  background-color: #f4a31c;
 }
 
 .paymentBtn {
-  background-color: #6268f1;
+  background-color: #2a9d8f;
   color: white;
-}
-
-.viewCompletedWork {
-  display: flex;
-  margin: 5px 0;
 }
 
 .paymentBtn:hover {
-  background-color: #6268f1;
-  transform: translateY(-2px);
+  background-color: #21867a;
 }
 
 .cancelBtn {
-  background-color: #6268f1;
+  background-color: #ef476f;
   color: white;
-  margin-top: 0.5rem;
 }
 
 .cancelBtn:hover {
-  background-color: #2d3958;
-  transform: translateY(-2px);
+  background-color: #d7375e;
 }
 
-.checkboxLabel{
-  margin-left: 10px;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .postsList {
+    grid-template-columns: 1fr;
+  }
 }
-

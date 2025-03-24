@@ -48,7 +48,7 @@ p {
   position: absolute;
   top: 5px;
   right: 5px;
-  background: red;
+  background: #6268f1;
   color: white;
   border: none;
   width: 20px;
@@ -105,12 +105,12 @@ p {
 }
 
 .submitButton {
-  background: #4CAF50;
+  background: #6268f1;
   color: white;
 }
 
 .submitButton:hover {
-  background: #45a049;
+  background: #6268f1;
 }
 
 .closeButton {

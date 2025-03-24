@@ -239,24 +239,36 @@ export const ClientService = {
     }
   },
 
-   updatePostStatus(status, postId) {
-      console.log("clientService: updatePostStatus() called....");
-      const longPostId = Number(postId);
-      if (isNaN(longPostId)) {
-        console.log("invalid postID", postId);
-      }
-      try {
-        return axios.post(
-          `${BASIC_URL}api/client/post-status/${status}?postId=${longPostId}`, // Include postId as a query parameter
-          null, // No data in the request body
-          {
-            headers: createAuthorizationHeader(),
-          }
-        );
-      } catch (error) {
-        console.error(error);
-      }
-    },
+  updatePostStatus(status, postId) {
+    console.log("clientService: updatePostStatus() called....");
+    const longPostId = Number(postId);
+    if (isNaN(longPostId)) {
+      console.log("invalid postID", postId);
+    }
+    try {
+      return axios.post(
+        `${BASIC_URL}api/client/post-status/${status}?postId=${longPostId}`, // Include postId as a query parameter
+        null, // No data in the request body
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  },
 
- 
+  clientPayment(paymentDto) {
+    try {
+      return axios.post(
+        `${BASIC_URL}api/client/payment`, // Include postId as a query parameter
+        paymentDto, // No data in the request body
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  },
 };

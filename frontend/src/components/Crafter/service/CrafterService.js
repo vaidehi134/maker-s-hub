@@ -181,4 +181,18 @@ export const CrafterService = {
       console.error(error);
     }
   },
+
+  getPaymentConfirmation(crafterId, postId) {
+    console.log("CrafterService : getPaymentConfirmation()");
+    try {
+      return axios.get(
+        `${BASIC_URL}api/crafter/paymentConformation/${crafterId}/${postId}`,
+        {
+          headers: createAuthorizationHeader(),
+        }
+      );
+    } catch (error) {
+      console.error("Error in getPaymentConfirmation:", error);
+    }
+  },
 };

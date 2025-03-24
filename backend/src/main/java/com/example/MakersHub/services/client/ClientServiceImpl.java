@@ -392,6 +392,7 @@ public List<CrafterDTO> findCrafter(Long postId) {
         return crafterWorkDTOList;
     }
 
+    @Transactional
     @Override
     public boolean payment(PaymentDTO paymentDTO) {
 
@@ -407,7 +408,9 @@ public List<CrafterDTO> findCrafter(Long postId) {
           if(!optionalClient.isPresent() || !optionalCrafter.isPresent() || !optionalPost.isPresent())
               return false;
 
-          payment.setPost(optionalPost.get());
+           Post post = optionalPost.get();
+          post.setPostStatus("PAID");
+          payment.setPost(post);
           payment.setCrafter(optionalCrafter.get());
           payment.setClient(optionalClient.get());
 

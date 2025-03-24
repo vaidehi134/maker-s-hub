@@ -25,4 +25,6 @@ public interface CrafterService {
      boolean uploadCrafterWork(CrafterWorkDTO crafterWorkDTO);
 
     CrafterWorkDTO getWorkClientReviews(Long crafterId, Long postId);
+
+    PaymentDTO getPaymentConfirmation(Long crafterId, Long postId);
 }

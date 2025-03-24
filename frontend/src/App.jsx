@@ -21,6 +21,7 @@ import UploadCrafterWork from "./components/Crafter/CrafterComponents/UploadCraf
 import CompletedWork from "./components/Client/ClientComponents/CompletedWork/CompletedWork";
 import CrafterPortfolio from "./components/Client/ClientComponents/CrafterPortfolio/CrafterPortfolio";
 import ClientPayment from "./components/Client/ClientComponents/ClientPayment/ClientPayment";
+import AcknowledgedPayment from "./components/Crafter/CrafterComponents/AcknowledgedPayment/AcknowledgedPayment";
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
           <Route 
           path="/client/payment" element={<ClientPayment/>}
           />
+          <Route path="/crafter/acknowledgedPayment/:crafterId/:postId" element={<AcknowledgedPayment/>}/>
         </Routes>
       </Router>
     </AuthProvider>

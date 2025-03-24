@@ -123,9 +123,17 @@ public class CrafterController {
                   System.out.println("crafterId or postId is null");
         }
         return ResponseEntity.ok(crafterService.getWorkClientReviews(crafterId,postId));
-
     }
 
+    @GetMapping("paymentConformation/{crafterId}/{postId}")
+    public ResponseEntity<?> getPaymentConfirmation(@PathVariable Long crafterId,@PathVariable Long postId)
+    {
+        if(crafterId == null || postId == null)
+        {
+            System.out.println("crafterId or postId is null");
+        }
+        return ResponseEntity.ok(crafterService.getPaymentConfirmation(crafterId,postId));
+    }
 }
 
 

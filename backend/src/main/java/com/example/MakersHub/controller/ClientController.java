@@ -156,6 +156,7 @@ public class ClientController {
         return ResponseEntity.ok(clientService.getCrafterWork(crafterId));
     }
 
+    //to send client payment proof
     @PostMapping("payment")
     public ResponseEntity<?> payment(@RequestBody PaymentDTO paymentDTO)
     {
