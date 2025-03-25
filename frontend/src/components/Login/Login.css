@@ -42,10 +42,8 @@
   background: rgba(255, 255, 255, 0.95);
   padding: 3rem 4rem;
   border-radius: 20px;
-  box-shadow: 
-    0 15px 30px rgba(0, 0, 0, 0.1), 
-    0 5px 10px rgba(0, 0, 0, 0.05);
-  width: 460px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+  width: 500px;
   position: relative;
   z-index: 1;
   backdrop-filter: blur(15px);
@@ -102,7 +100,6 @@
   display: flex;
   gap: 1.25rem;
   margin: 2.5rem 0 2rem;
-  
 }
 
 .role-btn {

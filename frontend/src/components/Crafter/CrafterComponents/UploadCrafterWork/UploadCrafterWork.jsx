@@ -32,6 +32,7 @@ const UploadCrafterWork = () => {
 
   const handleStatusUpdate = async (status) => {
     try {
+      console.log("handleStatusUpdated from handleStatusUpdated...", status);
       const response = await CrafterService.updatePostStatus(status, postId);
       if (response.status === 200) {
         console.log("Status updated to", status);
@@ -69,6 +70,7 @@ const UploadCrafterWork = () => {
         message: "Work submitted successfully!",
       });
 
+      console.log("awaiting payment...");
       // **Change status to "AWAITING_PAYMENT"**
       await handleStatusUpdate("AWAITING_PAYMENT");
 

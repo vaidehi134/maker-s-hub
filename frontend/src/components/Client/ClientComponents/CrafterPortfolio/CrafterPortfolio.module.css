@@ -95,7 +95,7 @@
   width: fit-content;
   margin: 20px auto;
   padding: 10px 20px;
-  background: #007bff;
+  background-color: #4a75f6;
   color: white;
   font-size: 16px;
   border: none;
@@ -104,5 +104,5 @@
 }
 
 .backButton:hover {
-  background: #0056b3;
+  background-color: #3a65e6;
 }

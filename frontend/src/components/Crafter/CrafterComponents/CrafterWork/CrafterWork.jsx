@@ -623,6 +623,7 @@ const CrafterWork = () => {
                           handleStatusUpdate(post.id, selectedStatus[post.id]);
                         }}
                       >
+                        <div className={styles.radioButtons}>
                         <label>
                           <input
                             type="radio"
@@ -644,9 +645,10 @@ const CrafterWork = () => {
                             onChange={() =>
                               handleStatusChange(post.id, "COMPLETED")
                             }
-                          />
+                            />
                           Completed
                         </label>
+                            </div>
                       </form>
                     )}
                   </div>

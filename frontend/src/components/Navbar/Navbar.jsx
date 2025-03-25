@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import StorageService from "../../util/StorageService";
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { 
   FaBars, 
@@ -14,11 +15,11 @@ import {
   FaTools,
   FaHammer
 } from "react-icons/fa";
-
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [role,setRole] = useState(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -26,8 +27,12 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setIsOpen(false);
+    localStorage.removeItem("role");
+    StorageService.logout();
+    naviagate
     logout();
   };
+  
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -52,9 +57,18 @@ const Navbar = () => {
     return location.pathname === path ? 'active' : '';
   };
 
+  useEffect(()=>{
+    const role = localStorage.getItem("role");
+    if(role === null){
+      setRole(null);
+    }
+    setRole(role);
+    console.log(role);
+  },[user])
+
   return (
     <nav className="navbar">
-      <div className="logo">
+    <div className="logo">
         <FaHammer style={{ marginRight: '8px' }} />
         Maker's Hub
       </div>
@@ -64,16 +78,10 @@ const Navbar = () => {
       </div>
       
       <ul className={`nav-links ${isOpen ? 'active' : ''}`}>
-        <li className={isActive('/')}>
-          <Link to="/">
-            <FaHome className="nav-icon" />
-            Home
-          </Link>
-        </li>
-        
-        {user ? (
+
+        {role ? (
           <>
-            {StorageService.getUserRole() === "CLIENT" ? (
+            {role === "CLIENT" ? (
               <>
                 <li className={isActive('/all-posts')}>
                   <Link to="/all-posts">
@@ -112,12 +120,20 @@ const Navbar = () => {
             </li>
           </>
         ) : (
+          <>
+          <li className={isActive('/')}>
+            <Link to="/">
+              <FaHome className="nav-icon" />
+              Home
+            </Link>
+          </li>
           <li className={isActive('/login')}>
             <Link to="/login">
               <FaUserCircle className="nav-icon" />
               Login
             </Link>
           </li>
+          </>
         )}
       </ul>
     </nav>

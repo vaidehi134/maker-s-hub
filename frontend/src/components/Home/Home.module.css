@@ -1,0 +1,443 @@
+/* Base styles */
+.homePage {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+section {
+  padding: 60px 20px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #7c82f2;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #7c82f2;
+}
+
+p {
+  margin: 0 0 20px;
+  font-size: 1.1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styles */
+.ctaButton {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primaryButton {
+  background-color: #7c82f2;
+  color: white;
+}
+
+.primaryButton:hover {
+  background-color: #284b63;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(60, 110, 113, 0.25);
+}
+
+.secondaryButton {
+  background-color: white;
+  color: #3c6e71;
+  border: 2px solid #3c6e71;
+}
+
+.secondaryButton:hover {
+  background-color: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Section */
+.heroSection {
+  background: linear-gradient(135deg, #3c6e71, #284b63);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 80px 20px;
+}
+
+.heroContent {
+  flex: 1;
+  padding-right: 40px;
+}
+
+.heroImage {
+  flex: 1;
+}
+
+.heroImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); */
+}
+
+.heroCta {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+/* How It Works Section */
+.howItWorksSection {
+  background-color: white;
+}
+
+.stepsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+  background-color: #7c82f2;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+/* For Clients/Crafters Sections */
+.forClientsSection,
+.forCraftersSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.forClientsSection {
+  background-color: #f9f9f9;
+}
+
+.forCraftersSection {
+  background-color: white;
+}
+
+.sectionContent {
+  flex: 1;
+}
+
+.sectionContent h2 {
+  text-align: left;
+}
+
+.sectionImage {
+  flex: 1;
+}
+
+.benefitsList {
+  margin: 20px 0 30px;
+  padding-left: 20px;
+}
+
+.benefitsList li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+/* Featured Projects Section */
+.featuredProjectsSection {
+  background-color: #f9f9f9;
+  padding: 60px 20px;
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.projectCard {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.projectImage {
+  height: 200px;
+  overflow: hidden;
+}
+
+.projectImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0;
+  transition: transform 0.5s ease;
+}
+
+.projectCard:hover .projectImage img {
+  transform: scale(1.05);
+}
+
+.projectCard h3 {
+  padding: 15px 15px 5px;
+  margin-bottom: 5px;
+}
+
+.projectCard p {
+  padding: 0 15px 15px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.viewMoreContainer {
+  text-align: center;
+}
+
+/* Testimonials Section */
+.testimonialsSection {
+  background-color: white;
+  padding: 60px 20px;
+}
+
+.testimonialCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonialCard {
+  flex: 1;
+  min-width: 280px;
+  max-width: 380px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.testimonialCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.testimonialContent {
+  position: relative;
+  padding-left: 25px;
+}
+
+.testimonialContent::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 3rem;
+  color: #3c6e71;
+  opacity: 0.3;
+  line-height: 1;
+}
+
+.testimonialContent p {
+  font-style: italic;
+  color: #444;
+}
+
+.testimonialAuthor {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.authorName {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.authorType {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Call to Action Section */
+.ctaSection {
+  background: linear-gradient(135deg, #3c6e71, #284b63);
+  color: white;
+  text-align:center;
+  padding: 80px 20px;
+}
+
+.ctaSection h1 {
+  color: white;
+}
+
+.ctaSection p {
+  color: white;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.2rem;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.ctaSection .primaryButton {
+  background-color: white;
+  color: #7c82f2;
+}
+
+.ctaSection .primaryButton:hover {
+  background-color: #f0f0f0;
+  color: #284b63;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .heroSection,
+  .forClientsSection,
+  .forCraftersSection {
+    flex-direction: column;
+  }
+
+  .heroContent,
+  .sectionContent,
+  .sectionImage {
+    padding-right: 0;
+    margin-bottom: 30px;
+  }
+
+  .sectionContent h2 {
+    text-align: center;
+  }
+
+  .forCraftersSection {
+    flex-direction: column-reverse;
+  }
+
+  .testimonialCards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonialCard {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  section {
+    padding: 40px 15px;
+  }
+
+  .heroSection {
+    padding: 50px 15px;
+  }
+
+  .step {
+    min-width: 100%;
+  }
+
+  .projectsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .heroCta,
+  .ctaButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}

@@ -9,6 +9,7 @@ const StorageService = {
 
   saveUser: (user) => {
     localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("role", StorageService.getUserRole());
   },
 
   getUser: () => {
@@ -30,6 +31,7 @@ const StorageService = {
   logOut: () => {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user");
+    localStorage.removeItem("role");
     console.log("token : ", StorageService.getToken());
     console.log("user : ", StorageService.getUser());
   },

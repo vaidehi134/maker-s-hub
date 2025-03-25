@@ -143,7 +143,7 @@ const CrafterProposal = () => {
         className={styles.proposalForm}
       >
         <div>
-          <label htmlFor="estimatedPrice">Estimate Price in rs : </label>
+          <label htmlFor="estimatedPrice">Estimate Price in Rs : </label>
           <input
             type="number"
             id="estimatedPrice"

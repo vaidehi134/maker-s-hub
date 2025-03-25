@@ -67,7 +67,7 @@ hr {
 
 /* Buttons */
 .acceptRequestBtn {
-  background: #0056b3;
+  background-color: #4a75f6;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -81,7 +81,7 @@ hr {
 }
 
 .acceptRequestBtn:hover {
-  background: #0056b3;
+  background: #3a65e6;
   transform: scale(1.05);
 }
 

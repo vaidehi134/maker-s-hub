@@ -124,5 +124,3 @@ const CompletedWork = () => {
 };
 
 export default CompletedWork;
-
-

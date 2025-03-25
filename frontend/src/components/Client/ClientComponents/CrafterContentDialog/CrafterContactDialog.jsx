@@ -28,7 +28,7 @@ const CrafterContactDialog = ({ isOpen, onClose, crafterId }) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.dialog}>
-        <h3>Crafter Contact Details</h3>
+        <h3>Crafter Details</h3>
         {loading ? (
           <p>Loading...</p>
         ) : (

@@ -39,7 +39,7 @@
   font-size: 18px;
   font-weight: bold;
   color: #fff;
-  background: #6268f1;
+  background-color: #4a75f6;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -47,7 +47,7 @@
 }
 
 .button:hover {
-  background: #6268f1;
+  background-color: #3a65e6;
   transform: scale(1.05);
 }
 

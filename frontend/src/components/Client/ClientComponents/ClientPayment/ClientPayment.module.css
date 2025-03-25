@@ -75,7 +75,7 @@
 .paymentButton {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(45deg, #007bff, #0056b3);
+  background-color: #4a75f6;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -87,13 +87,13 @@
 }
 
 .paymentButton:hover {
-  background: linear-gradient(45deg, #0056b3, #00408a);
+  background-color: #3a65e6;
 }
 
 .backButton {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(45deg, #6c757d, #495057);
+  background-color: #4a75f6;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -105,7 +105,7 @@
 }
 
 .backButton:hover {
-  background: linear-gradient(45deg, #495057, #343a40);
+  background-color: #3a65e6;
 }
 
 @media (max-width: 600px) {

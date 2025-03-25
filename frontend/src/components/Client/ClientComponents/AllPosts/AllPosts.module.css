@@ -121,48 +121,48 @@ button {
 }
 
 .updateBtn {
-  background-color: #4c7ef3;
+  background-color: #4a75f6;
   color: white;
 }
 
 .updateBtn:hover {
-  background-color: #3b6cd4;
+  background-color: #3a65e6;
 }
 
 .delBtn {
-  background-color: #e63946;
+  background-color: #4a75f6;
   color: white;
 }
 
 .delBtn:hover {
-  background-color: #c5303b;
+  background-color: #3a65e6;
 }
 
 .findCraftersBtn {
-  background-color: #fcbf49;
+  background-color: #4a75f6;
   color: white;
 }
 
 .findCraftersBtn:hover {
-  background-color: #f4a31c;
+  background-color: #3a65e6;
 }
 
 .paymentBtn {
-  background-color: #2a9d8f;
+  background-color: #4a75f6;
   color: white;
 }
 
 .paymentBtn:hover {
-  background-color: #21867a;
+  background-color: #3a65e6;
 }
 
 .cancelBtn {
-  background-color: #ef476f;
+  background-color: #4a75f6;
   color: white;
 }
 
 .cancelBtn:hover {
-  background-color: #d7375e;
+  background-color: #3a65e6;
 }
 
 /* Responsive Adjustments */

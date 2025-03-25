@@ -425,6 +425,7 @@ const Register = () => {
 
   return (
     <div className={styles.register}>
+      <div className={styles.crafterHeading}>Register as Crafter</div>
       <div className={styles.formContainer}>
         <form className={styles.form} onSubmit={handleSubmit}>
           <div>
@@ -487,7 +488,7 @@ const Register = () => {
             <label htmlFor="location" className={styles.label}>
               City
             </label>
-            <div style={{ position: "relative" }}>
+            {/* <div style={{ position: "relative" }}> */}
               <input
                 type="text"
                 id="location"
@@ -501,7 +502,7 @@ const Register = () => {
               {locationSuggestions.length > 0 && (
                 <div
                   style={{
-                    position: "absolute",
+                    // position: "absolute",
                     width: "100%",
                     backgroundColor: "white",
                     border: "1px solid #ddd",
@@ -524,7 +525,7 @@ const Register = () => {
                   ))}
                 </div>
               )}
-            </div>
+            {/* </div> */}
           </div>
 
           <div>

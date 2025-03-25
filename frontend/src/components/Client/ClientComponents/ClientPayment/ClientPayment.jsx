@@ -177,7 +177,7 @@ const ClientPayment = () => {
         message: "Success",
         description: "Your payment is successful",
       });
-      navigate("/crafter-all-posts");
+      navigate("/all-posts");
     } catch (error) {
       console.error("Error processing payment:", error);
       notification.error({

@@ -1,16 +1,10 @@
 /* ========= REGISTER CLIENT PAGE STYLING ========= */
 .register {
-  overflow: hidden;
-  padding-top: 100px;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
   background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Background decorative elements */
@@ -38,6 +32,16 @@
   z-index: 0;
 }
 
+.clientHeading {
+  color: #2d3958;
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
 /* ========= FORM CONTAINER ========= */
 .formContainer {
   background: rgba(255, 255, 255, 0.95);
@@ -45,36 +49,17 @@
   border-radius: 20px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
   width: 100%;
-  max-width: 550px;
+  max-width: 600px;
   position: relative;
   z-index: 1;
   backdrop-filter: blur(15px);
   border: 2px solid rgba(255, 255, 255, 0.9);
 
   /* Adjust vertical space */
-  max-height: 75vh;
+  /* max-height: 75vh; */
   margin: 5vh auto;
 
-  overflow-y: auto;
-}
-
-/* Scrollbar Styling */
-.formContainer::-webkit-scrollbar {
-  width: 8px;
-}
-
-.formContainer::-webkit-scrollbar-track {
-  background: rgba(124, 130, 242, 0.05);
-  border-radius: 4px;
-}
-
-.formContainer::-webkit-scrollbar-thumb {
-  background: rgba(124, 130, 242, 0.2);
-  border-radius: 4px;
-}
-
-.formContainer::-webkit-scrollbar-thumb:hover {
-  background: rgba(124, 130, 242, 0.3);
+  /* overflow-y: auto; */
 }
 
 /* ========= FORM STYLING ========= */

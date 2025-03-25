@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%); */
+  background: linear-gradient(135deg, #f6f8ff 0%, #f0f4ff 100%);
   padding: 2rem;
   overflow: hidden;
   position: relative;
@@ -13,26 +13,26 @@
 
 /* Background decorative elements */
 .postUploadContainer::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 1000px;
   height: 1000px;
   border-radius: 50%;
-  /* background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%); */
+  background: linear-gradient(135deg, #6b8afd20 0%, #8c5bfd20 100%);
   top: -400px;
-  left: -300px;
+  right: -300px;
   z-index: 0;
 }
 
 .postUploadContainer::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 800px;
   height: 800px;
   border-radius: 50%;
-  /* background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%); */
+  background: linear-gradient(135deg, #8c5bfd20 0%, #6b8afd20 100%);
   bottom: -300px;
-  right: -200px;
+  left: -200px;
   z-index: 0;
 }
 
@@ -49,11 +49,10 @@
   background: rgba(255, 255, 255, 0.95);
   padding: 3rem 3.5rem;
   border-radius: 20px;
-  box-shadow: 
-    0 10px 25px rgba(124, 130, 242, 0.07),
+  box-shadow: 0 10px 25px rgba(124, 130, 242, 0.07),
     0 2px 4px rgba(124, 130, 242, 0.05);
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   position: relative;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.8);
@@ -96,7 +95,7 @@
 }
 
 .subBtn {
-  background: #7c82f2;
+  background-color: #4a75f6;
   color: white;
   padding: 1rem;
   border: none;
@@ -110,7 +109,7 @@
 }
 
 .subBtn:hover {
-  background: #6268f1;
+  background-color: #3a65e6;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(124, 130, 242, 0.25);
 }

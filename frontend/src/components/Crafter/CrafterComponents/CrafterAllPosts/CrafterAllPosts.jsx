@@ -427,6 +427,8 @@ const CrafterAllPosts = () => {
       setIsSubmitting(true);
       const response = await CrafterService.getAllPosts(crafterRequestDto);
       if (response.status === 200) {
+        console.log(response.data);
+        
         setPosts(response.data);
       } else {
         notification.error({
@@ -564,28 +566,31 @@ const CrafterAllPosts = () => {
         <h1 className={styles.noPostAvailable}>No Posts Available</h1>
       ) : (
         <div className={styles.postList}>
+          {/* <div className={styles.postContent}> */}
           {filteredPosts.map((post) => (
             <div key={post.id} className={styles.postItem}>
+              <div className={styles.postContent}>
               <div className={styles.postImage}>
-                {post.imageDetails?.map((imgDetail, index) => (
+                {post.imageDetails?.length > 0 && (
                   <img
-                    key={index}
-                    className="post-image"
-                    src={imgDetail.imgUrl}
-                    alt={`Post ${post.id} Image ${index + 1}`}
+                    className={styles.postImage}
+                    src={post.imageDetails[0].imgUrl} // Display only the first image
+                    alt={`Post ${post.id} Image`}
                     onError={(e) => {
                       e.target.src = "/path/to/placeholder-image.jpg";
                     }}
                   />
-                ))}
+                )}
               </div>
-              <div className="post-details">
-                <h2 className="post-title">{post.itemName}</h2>
+
+              <div className="{styles.postDetails}">
+                <h2 className="{styles.postTitle}">{post.itemName}</h2>
               </div>
 
               {post.postStatus === "ACCEPTED" ? (
                 post.postAcceptingCrafterId?.includes(currentUserId) ? (
                   <div className={styles.postAction}>
+                    <p>No Client has accepted your request</p>
                     <button
                       className={styles.updateButton}
                       onClick={() =>
@@ -598,7 +603,6 @@ const CrafterAllPosts = () => {
                     >
                       See Details
                     </button>
-                    <p>No Client has accepted your request</p>
                   </div>
                 ) : (
                    <div className={styles.postAction}>
@@ -632,8 +636,10 @@ const CrafterAllPosts = () => {
                 </button>
                 </div>
               )}
+              </div>
             </div>
           ))}
+          {/* </div> */}
         </div>
       )}
     </div>
