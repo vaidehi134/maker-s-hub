@@ -10,8 +10,8 @@ Maker's Hub is a platform that connects clients with skilled crafters to create 
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/makers-hub.git
-   cd makers-hub
+   git clone https://github.com/vaidehi134/maker-s-hub
+   cd maker-s-hub
    ```
 2. Set up MySQL database:
    - Create a database named `makers_hub_db`.
@@ -38,7 +38,7 @@ Maker's Hub is a platform that connects clients with skilled crafters to create 
 
 ## Technologies Used
 
-- **Backend:** Spring Boot, Spring Security, MySQL, Spring AI
+- **Backend:** Spring Boot, Spring Security, MySQL
 - **Frontend:** React, HTML, CSS, JavaScript
 - **Authentication:** JWT
 
