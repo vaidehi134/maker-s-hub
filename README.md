@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Maker's Hub is a platform that connects clients with skilled crafters to create custom furniture and handmade items. Clients can post their requests, and crafters can submit proposals, complete projects, and receive payments securely.
+Maker's Hub is a platform that connects clients with skilled crafters to create custom furniture and handmade items. Clients can post their requests, and crafters can submit proposals, complete projects, and receive payment confirmation.
 
 ## How to Install & Run
 
