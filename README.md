@@ -11,7 +11,7 @@ Maker's Hub is a platform that connects clients with skilled crafters to create 
 1. Clone the repository:
    ```sh
    git clone https://github.com/vaidehi134/maker-s-hub
-   cd maker-s-hub
+   cd makers-hub
    ```
 2. Set up MySQL database:
    - Create a database named `makers_hub_db`.
